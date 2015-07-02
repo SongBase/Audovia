@@ -20,9 +20,9 @@ If you are setting up a shared database, use the *Database/Database Connections*
 We recommend that you create a user in your MySQL database called 'guest' with *EXECUTE* as the only privilege.  Connecting as 'guest' enables read access to all songs and also the ability to create and log in to individual user accounts for the creation of songs.  Full access to these songs can optionally be shared with selected other user accounts.
 
 Before running **Audovia** on Microsoft Windows you will first need to install the latest version of Java from Java.com or, if you are using Linux Ubuntu, you will need to execute the following commands to install Oracle's Java.
-
-    *sudo add-apt-repository ppa:webupd8team/java*  
-    *sudo apt-get update*  
-    *sudo apt-get install oracle-java8-installer*
-
+```
+*sudo add-apt-repository ppa:webupd8team/java*  
+*sudo apt-get update*  
+*sudo apt-get install oracle-java8-installer*
+```
 For best results on Linux Ubuntu, we recommend using the Gnome Desktop Environment.
