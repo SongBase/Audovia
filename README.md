@@ -21,8 +21,8 @@ We recommend that you create a user in your MySQL database called 'guest' with *
 
 Before running **Audovia** on Microsoft Windows you will first need to install the latest version of Java from Java.com or, if you are using Linux Ubuntu, you will need to execute the following commands to install Oracle's Java.
 
-  *sudo add-apt-repository ppa:webupd8team/java*  
-  *sudo apt-get update*  
-  *sudo apt-get install oracle-java8-installer*
+- *sudo add-apt-repository ppa:webupd8team/java*  
+- *sudo apt-get update*  
+- *sudo apt-get install oracle-java8-installer*
 
 For best results on Linux Ubuntu, we recommend using the Gnome Desktop Environment.
