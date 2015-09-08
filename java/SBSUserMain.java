@@ -1,6 +1,6 @@
 /*
  * SBSUserMain.java - Main program for Audovia System
- * Copyright (C) 2010, 2011, 2012, 2013, 2014  Donald G Gray
+ * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015  Donald G Gray
  *
  * http://gray10.com/
  *
@@ -30,7 +30,7 @@ import java.awt.*;
 public class SBSUserMain
 {
 	/*
-	 * version 3.0.5
+	 * version 3.0.11
 	 *
 	 */
 
@@ -57,6 +57,7 @@ public class SBSUserMain
             if ("Nimbus".equals(info.getName()))
             {
                UIManager.setLookAndFeel(info.getClassName());
+               UIManager.put("ScrollBar.minimumThumbSize", new Dimension(32,32)); // added 8 Sep 2015
                break;
             }
          }
@@ -65,7 +66,7 @@ public class SBSUserMain
                                         ("SBS - Execution Monitor");
          console.init();
 
-         System.out.println("Audovia version 3.0.5 with Liberation fonts");
+         System.out.println("Audovia version 3.0.11 with Liberation fonts");
          System.out.println("Work directory: " + System.getProperty("user.dir"));
          System.out.println("Java directory: " + System.getProperty("java.home"));
 
