@@ -40,10 +40,12 @@ import javax.swing.filechooser.*;
 
 import org.jfugue.*;
 
+import javax.swing.plaf.basic.*;
+
 public class SBSTree extends JFrame
 {
 	/*
-	 * version 3.0.5
+	 * version 3.0.12
 	 *
 	 */
 
@@ -262,6 +264,15 @@ public class SBSTree extends JFrame
 
       JMenuBar menuBar = new JMenuBar();
       setJMenuBar(menuBar);
+
+      menuBar.setUI ( new BasicMenuBarUI ()
+ 		    {
+ 		        public void paint ( Graphics g, JComponent c )
+ 		        {
+ 		            g.setColor ( new Color(232, 204, 255) );
+ 		            g.fillRect ( 0, 0, c.getWidth (), c.getHeight () );
+ 		        }
+          } );
 
       JMenu fileMenu = new JMenu("File");
       menuBar.add(fileMenu);

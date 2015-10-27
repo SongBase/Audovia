@@ -27,10 +27,12 @@ import javax.swing.UIManager.*;
 import javax.xml.parsers.*;
 import java.awt.*;
 
+import javax.swing.plaf.basic.*;
+
 public class SBSUserMain
 {
 	/*
-	 * version 3.0.11
+	 * version 3.0.12
 	 *
 	 */
 
@@ -62,11 +64,27 @@ public class SBSUserMain
             }
          }
          UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Liberation Sans", Font.PLAIN, 14));
+
+  //       BasicMenuBarUI MyMenuBarUI = new BasicMenuBarUI ()
+	//		    {
+	//		        public void paint ( Graphics g, JComponent c )
+	//		        {
+	//		            g.setColor ( Color.RED );
+	//		            g.fillRect ( 0, 0, c.getWidth (), c.getHeight () );
+	//		        }
+  //           } ;
+
+  //           UIManager.put ( "MenuBarUI", MyMenuBarUI.getClass().getCanonicalName() );
+
+
+
          ExecutionMonitor console = new ExecutionMonitor
                                         ("SBS - Execution Monitor");
          console.init();
 
-         System.out.println("Audovia version 3.0.11 with Liberation fonts");
+          //System.out.println("menu bar test");
+
+         System.out.println("Audovia version 3.0.12 with Liberation fonts");
          System.out.println("Work directory: " + System.getProperty("user.dir"));
          System.out.println("Java directory: " + System.getProperty("java.home"));
 

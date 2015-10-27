@@ -35,10 +35,12 @@ import java.sql.*;
 import java.net.*;
 import java.awt.font.*;
 
+import javax.swing.plaf.basic.*;
+
 public class SBSPopupEditor extends JDialog
 {
 	/*
-	 * version 3.0.5
+	 * version 3.0.12
 	 *
 	 */
 
@@ -128,6 +130,15 @@ public class SBSPopupEditor extends JDialog
 
       JMenuBar menuBar = new JMenuBar();
       setJMenuBar(menuBar);
+
+      menuBar.setUI ( new BasicMenuBarUI ()
+		    {
+		        public void paint ( Graphics g, JComponent c )
+		        {
+		            g.setColor ( new Color(232, 204, 255) );
+		            g.fillRect ( 0, 0, c.getWidth (), c.getHeight () );
+		        }
+          } );
 
       JMenu fileMenu = new JMenu("Insert");
       menuBar.add(fileMenu);

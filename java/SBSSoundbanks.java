@@ -35,10 +35,12 @@ import java.sql.*;
 import javax.sound.midi.*;
 import javax.swing.filechooser.*;
 
+import javax.swing.plaf.basic.*;
+
 public class SBSSoundbanks extends JFrame
 {
 	/*
-	 * version 3.0.0
+	 * version 3.0.12
 	 *
 	 */
 
@@ -172,6 +174,16 @@ public class SBSSoundbanks extends JFrame
 
       JMenuBar menuBar = new JMenuBar();
       setJMenuBar(menuBar);
+
+      menuBar.setUI ( new BasicMenuBarUI ()
+		    {
+		        public void paint ( Graphics g, JComponent c )
+		        {
+		            g.setColor ( new Color(232, 204, 255) );
+		            g.fillRect ( 0, 0, c.getWidth (), c.getHeight () );
+		        }
+          } );
+
       JMenu fileMenu = new JMenu("File");
       menuBar.add(fileMenu);
 

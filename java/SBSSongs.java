@@ -38,10 +38,12 @@ import javax.swing.border.*;
 import java.net.*;
 import javax.swing.filechooser.*;
 
+import javax.swing.plaf.basic.*;
+
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.0.11
+	 * version 3.0.12
 	 *
 	 */
 
@@ -227,6 +229,15 @@ public class SBSSongs extends JFrame
 
       JMenuBar menuBar = new JMenuBar();
       setJMenuBar(menuBar);
+
+      menuBar.setUI ( new BasicMenuBarUI ()
+		    {
+		        public void paint ( Graphics g, JComponent c )
+		        {
+		            g.setColor ( new Color(232, 204, 255) );
+		            g.fillRect ( 0, 0, c.getWidth (), c.getHeight () );
+		        }
+          } );
 
       JMenu fileMenu = new JMenu("File");
       menuBar.add(fileMenu);
@@ -2278,7 +2289,7 @@ public class SBSSongs extends JFrame
             aboutFrame.setVisible(true);
 
             output.append("Audovia - Database application for making music using JFugue \n" +
-                          "MusicStrings  version 3.0.11  Copyright (C) 2010 - 2015  Donald G Gray \n" +
+                          "MusicStrings  version 3.0.12  Copyright (C) 2010 - 2015  Donald G Gray \n" +
                           "\n" +
                           "http://gray10.com/ \n" +
                           "\n" +
