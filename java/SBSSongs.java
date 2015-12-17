@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.0.12
+	 * version 3.1.0
 	 *
 	 */
 
@@ -2289,7 +2289,7 @@ public class SBSSongs extends JFrame
             aboutFrame.setVisible(true);
 
             output.append("Audovia - Database application for making music using JFugue \n" +
-                          "MusicStrings  version 3.0.12  Copyright (C) 2010 - 2015  Donald G Gray \n" +
+                          "MusicStrings  version 3.1.0  Copyright (C) 2010 - 2015  Donald G Gray \n" +
                           "\n" +
                           "http://gray10.com/ \n" +
                           "\n" +

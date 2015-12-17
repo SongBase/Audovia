@@ -45,7 +45,7 @@ import javax.swing.plaf.basic.*;
 public class SBSTree extends JFrame
 {
 	/*
-	 * version 3.0.12
+	 * version 3.1.0
 	 *
 	 */
 
@@ -855,9 +855,9 @@ public class SBSTree extends JFrame
                   try
                   {
                      JFileChooser chooser = new JFileChooser(new File(new File(new File(System.getProperty("user.home"),"Documents"),"Audovia"),"MIDI"));
-                     chooser.setSelectedFile(new File(song_name + ".mid"));
+                     chooser.setSelectedFile(new File(song_name + "-" + component_name + ".mid"));
                      chooser.setPreferredSize(new Dimension(600,300));
-                     chooser.setDialogTitle("Export to MIDI - " + song_name + ": " + component_name);
+                     chooser.setDialogTitle("Export to MIDI - " + song_name + " - " + component_name);
 
                      int result = chooser.showDialog(frame, "Export to MIDI");
                      if (result == JFileChooser.APPROVE_OPTION)
@@ -931,9 +931,9 @@ public class SBSTree extends JFrame
                   try
                   {
                      JFileChooser chooser = new JFileChooser(new File(new File(new File(System.getProperty("user.home"),"Documents"),"Audovia"),"MusicXML"));
-                     chooser.setSelectedFile(new File(song_name + ".xml"));
+                     chooser.setSelectedFile(new File(song_name + "-" + component_name + ".xml"));
                      chooser.setPreferredSize(new Dimension(600,300));
-                     chooser.setDialogTitle("Export to MusicXML - " + song_name + ": " + component_name);
+                     chooser.setDialogTitle("Export to MusicXML - " + song_name + " - " + component_name);
 
                      int result = chooser.showDialog(frame, "Export to MusicXML");
                      if (result == JFileChooser.APPROVE_OPTION)
@@ -1027,9 +1027,9 @@ public class SBSTree extends JFrame
                   try
                   {
                      JFileChooser chooser1 = new JFileChooser(new File(new File(new File(System.getProperty("user.home"),"Documents"),"Audovia"),"WAV"));
-                     chooser1.setSelectedFile(new File(song_name + ".wav"));
+                     chooser1.setSelectedFile(new File(song_name + "-" + pattern_name + ".wav"));
                      chooser1.setPreferredSize(new Dimension(600,300));
-                     chooser1.setDialogTitle("Export to WAV - " + song_name + ": " + pattern_name);
+                     chooser1.setDialogTitle("Export to WAV - " + song_name + " - " + pattern_name);
 
                      int result1 = chooser1.showDialog(frame, "Export to WAV");
                      if (result1 == JFileChooser.APPROVE_OPTION)
