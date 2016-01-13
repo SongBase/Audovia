@@ -1,6 +1,6 @@
 /*
  * SBSSongs.java - List of Songs
- * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015  Donald G Gray
+ * Copyright (C) 2010 - 2016  Donald G Gray
  *
  * http://gray10.com/
  *
@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.1.0
+	 * version 3.1.1
 	 *
 	 */
 
@@ -1245,6 +1245,21 @@ public class SBSSongs extends JFrame
 				bufferedWriter.write("      </component>");
 				bufferedWriter.newLine();
 
+				if (Integer.parseInt(no_parts) > 1)
+				{
+				   for (int part_no = 1; part_no <= Integer.parseInt(no_parts); part_no++)
+				   {
+			      	bufferedWriter.write("      <component>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("        <component_type>pattern</component_type>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("        <component_name>Part " + Integer.toString(part_no) + "</component_name>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("      </component>");
+			      	bufferedWriter.newLine();
+				   }
+			   }
+
 				String voiceMask = "00";
 				String barMask   = "000";
 				String numberi;
@@ -1322,6 +1337,7 @@ public class SBSSongs extends JFrame
 				   	}
 				   }
 				}
+
 				bufferedWriter.write("    </components>");
 				bufferedWriter.newLine();
 
@@ -1451,6 +1467,71 @@ public class SBSSongs extends JFrame
 		   				bufferedWriter.newLine();
 		   			}
 				   }
+				}
+
+            if (Integer.parseInt(no_parts) > 1)
+            {
+               for (int part_no = 1; part_no <= Integer.parseInt(no_parts); part_no++)
+               {
+			      	bufferedWriter.write("      <pattern_component>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("        <pattern_name>Part " + Integer.toString(part_no) + "</pattern_name>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("        <component_position>1</component_position>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("        <component_type>string</component_type>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("        <component_name>tempo</component_name>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("      </pattern_component>");
+			      	bufferedWriter.newLine();
+
+			      	bufferedWriter.write("      <pattern_component>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("        <pattern_name>Part " + Integer.toString(part_no) + "</pattern_name>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("        <component_position>2</component_position>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("        <component_type>string</component_type>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("        <component_name>constants</component_name>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("      </pattern_component>");
+			      	bufferedWriter.newLine();
+
+                  for (int v=0; v<=Integer.parseInt(no_voices)-1; v++)
+                  {
+							numberi = Integer.toString(v);
+					      voiceNumber = voiceMask.substring(0,voiceMask.length()-numberi.length()) + numberi;
+
+				      	bufferedWriter.write("      <pattern_component>");
+					      bufferedWriter.newLine();
+					      bufferedWriter.write("        <pattern_name>Part " + Integer.toString(part_no) + "</pattern_name>");
+				      	bufferedWriter.newLine();
+					      bufferedWriter.write("        <component_position>" + Integer.toString(v*2 + 3) + "</component_position>");
+					      bufferedWriter.newLine();
+					      bufferedWriter.write("        <component_type>string</component_type>");
+ 				         bufferedWriter.newLine();
+					      if (v == 9) bufferedWriter.write("        <component_name>start voice " + voiceNumber + " (percussion)</component_name>");
+					      else bufferedWriter.write("        <component_name>start voice " + voiceNumber + "</component_name>");
+					      bufferedWriter.newLine();
+					      bufferedWriter.write("      </pattern_component>");
+					      bufferedWriter.newLine();
+
+		   	   		bufferedWriter.write("      <pattern_component>");
+		   	   		bufferedWriter.newLine();
+		   	   		bufferedWriter.write("        <pattern_name>Part " + Integer.toString(part_no) + "</pattern_name>");
+		   	   		bufferedWriter.newLine();
+		   	   		bufferedWriter.write("        <component_position>" + Integer.toString(v*2 + 4) + "</component_position>");
+		   	   		bufferedWriter.newLine();
+		   	   		bufferedWriter.write("        <component_type>pattern</component_type>");
+		   	   		bufferedWriter.newLine();
+		   	   		bufferedWriter.write("        <component_name>Voice " + voiceNumber + " Part " + Integer.toString(part_no) + "</component_name>");
+		   	   		bufferedWriter.newLine();
+		   	   		bufferedWriter.write("      </pattern_component>");
+		   	   		bufferedWriter.newLine();
+						}
+			      }
 				}
 
 				bufferedWriter.write("    </pattern_components>");
@@ -2289,7 +2370,7 @@ public class SBSSongs extends JFrame
             aboutFrame.setVisible(true);
 
             output.append("Audovia - Database application for making music using JFugue \n" +
-                          "MusicStrings  version 3.1.0  Copyright (C) 2010 - 2015  Donald G Gray \n" +
+                          "MusicStrings  version 3.1.1  Copyright (C) 2010 - 2016  Donald G Gray \n" +
                           "\n" +
                           "http://gray10.com/ \n" +
                           "\n" +

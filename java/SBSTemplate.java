@@ -1,6 +1,6 @@
 /*
  * SBSTemplate.java - Template Generator for Audovia
- * Copyright (C) 2011 - 2014  Donald G Gray
+ * Copyright (C) 2011 - 2016  Donald G Gray
  *
  * http://gray10.com/
  *
@@ -31,7 +31,7 @@ import javax.xml.parsers.*;
 public class SBSTemplate extends JDialog
 {
 	/*
-	 * version 3.0.5
+	 * version 3.1.1
 	 *
 	 */
 
@@ -89,7 +89,7 @@ public class SBSTemplate extends JDialog
       partsLabel.setBounds(25,50,185,30);
       contentPane.add(partsLabel);
 
-      String[] parts = {"1","2","3","4","5","6","7","8","9"};
+      String[] parts = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"};
       partsBox = new JComboBox<String>(parts);
       partsBox.setSelectedIndex(0);
       partsBox.setBounds(210,50,65,30);
