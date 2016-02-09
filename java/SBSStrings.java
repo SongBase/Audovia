@@ -1,6 +1,6 @@
 /*
  * SBSStrings.java - Manage Strings
- * Copyright (C) 2010, 2011, 2012, 2014, 2015  Donald G Gray
+ * Copyright (C) 2010, 2011, 2012, 2014, 2015, 2016  Donald G Gray
  *
  * http://gray10.com/
  *
@@ -40,7 +40,7 @@ import javax.swing.plaf.basic.*;
 public class SBSStrings extends JFrame
 {
 	/*
-	 * version 3.0.12
+	 * version 3.1.2
 	 *
 	 */
 
@@ -337,7 +337,7 @@ public class SBSStrings extends JFrame
       JButton insertButton = new JButton("Insert");
       JButton deleteButton = new JButton("Delete");
       JButton saveButton   = new JButton("Save");
-      JButton popupButton  = new JButton("Popup Editor");
+      JButton popupButton  = new JButton("Editor");
       JButton quitButton   = new JButton("Quit");
 
       buttonPanel.add(insertButton);

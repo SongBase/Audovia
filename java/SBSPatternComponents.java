@@ -38,7 +38,7 @@ import org.jfugue.*;
 public class SBSPatternComponents extends JFrame
 {
 	/*
-	 * version 3.0.3
+	 * version 3.1.2
 	 *
 	 */
 
@@ -88,6 +88,8 @@ public class SBSPatternComponents extends JFrame
 	private String  drill_string_value;
    private String  constants;
    private String  parse_value;
+   private String  string_name;
+   private String  string_value;
 
    private String session_user = null;
    private String session_password = null;
@@ -373,6 +375,7 @@ public class SBSPatternComponents extends JFrame
       JButton deleteButton     = new JButton("Delete");
       JButton saveButton       = new JButton("Save");
       JButton drillButton      = new JButton("Drill Down");
+      JButton popupButton      = new JButton("Editor");
       JButton quitButton       = new JButton("Quit");
 
       buttonPanel.add(insertButton);
@@ -380,6 +383,7 @@ public class SBSPatternComponents extends JFrame
       buttonPanel.add(deleteButton);
       buttonPanel.add(saveButton);
       buttonPanel.add(drillButton);
+      buttonPanel.add(popupButton);
       buttonPanel.add(quitButton);
 
       buttonPanel.setBorder(BorderFactory.createEmptyBorder(20,0,20,0));
@@ -390,6 +394,7 @@ public class SBSPatternComponents extends JFrame
       DeleteAction deleteAction         = new DeleteAction();
       SaveAction saveAction             = new SaveAction();
       DrillAction drillAction           = new DrillAction();
+      PopupAction popupAction           = new PopupAction();
       QuitAction quitAction             = new QuitAction();
 
       insertButton.addActionListener(insertAction);
@@ -397,6 +402,7 @@ public class SBSPatternComponents extends JFrame
       deleteButton.addActionListener(deleteAction);
       saveButton.addActionListener(saveAction);
       drillButton.addActionListener(drillAction);
+      popupButton.addActionListener(popupAction);
       quitButton.addActionListener(quitAction);
    }
 
@@ -875,6 +881,45 @@ public class SBSPatternComponents extends JFrame
          }
 		}
 	}
+
+   private class PopupAction implements ActionListener // needs work
+   {
+      public void actionPerformed(ActionEvent a)
+      {
+         selectedRow = tableField.getSelectedRow();
+         selectedCol = tableField.getSelectedColumn();
+         if (selectedRow >= 0)
+         {
+            tableField.changeSelection(selectedRow, selectedCol, false, false);
+
+            //string_name  = (String)tableModel.getValueAt(selectedRow,2);
+            string_name = "<anonymous string>";
+            string_value = (String)tableModel.getValueAt(selectedRow, 5);
+
+            try
+            {
+               SBSPopupEditor editor = new SBSPopupEditor(conn, song_id, song_name, string_name, string_value, "OK", "Cancel");
+               editor.setVisible(true);
+               int selection1 = editor.getSelection();
+               if (selection1 == 0)
+               {
+                  string_value = editor.getStringValue();
+                  tableModel.setValueAt(string_value, selectedRow, 5);
+					}
+					editor.dispose();
+					tableField.requestFocusInWindow();
+			   }
+			   catch (Exception e)
+			   {
+					Messages.exceptionHandler(frame, title, e);
+				}
+         }
+         else
+         {
+            Messages.plainMessage(frame, title, "No selection made.");
+         }
+      }
+   }
 
    private class QuitAction implements ActionListener
    {
