@@ -1,6 +1,6 @@
 /*
  * SBSPopupEditor.java - Popup Editor for Music Strings
- * Copyright (C) 2010, 2012, 2014, 2015  Donald G Gray
+ * Copyright (C) 2010, 2012, 2014, 2015, 2016  Donald G Gray
  *
  * http://gray10.com/
  *
@@ -40,7 +40,7 @@ import javax.swing.plaf.basic.*;
 public class SBSPopupEditor extends JDialog
 {
 	/*
-	 * version 3.0.12
+	 * version 3.1.3
 	 *
 	 */
 
@@ -375,7 +375,7 @@ public class SBSPopupEditor extends JDialog
       instrument.addItem("I[electric_piano]");
       instrument.addItem("I[electric_piano_1]");
       instrument.addItem("I[electric_piano_2]");
-      instrument.addItem("I[harpischord]");
+      instrument.addItem("I[harpsichord]");
       instrument.addItem("I[clavinet]");
       instrument.addItem("I[celesta]");
       instrument.addItem("I[glockenspiel]");

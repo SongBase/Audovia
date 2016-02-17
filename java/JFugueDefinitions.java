@@ -61,6 +61,7 @@ public final class JFugueDefinitions
         dictionaryMap.put("ELECTRIC_PIANO_1"         ,"4");
         dictionaryMap.put("ELECTRIC_PIANO_2"         ,"5");
         dictionaryMap.put("HARPISCHORD"              ,"6");
+        dictionaryMap.put("HARPSICHORD"              ,"6");  // added D G Gray 14th Feb 2016
         dictionaryMap.put("CLAVINET"                 ,"7");
         dictionaryMap.put("CELESTA"                  ,"8");
         dictionaryMap.put("GLOCKENSPIEL"             ,"9");
