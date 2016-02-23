@@ -32,7 +32,7 @@ import javax.swing.plaf.basic.*;
 public class SBSUserMain
 {
 	/*
-	 * version 3.1.3
+	 * version 3.1.4
 	 *
 	 */
 
@@ -84,7 +84,7 @@ public class SBSUserMain
 
           //System.out.println("menu bar test");
 
-         System.out.println("Audovia version 3.1.3 with Liberation fonts");
+         System.out.println("Audovia version 3.1.4 with Liberation fonts");
          System.out.println("Work directory: " + System.getProperty("user.dir"));
          System.out.println("Java directory: " + System.getProperty("java.home"));
 

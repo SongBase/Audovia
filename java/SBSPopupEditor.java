@@ -40,7 +40,7 @@ import javax.swing.plaf.basic.*;
 public class SBSPopupEditor extends JDialog
 {
 	/*
-	 * version 3.1.3
+	 * version 3.1.4
 	 *
 	 */
 
@@ -825,12 +825,12 @@ public class SBSPopupEditor extends JDialog
       JMenu helpMenu = new JMenu("Help");
       menuBar.add(helpMenu);
 
-      JMenuItem jfugueDocumentationItem    = new JMenuItem("MusicStrings");
+      JMenuItem jfugueDocumentationItem    = new JMenuItem("Documentation");
       helpMenu.add(jfugueDocumentationItem);
 
       helpMenu.addSeparator();
 
-      JMenu clefsMenu = new JMenu("Clefs");
+      JMenu clefsMenu = new JMenu("Pick from staves");
       helpMenu.add(clefsMenu);
 
       JMenuItem sopranoItem = new JMenuItem("Treble");
@@ -846,7 +846,7 @@ public class SBSPopupEditor extends JDialog
 
       helpMenu.addSeparator();
 
-      JMenuItem durationsItem = new JMenuItem("Durations");
+      JMenuItem durationsItem = new JMenuItem("Pick durations");
       helpMenu.add(durationsItem);
 
       JFugueDocumentationAction jfugueDocumentationAction = new JFugueDocumentationAction();
@@ -1137,7 +1137,7 @@ public class SBSPopupEditor extends JDialog
 			   Desktop myDesktop = Desktop.getDesktop();
             //myDesktop.browse(new URI("http://jfugue.org/jfugue-chapter2.pdf"));
             //if (System.getProperty("os.name").startsWith("Windows"))
-            myDesktop.open(new File("doc/AudoviaMusicStrings.pdf"));
+            myDesktop.open(new File("doc/AudoviaDocumentation.pdf"));
             //else
             //myDesktop.open(new File("/opt/SongBase/doc/MusicStringDocumentation.pdf"));
 
