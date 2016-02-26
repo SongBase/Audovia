@@ -40,7 +40,7 @@ import javax.swing.plaf.basic.*;
 public class SBSStrings extends JFrame
 {
 	/*
-	 * version 3.1.2
+	 * version 3.1.5
 	 *
 	 */
 
@@ -310,7 +310,8 @@ public class SBSStrings extends JFrame
       tableField.removeColumn(column0);
       tableField.removeColumn(column1);
 
-      column3.setPreferredWidth(300);
+      //column3.setPreferredWidth(300);
+      column3.setPreferredWidth(240);
 
       column2.setCellRenderer(new TextFieldRenderer());
 

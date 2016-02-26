@@ -1,6 +1,6 @@
 /*
  * SBSPatternComponents.java - Manage Pattern Components
- * Copyright (C) 2010, 2011, 2012, 2014, 2015  Donald G Gray
+ * Copyright (C) 2010, 2011, 2012, 2014, 2015, 2016  Donald G Gray
  *
  * http://gray10.com/
  *
@@ -38,7 +38,7 @@ import org.jfugue.*;
 public class SBSPatternComponents extends JFrame
 {
 	/*
-	 * version 3.1.2
+	 * version 3.1.5
 	 *
 	 */
 
@@ -343,8 +343,11 @@ public class SBSPatternComponents extends JFrame
       tableField.removeColumn(column1);
       tableField.removeColumn(column3);
 
-      column4.setPreferredWidth(400);
-      column5.setPreferredWidth(150);
+      //column4.setPreferredWidth(400);
+      //column5.setPreferredWidth(150);
+
+      column4.setPreferredWidth(300);
+      column5.setPreferredWidth(250);
 
       column2.setCellRenderer(new IntegerFieldRenderer());
 
@@ -541,7 +544,7 @@ public class SBSPatternComponents extends JFrame
                      tableModel.setValueAt("unchanged", i, 0);
                   }
                }
-               Messages.plainMessage(frame, title, "Components renumbered.");
+               Messages.plainMessage(frame, title, "Components renumbered and saved.");
                tableField.requestFocusInWindow();
             }
             catch (Exception e)
