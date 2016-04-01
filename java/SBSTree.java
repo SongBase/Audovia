@@ -1,6 +1,6 @@
 /*
  * SBSTree.java - Tree View
- * Copyright (C) 2011, 2014, 2015  Donald G Gray
+ * Copyright (C) 2011, 2014, 2015, 2016  Donald G Gray
  *
  * http://gray10.com/
  *
@@ -45,7 +45,7 @@ import javax.swing.plaf.basic.*;
 public class SBSTree extends JFrame
 {
 	/*
-	 * version 3.1.0
+	 * version 3.1.6
 	 *
 	 */
 
@@ -331,155 +331,151 @@ public class SBSTree extends JFrame
       tree.addTreeSelectionListener
          (new TreeSelectionListener()
          {
-				public void valueChanged(TreeSelectionEvent event)
-				{
-					TreePath path = tree.getSelectionPath();
-					if (path == null) return;
-					DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)path.getLastPathComponent();
-					if (selectedNode.getAllowsChildren() == false)
-					{
-						SBSTreeNode treeNode = (SBSTreeNode)selectedNode.getUserObject();
-						String string_name  = treeNode.getComponentName();
-						String string_value = treeNode.getStringValue();
-						Integer component_id = treeNode.getComponentId();
-						Integer pattern_component_id = treeNode.getPatternComponentId();
+		    public void valueChanged(TreeSelectionEvent event)
+			{
+		       TreePath path = tree.getSelectionPath();
+			   if (path == null) return;
+			   DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)path.getLastPathComponent();
+			   if (selectedNode.getAllowsChildren() == false)
+			   {
+				  SBSTreeNode treeNode = (SBSTreeNode)selectedNode.getUserObject();
+				  String string_name  = treeNode.getComponentName();
+				  String string_value = treeNode.getStringValue();
+				  Integer component_id = treeNode.getComponentId();
+				  Integer pattern_component_id = treeNode.getPatternComponentId();
 
-						tree.update(tree.getGraphics()); /////////
+				  tree.update(tree.getGraphics()); // needed to highlight selection
 
                   try
                   {
                      SBSPopupEditor viewer = new SBSPopupEditor(conn, song_id, song_name, string_name, string_value, "Save", "Quit");
                      viewer.setVisible(true);
-
-
-                        while (viewer.getSelection() == 0)
-                        {
-									try
-									{
-                              drill_string_value = viewer.getStringValue();
-
-						            parse_value = "" + drill_string_value;
-						            if (parse_value.indexOf("[") > -1 || parse_value.indexOf("{") > -1)
-						            {
-                                 if (conn.getMetaData().getDatabaseProductName().equals("MySQL"))
-                                 {
-			                           cSgetConstants.setInt(1, song_id.intValue());
-			                           cSgetConstants.execute();
-			                           rset = cSgetConstants.getResultSet();
-		                           }
-		                           else
-		                           {
-							               getConstants.setInt(1,song_id.intValue());
-							               rset = getConstants.executeQuery();
-										   }
-							            while (rset.next())
-							            {
-							            	constants = rset.getString(1);
-								            parse_value = constants + " " + parse_value;
-						               }
-                                 rset.close();
-                                 conn.commit();
-						            }
-						            Pattern pattern = new Pattern(parse_value);
-						            MusicStringParser parser = new MusicStringParser();
-                              parser.parse(pattern);
-
-                              break;
-									}
-									catch (Exception e2)
-									{
-										Messages.exceptionHandler(frame, "Popup Viewer", e2);
-										viewer.setVisible(true);
-									}
-								}
-								if (viewer.getSelection() == 0)
-								{
-									if (component_id == null)
-									{
-                              if (session_user == null)
+                     while (viewer.getSelection() == 0)
+                     {
+						try
+						{
+                           drill_string_value = viewer.getStringValue();
+						   parse_value = "" + drill_string_value;
+						   if (parse_value.indexOf("[") > -1 || parse_value.indexOf("{") > -1)
+						   {
+                              if (conn.getMetaData().getDatabaseProductName().equals("MySQL"))
                               {
-                                 updateAnonymousString.setString(1, drill_string_value);
-                                 updateAnonymousString.setInt(2, pattern_component_id.intValue());
+			                     cSgetConstants.setInt(1, song_id.intValue());
+			                     cSgetConstants.execute();
+			                     rset = cSgetConstants.getResultSet();
+		                      }
+		                      else
+		                      {
+							     getConstants.setInt(1,song_id.intValue());
+							     rset = getConstants.executeQuery();
+							  }
+							  while (rset.next())
+							  {
+							     constants = rset.getString(1);
+								 parse_value = constants + " " + parse_value;
+						      }
+                              rset.close();
+                              conn.commit();
+						   }
+						   Pattern pattern = new Pattern(parse_value);
+						   MusicStringParser parser = new MusicStringParser();
+                           parser.parse(pattern);
 
-                                 updateAnonymousString.execute();
-                                 conn.commit();
-										}
-										else
-										{
-                                 cSupdateAnonymousString.setString(1, drill_string_value);
-                                 cSupdateAnonymousString.setInt(2, pattern_component_id.intValue());
-                                 cSupdateAnonymousString.setString(3, session_user);
-                                 cSupdateAnonymousString.setString(4, session_password);
-                                 cSupdateAnonymousString.execute();
+                           break;
+						}
+						catch (Exception e2)
+						{
+						   Messages.exceptionHandler(frame, "Popup Viewer", e2);
+						   viewer.setVisible(true);
+						}
+				     }
+					 if (viewer.getSelection() == 0)
+				     {
+						if (component_id == null)
+						{
+                           if (session_user == null)
+                           {
+                              updateAnonymousString.setString(1, drill_string_value);
+                              updateAnonymousString.setInt(2, pattern_component_id.intValue());
+                              updateAnonymousString.execute();
+                              conn.commit();
+						   }
+						   else
+						   {
+                              cSupdateAnonymousString.setString(1, drill_string_value);
+                              cSupdateAnonymousString.setInt(2, pattern_component_id.intValue());
+                              cSupdateAnonymousString.setString(3, session_user);
+                              cSupdateAnonymousString.setString(4, session_password);
+                              cSupdateAnonymousString.execute();
 
-	   		                  	rset = cSupdateAnonymousString.getResultSet();
+	   		                  rset = cSupdateAnonymousString.getResultSet();
 
-	   	                        while (rset.next()) returned_user_id = new Integer(rset.getInt(1));
+	   	                      while (rset.next()) returned_user_id = new Integer(rset.getInt(1));
 
-	   		                  	if (returned_user_id.intValue() == -1)
-	   		                  	{
-	   		                  	   rset.close();
-	   		                  	   conn.rollback();
-	   		                  		throw new Exception("You can only update your own or shared songs.");
-	   		                  	}
+	   		                  if (returned_user_id.intValue() == -1)
+	   		                  {
+	   		                  	 rset.close();
+	   		                  	 conn.rollback();
+	   		                     throw new Exception("You can only update your own or shared songs.");
+	   		                  }
 
-                                 rset.close(); //need a commit
-                                 conn.commit();
-										}
-								   }
-								   else
-								   {
-                              if (session_user == null)
-                              {
-										   updateString.setString(1, drill_string_value);
-										   updateString.setInt(2, component_id.intValue());
+                              rset.close(); //need a commit
+                              conn.commit();
+						   }
+						}
+						else
+						{
+                           if (session_user == null)
+                           {
+							  updateString.setString(1, drill_string_value);
+							  updateString.setInt(2, component_id.intValue());
 
-										   updateString.execute();
-                                 conn.commit();
-										}
-										else
-										{
-                                 cSupdateString.setString(1, drill_string_value);
-                                 cSupdateString.setInt(2, component_id.intValue());
-                                 cSupdateString.setString(3, session_user);
-                                 cSupdateString.setString(4, session_password);
-                                 cSupdateString.execute();
+						      updateString.execute();
+                              conn.commit();
+						   }
+						   else
+						   {
+                              cSupdateString.setString(1, drill_string_value);
+                              cSupdateString.setInt(2, component_id.intValue());
+                              cSupdateString.setString(3, session_user);
+                              cSupdateString.setString(4, session_password);
+                              cSupdateString.execute();
 
-	   		                  	rset = cSupdateString.getResultSet();
+	   		                  rset = cSupdateString.getResultSet();
 
-	   	                        while (rset.next()) returned_user_id = new Integer(rset.getInt(1));
+	   	                      while (rset.next()) returned_user_id = new Integer(rset.getInt(1));
 
-	   		                  	if (returned_user_id.intValue() == -1)
-	   		                  	{
-	   		                  	   rset.close();
-	   		                  	   conn.rollback();
-	   		                  		throw new Exception("You can only update your own or shared songs.");
-	   		                  	}
+	   		                  if (returned_user_id.intValue() == -1)
+	   		                  {
+	   		                  	 rset.close();
+	   		                  	 conn.rollback();
+	   		                  	 throw new Exception("You can only update your own or shared songs.");
+	   		                  }
 
-                                 rset.close(); //need a commit
-                                 conn.commit();
-										}
-								   }
+                              rset.close(); //need a commit
+                              conn.commit();
+						   }
+						}
 
-                           // need to update label!
-                           treeNode.setStringValue(drill_string_value);
-                           selectedNode.setUserObject(treeNode);
-                           treeModel.nodeChanged(selectedNode);
+                        // need to update label!
+                        //treeNode.setStringValue(drill_string_value);
+                        //selectedNode.setUserObject(treeNode);
+                        //treeModel.nodeChanged(selectedNode);
 
-				          	}
-
-
-				      	viewer.dispose();
-					      tree.requestFocusInWindow();
+                        DefaultMutableTreeNode root = (DefaultMutableTreeNode)treeModel.getRoot();
+                        walk(treeModel, root, pattern_component_id, component_id);
+				     }
+				     viewer.dispose();
+					 tree.requestFocusInWindow();
                   }
                   catch (Exception e)
                   {
                      Messages.exceptionHandler(frame, title, e);
                   }
-					}
-				}
+			   }
 			}
-			);
+	     }
+		 );
 
       Container contentPane = getContentPane();
       contentPane.setLayout(new BorderLayout());
@@ -544,7 +540,7 @@ public class SBSTree extends JFrame
       JButton playButton    = new JButton("Play");
       JButton quitButton    = new JButton("Quit");
 
-      buttonPanel.add(refreshButton);
+      //buttonPanel.add(refreshButton);
       buttonPanel.add(componentsButton);
       buttonPanel.add(playButton);
       buttonPanel.add(quitButton);
@@ -565,6 +561,41 @@ public class SBSTree extends JFrame
       pleaseWait = new JDialog(frame, "Please wait...", false);
       pleaseWait.setSize(200,0);
       pleaseWait.setLocation(300,204);
+   }
+
+   protected void walk(SBSTreeModel model, DefaultMutableTreeNode n, Integer pattern_component_id, Integer component_id)
+   {
+	   int count = model.getChildCount(n);
+	   for (int i = 0; i < count;  i++)
+	   {
+		   DefaultMutableTreeNode child = (DefaultMutableTreeNode)model.getChild(n, i);
+		   if (model.isLeaf(child))
+		   {
+			   SBSTreeNode leafNode = (SBSTreeNode)child.getUserObject();
+			   Integer leaf_component_id = leafNode.getComponentId();
+			   Integer leaf_pattern_component_id = leafNode.getPatternComponentId();
+
+               if (component_id == null)
+               {
+				   if (leaf_pattern_component_id.intValue() == pattern_component_id.intValue())
+				   {
+                      leafNode.setStringValue(drill_string_value);
+                      child.setUserObject(leafNode);
+                      model.nodeChanged(child);
+				   }
+			   }
+			   else
+			   {
+				   if ((leaf_component_id != null) && (leaf_component_id.intValue() == component_id.intValue()))
+				   {
+                      leafNode.setStringValue(drill_string_value);
+                      child.setUserObject(leafNode);
+                      model.nodeChanged(child);
+				   }
+			   }
+		   }
+		   else walk(model, child, pattern_component_id, component_id);
+	   }
    }
 
    private class RefreshAction implements ActionListener
