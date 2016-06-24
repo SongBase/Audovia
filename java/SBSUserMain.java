@@ -32,7 +32,7 @@ import javax.swing.plaf.basic.*;
 public class SBSUserMain
 {
 	/*
-	 * version 3.2
+	 * version 3.3
 	 *
 	 */
 
@@ -63,6 +63,7 @@ public class SBSUserMain
                break;
             }
          }
+
          UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Liberation Sans", Font.PLAIN, 14));
 
   //       BasicMenuBarUI MyMenuBarUI = new BasicMenuBarUI ()
@@ -76,7 +77,7 @@ public class SBSUserMain
 
   //           UIManager.put ( "MenuBarUI", MyMenuBarUI.getClass().getCanonicalName() );
 
-
+         System.setProperty("image.dir", args[1]);
 
          ExecutionMonitor console = new ExecutionMonitor
                                         ("SBS - Execution Monitor");
@@ -84,7 +85,7 @@ public class SBSUserMain
 
           //System.out.println("menu bar test");
 
-         System.out.println("Audovia version 3.2 with Liberation fonts");
+         System.out.println("Audovia version 3.3 for Ubuntu Snappy");
          System.out.println("Work directory: " + System.getProperty("user.dir"));
          System.out.println("Java directory: " + System.getProperty("java.home"));
 
@@ -139,7 +140,8 @@ public class SBSUserMain
 				// check if database exists
 
 				//File database_directory = new File(database);
-				derby_directory = new File(new File(new File(System.getProperty("user.home"),"Documents"),"Audovia"),database);
+				//derby_directory = new File(new File(new File(System.getProperty("user.home"),"Documents"),"Audovia"),database);
+            derby_directory = new File(database);
 				if (! derby_directory.exists()) createDatabase();
 
 				// end of check if database exists

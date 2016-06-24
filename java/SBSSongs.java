@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.2
+	 * version 3.3
 	 *
 	 */
 
@@ -144,7 +144,7 @@ public class SBSSongs extends JFrame
       setLocation(50,50);
       setTitle(title + " (" + aConnectionName + ")");
 
-      ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+      ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
       setIconImage(icon.getImage());
 
       Image iconImage = icon.getImage();
@@ -302,10 +302,10 @@ public class SBSSongs extends JFrame
       JMenuItem contactItem  = new JMenuItem("Website");
 
       helpMenu.add(aboutItem);
-      helpMenu.add(tutorialItem);
+      //helpMenu.add(tutorialItem);
       //helpMenu.add(faqItem);
       //helpMenu.add(checkItem);
-      helpMenu.add(contactItem);
+      //helpMenu.add(contactItem);
 
       TemplateAction templateAction = new TemplateAction();
       templateItem.addActionListener(templateAction);
@@ -1173,12 +1173,12 @@ public class SBSSongs extends JFrame
 
             if (type_of_bar.equals("string"))
             {
-   				templateFile = new File(new File(new File(new File(System.getProperty("user.home"),"Documents"),"Audovia"),"XML"),
+   				templateFile = new File(new File("XML"),
    				                        "SongTemplate" + no_voices + "voices" + no_parts + "parts" + no_bars + "stringbars.sbxml");
    		   }
    		   else
    		   {
-   				templateFile = new File(new File(new File(new File(System.getProperty("user.home"),"Documents"),"Audovia"),"XML"),
+   				templateFile = new File(new File("XML"),
    				                        "SongTemplate" + no_voices + "voices" + no_parts + "parts" + no_bars + "patternbars.sbxml");
    			}
 
@@ -1658,7 +1658,8 @@ public class SBSSongs extends JFrame
                      {
                         tableModel.setValueAt("unchanged", i, 0);
                      }
-                     JFileChooser chooser = new JFileChooser(new File(new File(new File(System.getProperty("user.home"),"Documents"),"Audovia"),"XML"));
+                     FileSystemView fsv = new SingleRootFileSystemView(new File("."));
+                     JFileChooser chooser = new JFileChooser(new File("XML"), fsv);
                      chooser.setSelectedFile(new File(song_name + ".sbxml"));
                      chooser.setPreferredSize(new Dimension(600,300));
                      chooser.setDialogTitle("XML Export - " + song_name);
@@ -1869,7 +1870,8 @@ public class SBSSongs extends JFrame
 
             try
             {
-               JFileChooser chooser = new JFileChooser(new File(new File(new File(System.getProperty("user.home"),"Documents"),"Audovia"),"XML"));
+               FileSystemView fsv = new SingleRootFileSystemView(new File("."));
+               JFileChooser chooser = new JFileChooser(new File("XML"), fsv);
                chooser.setPreferredSize(new Dimension(600,300));
                chooser.setDialogTitle("XML Import");
 
@@ -2359,33 +2361,46 @@ public class SBSSongs extends JFrame
             aboutFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             aboutFrame.setTitle("About Audovia");
 
-      ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+      ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
       aboutFrame.setIconImage(icon.getImage());
 
-            JTextArea output = new JTextArea();
-            output.setEditable(false);
-            aboutFrame.getContentPane().add(new JScrollPane(output));
-            aboutFrame.setSize(520,380);
+  //         JTextArea output = new JTextArea();
+  //          output.setEditable(false);
+            //aboutFrame.getContentPane().add(new JScrollPane(output));
+            //aboutFrame.setSize(560,380);
+
             aboutFrame.setLocation(100,100);
             aboutFrame.setVisible(true);
 
-            output.append("Audovia - Database application for making music using JFugue \n" +
-                          "MusicStrings  version 3.2  Copyright (C) 2010 - 2016  Donald G Gray \n" +
-                          "\n" +
-                          "http://gray10.com/ \n" +
-                          "\n" +
-                          "This program is free software: you can redistribute it and/or modify \n" +
-                          "it under the terms of the GNU General Public License as published by \n" +
-                          "the Free Software Foundation, either version 3 of the License, or \n" +
-                          "(at your option) any later version. \n" +
-                          "\n" +
-                          "This program is distributed in the hope that it will be useful, \n" +
-                          "but WITHOUT ANY WARRANTY; without even the implied warranty of \n" +
-                          "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. \n" +
-                          "See the GNU General Public License for more details. \n" +
-                          "\n" +
-                          "You should have received a copy of the GNU General Public License \n" +
-                          "along with this program.  If not, see http://www.gnu.org/licenses/. \n");
+            JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\">Audovia - Database application for making music using JFugue " +
+                          "MusicStrings&nbsp; version 3.3</p>" +
+
+                          "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2016&nbsp; Donald G Gray</p>" +
+
+                          "<p style=\"margin-bottom:4px;\">website: http://audovia.com/</p>" +
+                          "<p style=\"margin-bottom:4px;\">e-mail: info@audovia.com</p>" +
+                          "<p style=\"margin-bottom:8px;\">documentation: ~/snap/audovia/&lt;version&gt;/doc/</p>" +
+
+                          "<p style=\"margin-bottom:8px;\">This program is free software: you can redistribute it and/or modify " +
+                          "it under the terms of the GNU General Public License as published by " +
+                          "the Free Software Foundation, either version 3 of the License, or " +
+                          "(at your option) any later version.</p>" +
+
+                          "<p style=\"margin-bottom:8px;\">This program is distributed in the hope that it will be useful, " +
+                          "but WITHOUT ANY WARRANTY; without even the implied warranty of " +
+                          "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&nbsp; " +
+                          "See the GNU General Public License for more details.</p>" +
+
+                          "<p>You should have received a copy of the GNU General Public License " +
+                          "along with this program.&nbsp; If not, see http://www.gnu.org/licenses/.</p></html>");
+
+            label.setPreferredSize(new Dimension(590,360));
+            label.setVerticalAlignment(JLabel.TOP);
+
+            JScrollPane contentPane = new JScrollPane(label); // added
+
+            aboutFrame.add(contentPane); // added
+            aboutFrame.pack(); // added
 
 				//tableField.requestFocusInWindow();
          }

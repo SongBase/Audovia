@@ -46,7 +46,7 @@ public class ExecutionMonitor
       JButton exitButton = new JButton("Exit");
       frame.setTitle(title);
 
-      ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+      ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
       frame.setIconImage(icon.getImage());
 
       buttonPanel.add(exitButton);
@@ -74,8 +74,8 @@ public class ExecutionMonitor
       System.setErr(consoleStream);
    }
 
-   public static final int WIDTH = 440;
-   public static final int HEIGHT = 320;
+   public static final int WIDTH = 500;
+   public static final int HEIGHT = 350;
    public static final int LEFT = 0;
    public static final int TOP = 0;
 

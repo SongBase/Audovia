@@ -86,7 +86,7 @@ public class SBSPlayerThread extends Thread
       pleaseWait = new JDialog(frame); //////////
       pleaseWait.setTitle("Player started...");
 
-      ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+      ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
       pleaseWait.setIconImage(icon.getImage());
 
 		pleaseWait.setModal(false); //////////
@@ -239,7 +239,8 @@ public class SBSPlayerThread extends Thread
 						   }
 						   else
 						   {
-                        JFileChooser chooser = new JFileChooser();
+								FileSystemView fsv = new SingleRootFileSystemView(new File("."));
+                        JFileChooser chooser = new JFileChooser("SF2", fsv);
                         chooser.setPreferredSize(new Dimension(600,300));
                         chooser.setDialogTitle("Get Soundbank from File");
 

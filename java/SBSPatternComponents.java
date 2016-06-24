@@ -141,7 +141,7 @@ public class SBSPatternComponents extends JFrame
          setTitle(title + " (" + aConnectionName + ") " + aSessionUser);
 		}
 
-      ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+      ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
       setIconImage(icon.getImage());
 
       parentFrame = aParentFrame;

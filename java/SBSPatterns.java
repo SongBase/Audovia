@@ -148,7 +148,7 @@ public class SBSPatterns extends JFrame
          setTitle(title + " (" + aConnectionName + ") " + aSessionUser);
 		}
 
-      ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+      ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
       setIconImage(icon.getImage());
 
       parentFrame = aParentFrame;
@@ -1020,7 +1020,8 @@ public class SBSPatterns extends JFrame
                      {
                         tableModel.setValueAt("unchanged", i, 0);
                      }
-                     JFileChooser chooser = new JFileChooser(new File(new File(new File(System.getProperty("user.home"),"Documents"),"Audovia"),"MIDI"));
+                     FileSystemView fsv = new SingleRootFileSystemView(new File("."));
+                     JFileChooser chooser = new JFileChooser(new File("MIDI"), fsv);
                      chooser.setSelectedFile(new File(song_name + "-" + pattern_name + ".mid"));
                      chooser.setPreferredSize(new Dimension(600,300));
                      chooser.setDialogTitle("Export to MIDI - " + song_name + " - " + pattern_name);
@@ -1118,7 +1119,8 @@ public class SBSPatterns extends JFrame
                      {
                         tableModel.setValueAt("unchanged", i, 0);
                      }
-                     JFileChooser chooser = new JFileChooser(new File(new File(new File(System.getProperty("user.home"),"Documents"),"Audovia"),"MusicXML"));
+                     FileSystemView fsv = new SingleRootFileSystemView(new File("."));
+                     JFileChooser chooser = new JFileChooser(new File("MusicXML"), fsv);
                      chooser.setSelectedFile(new File(song_name + "-" + pattern_name + ".xml"));
                      chooser.setPreferredSize(new Dimension(600,300));
                      chooser.setDialogTitle("Export to MusicXML - " + song_name + " - " + pattern_name);
@@ -1269,7 +1271,8 @@ public class SBSPatterns extends JFrame
                      {
                         tableModel.setValueAt("unchanged", i, 0);
                      }
-                     JFileChooser chooser1 = new JFileChooser(new File(new File(new File(System.getProperty("user.home"),"Documents"),"Audovia"),"WAV"));
+                     FileSystemView fsv = new SingleRootFileSystemView(new File("."));
+                     JFileChooser chooser1 = new JFileChooser(new File("WAV"), fsv);
                      chooser1.setSelectedFile(new File(song_name + "-" + pattern_name + ".wav"));
                      chooser1.setPreferredSize(new Dimension(600,300));
                      chooser1.setDialogTitle("Export to WAV - " + song_name + " - " + pattern_name);
@@ -1391,7 +1394,8 @@ public class SBSPatterns extends JFrame
 						   }
 						   else
 						   {
-                        JFileChooser chooser = new JFileChooser();
+								FileSystemView fsv2 = new SingleRootFileSystemView(new File("."));
+                        JFileChooser chooser = new JFileChooser("SF2", fsv2);
                         chooser.setPreferredSize(new Dimension(600,300));
                         chooser.setDialogTitle("Get Soundbank from File");
 

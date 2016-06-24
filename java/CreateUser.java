@@ -40,7 +40,7 @@ public class CreateUser extends JDialog
    {
       setTitle("Create Account");
 
-      ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+      ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
       setIconImage(icon.getImage());
 
       setModal(true);

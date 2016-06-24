@@ -85,7 +85,7 @@ public class SBSStringPicker extends JDialog
       setLocation(150,150);
       setTitle(title + " - Import to: " + aParentName);
 
-      ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+      ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
       setIconImage(icon.getImage());
 
       conn = aConnection;

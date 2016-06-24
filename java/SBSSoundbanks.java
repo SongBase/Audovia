@@ -108,7 +108,7 @@ public class SBSSoundbanks extends JFrame
       setLocation(100,100);
       setTitle(title + " (" + aConnectionName + ")");
 
-      ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+      ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
       setIconImage(icon.getImage());
 
       parentFrame = aParentFrame;
@@ -645,7 +645,8 @@ public class SBSSoundbanks extends JFrame
                      {
                         tableModel.setValueAt("unchanged", i, 0);
                      }
-                     JFileChooser chooser = new JFileChooser();
+                     FileSystemView fsv = new SingleRootFileSystemView(new File("."));
+                     JFileChooser chooser = new JFileChooser("SF2", fsv);
                      chooser.setPreferredSize(new Dimension(600,300));
                      chooser.setDialogTitle("Upload Soundbank - " + soundbank_name);
 

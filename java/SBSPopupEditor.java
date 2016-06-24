@@ -40,7 +40,7 @@ import javax.swing.plaf.basic.*;
 public class SBSPopupEditor extends JDialog
 {
 	/*
-	 * version 3.1.4
+	 * version 3.2.8
 	 *
 	 */
 
@@ -97,7 +97,7 @@ public class SBSPopupEditor extends JDialog
       setLocation(125,125);
       setTitle(title + " - " + aSongName);
 
-      ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+      ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
       setIconImage(icon.getImage());
 
       setModal(true);
@@ -822,13 +822,13 @@ public class SBSPopupEditor extends JDialog
       menuBar.add(controller);
       controller.setVisible(false);
 
-      JMenu helpMenu = new JMenu("Help");
+      JMenu helpMenu = new JMenu("Pick");
       menuBar.add(helpMenu);
 
-      JMenuItem jfugueDocumentationItem    = new JMenuItem("Documentation");
-      helpMenu.add(jfugueDocumentationItem);
+      //JMenuItem jfugueDocumentationItem    = new JMenuItem("Documentation");
+      //helpMenu.add(jfugueDocumentationItem);
 
-      helpMenu.addSeparator();
+      //helpMenu.addSeparator();
 
       JMenu clefsMenu = new JMenu("Pick from staves");
       helpMenu.add(clefsMenu);
@@ -849,8 +849,8 @@ public class SBSPopupEditor extends JDialog
       JMenuItem durationsItem = new JMenuItem("Pick durations");
       helpMenu.add(durationsItem);
 
-      JFugueDocumentationAction jfugueDocumentationAction = new JFugueDocumentationAction();
-      jfugueDocumentationItem.addActionListener(jfugueDocumentationAction);
+      //JFugueDocumentationAction jfugueDocumentationAction = new JFugueDocumentationAction();
+      //jfugueDocumentationItem.addActionListener(jfugueDocumentationAction);
 
       SopranoAction sopranoAction = new SopranoAction();
       sopranoItem.addActionListener(sopranoAction);
@@ -1127,29 +1127,29 @@ public class SBSPopupEditor extends JDialog
       }
    }
 
-   private class JFugueDocumentationAction implements ActionListener
-   {
-      public void actionPerformed(ActionEvent a)
-      {
-
-         try
-         {
-			   Desktop myDesktop = Desktop.getDesktop();
-            //myDesktop.browse(new URI("http://jfugue.org/jfugue-chapter2.pdf"));
-            //if (System.getProperty("os.name").startsWith("Windows"))
-            myDesktop.open(new File("doc/AudoviaDocumentation.pdf"));
-            //else
-            //myDesktop.open(new File("/opt/SongBase/doc/MusicStringDocumentation.pdf"));
-
-            //editor.requestFocusInWindow();
-         }
-         catch (Exception e)
-         {
-            Messages.exceptionHandler(frame, title, e);
-         }
-         editor.requestFocusInWindow();
-      }
-   }
+//   private class JFugueDocumentationAction implements ActionListener
+//   {
+//      public void actionPerformed(ActionEvent a)
+//      {
+//
+//         try
+//         {
+//			   Desktop myDesktop = Desktop.getDesktop();
+//            //myDesktop.browse(new URI("http://jfugue.org/jfugue-chapter2.pdf"));
+//            //if (System.getProperty("os.name").startsWith("Windows"))
+//            myDesktop.open(new File("doc/AudoviaDocumentation.pdf"));
+//            //else
+//            //myDesktop.open(new File("/opt/SongBase/doc/MusicStringDocumentation.pdf"));
+//
+//            //editor.requestFocusInWindow();
+//         }
+//         catch (Exception e)
+//         {
+//            Messages.exceptionHandler(frame, title, e);
+//         }
+//         editor.requestFocusInWindow();
+//      }
+//   }
 
    private class SopranoAction implements ActionListener
    {
@@ -1162,17 +1162,19 @@ public class SBSPopupEditor extends JDialog
             sopranoFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             sopranoFrame.setTitle("Treble");
 
-            ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+            ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
             sopranoFrame.setIconImage(icon.getImage());
 
-            sopranoFrame.setSize(730,170);
+            //sopranoFrame.setSize(730,170);
             sopranoFrame.setLocation(125,550);
             sopranoFrame.setVisible(true);
 
-            Container contentPane = sopranoFrame.getContentPane();
+            //Container contentPane = sopranoFrame.getContentPane();
+            JPanel contentPane = new JPanel(); // added
+            contentPane.setPreferredSize(new Dimension(710,140)); // added
             contentPane.setLayout(null);
 
-            ImageIcon sopranoIcon = new ImageIcon("TrebleClef.png");
+            ImageIcon sopranoIcon = new ImageIcon(System.getProperty("image.dir") + "/" + "TrebleClef.png");
 
             JLabel sopranoLabel = new JLabel(sopranoIcon);
 
@@ -1294,6 +1296,9 @@ public class SBSPopupEditor extends JDialog
             contentPane.add(note21);
             note22.setBounds(657,25,20,95);
             contentPane.add(note22);
+
+            sopranoFrame.add(contentPane); // added
+            sopranoFrame.pack(); // added
          }
          catch (Exception e)
          {
@@ -1314,17 +1319,19 @@ public class SBSPopupEditor extends JDialog
             sopranoFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             sopranoFrame.setTitle("Treble-8");
 
-            ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+            ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
             sopranoFrame.setIconImage(icon.getImage());
 
-            sopranoFrame.setSize(730,170);
+            //sopranoFrame.setSize(730,170);
             sopranoFrame.setLocation(200,550);
             sopranoFrame.setVisible(true);
 
-            Container contentPane = sopranoFrame.getContentPane();
+            //Container contentPane = sopranoFrame.getContentPane();
+            JPanel contentPane = new JPanel(); // added
+            contentPane.setPreferredSize(new Dimension(710,140)); // added
             contentPane.setLayout(null);
 
-            ImageIcon sopranoIcon = new ImageIcon("TrebleClef.png");
+            ImageIcon sopranoIcon = new ImageIcon(System.getProperty("image.dir") + "/" + "TrebleClef.png");
 
             JLabel sopranoLabel = new JLabel(sopranoIcon);
 
@@ -1456,6 +1463,9 @@ public class SBSPopupEditor extends JDialog
             contentPane.add(note21);
             note22.setBounds(657,25,20,95);
             contentPane.add(note22);
+
+            sopranoFrame.add(contentPane); // added
+            sopranoFrame.pack(); // added
          }
          catch (Exception e)
          {
@@ -1476,17 +1486,19 @@ public class SBSPopupEditor extends JDialog
             altoFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             altoFrame.setTitle("Alto");
 
-            ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+            ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
             altoFrame.setIconImage(icon.getImage());
 
-            altoFrame.setSize(730,170);
+            //altoFrame.setSize(730,170);
             altoFrame.setLocation(150,575);
             altoFrame.setVisible(true);
 
-            Container contentPane = altoFrame.getContentPane();
+            //Container contentPane = altoFrame.getContentPane();
+            JPanel contentPane = new JPanel(); // added
+            contentPane.setPreferredSize(new Dimension(710,140)); // added
             contentPane.setLayout(null);
 
-            ImageIcon altoIcon = new ImageIcon("AltoClef.png");
+            ImageIcon altoIcon = new ImageIcon(System.getProperty("image.dir") + "/" + "AltoClef.png");
 
             JLabel altoLabel = new JLabel(altoIcon);
 
@@ -1608,6 +1620,9 @@ public class SBSPopupEditor extends JDialog
             contentPane.add(note21);
             note22.setBounds(657,25,20,95);
             contentPane.add(note22);
+
+            altoFrame.add(contentPane); // added
+            altoFrame.pack(); // added
          }
          catch (Exception e)
          {
@@ -1628,17 +1643,19 @@ public class SBSPopupEditor extends JDialog
             tenorFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             tenorFrame.setTitle("Tenor");
 
-            ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+            ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
             tenorFrame.setIconImage(icon.getImage());
 
-            tenorFrame.setSize(730,170);
+            //tenorFrame.setSize(730,170);
             tenorFrame.setLocation(175,600);
             tenorFrame.setVisible(true);
 
-            Container contentPane = tenorFrame.getContentPane();
+            //Container contentPane = tenorFrame.getContentPane();
+            JPanel contentPane = new JPanel(); // added
+            contentPane.setPreferredSize(new Dimension(710,140)); // added
             contentPane.setLayout(null);
 
-            ImageIcon tenorIcon = new ImageIcon("TenorClef.png");
+            ImageIcon tenorIcon = new ImageIcon(System.getProperty("image.dir") + "/" + "TenorClef.png");
 
             JLabel tenorLabel = new JLabel(tenorIcon);
 
@@ -1760,6 +1777,9 @@ public class SBSPopupEditor extends JDialog
             contentPane.add(note21);
             note22.setBounds(651,25,28,95);
             contentPane.add(note22);
+
+            tenorFrame.add(contentPane); // added
+            tenorFrame.pack(); // added
          }
          catch (Exception e)
          {
@@ -1780,17 +1800,19 @@ public class SBSPopupEditor extends JDialog
             bassFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             bassFrame.setTitle("Bass");
 
-            ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+            ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
             bassFrame.setIconImage(icon.getImage());
 
-            bassFrame.setSize(730,170);
+            //bassFrame.setSize(730,170);
             bassFrame.setLocation(200,625);
             bassFrame.setVisible(true);
 
-            Container contentPane = bassFrame.getContentPane();
+            //Container contentPane = bassFrame.getContentPane();
+            JPanel contentPane = new JPanel(); // added
+            contentPane.setPreferredSize(new Dimension(710,140)); // added
             contentPane.setLayout(null);
 
-            ImageIcon bassIcon = new ImageIcon("BassClef.png");
+            ImageIcon bassIcon = new ImageIcon(System.getProperty("image.dir") + "/" + "BassClef.png");
 
             JLabel bassLabel = new JLabel(bassIcon);
 
@@ -1912,6 +1934,9 @@ public class SBSPopupEditor extends JDialog
             contentPane.add(note21);
             note22.setBounds(651,25,28,95);
             contentPane.add(note22);
+
+            bassFrame.add(contentPane); // added
+            bassFrame.pack(); // added
          }
          catch (Exception e)
          {
@@ -1932,17 +1957,19 @@ public class SBSPopupEditor extends JDialog
             durationsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             durationsFrame.setTitle("Durations");
 
-            ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+            ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
             durationsFrame.setIconImage(icon.getImage());
 
-            durationsFrame.setSize(184,354); // was 125
+            //durationsFrame.setSize(184,354); // was 125
             durationsFrame.setLocation(735,150);
             durationsFrame.setVisible(true);
 
-            Container contentPane = durationsFrame.getContentPane();
+            //Container contentPane = durationsFrame.getContentPane();
+            JPanel contentPane = new JPanel(); // added
+            contentPane.setPreferredSize(new Dimension(166,324)); // added
             contentPane.setLayout(null);
 
-            ImageIcon durationsIcon = new ImageIcon("NoteDurations.png");
+            ImageIcon durationsIcon = new ImageIcon(System.getProperty("image.dir") + "/" + "NoteDurations.png");
 
             JLabel durationsLabel = new JLabel(durationsIcon);
 
@@ -2027,6 +2054,9 @@ public class SBSPopupEditor extends JDialog
             spaceButton.addActionListener(spacebuttonAction);
             dotButton.addActionListener(buttonAction);
             restButton.addActionListener(buttonAction);
+
+            durationsFrame.add(contentPane); // added
+            durationsFrame.pack(); // added
          }
          catch (Exception e)
          {

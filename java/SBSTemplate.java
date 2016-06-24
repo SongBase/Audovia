@@ -25,7 +25,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.sql.*;
 import java.io.*;
-import javax.swing.UIManager.*;
+//import javax.swing.UIManager.*;
 import javax.xml.parsers.*;
 
 public class SBSTemplate extends JDialog
@@ -69,7 +69,7 @@ public class SBSTemplate extends JDialog
       setLocation(100,100);
       setTitle(title);
 
-      ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+      ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
       setIconImage(icon.getImage());
 
       Container contentPane = getContentPane();

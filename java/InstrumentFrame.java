@@ -36,7 +36,7 @@ public class InstrumentFrame extends JFrame
       setLocation(125,125);
 		setTitle("Soundbank: " + soundbank_name);
 
-      ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");
+      ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
       setIconImage(icon.getImage());
 
       output.setEditable(false);
