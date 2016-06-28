@@ -1,6 +1,6 @@
 /*
  * SBSTreeNode.java - Tree Node Object
- * Copyright (C) 2011  Donald G Gray
+ * Copyright (C) 2011, 2016  Donald G Gray
  *
  * http://gray10.com/
  *
@@ -22,7 +22,7 @@
 public class SBSTreeNode
 {
 	/*
-	 * version 2.0.8
+	 * version 3.3.1
 	 *
 	 */
 
@@ -55,12 +55,12 @@ public class SBSTreeNode
 		{
 	   	if (string_value == null)
 		   {
-		      return component_position.toString() + ":  " + component_name;
+		      return "<html>" + component_position.toString() + ":&nbsp;&nbsp;" + component_name + "</html>";
 	      }
 	      else
 	      {
-		      String content = string_value.replaceAll("\n", "    ");
-		      return component_position.toString() + ":  " + component_name + ":    " + content;
+		      String content = string_value.replaceAll("\n", "&nbsp;&nbsp;");
+		      return "<html>" + component_position.toString() + ":&nbsp;&nbsp;" + component_name + ":" + "<font face=\"Liberation Mono\" style=\"font-size: 14pt;\">&nbsp;&nbsp;" + content + "</font></html>";
 	      }
 		}
 	}
