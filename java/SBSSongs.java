@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.3.1
+	 * version 3.3.2
 	 *
 	 */
 
@@ -429,7 +429,7 @@ public class SBSSongs extends JFrame
       column5.setPreferredWidth(100);
 
       TextFieldEditor songFieldEditor = new TextFieldEditor();
-      songFieldEditor.setFilter("[\\w !£$%^&\\*()\\-+={\\[}\\]:;@'~#\\\\<,>\\.?/]*");
+      songFieldEditor.setFilter("[\\w !Â£$%^&\\*()\\-+={\\[}\\]:;@'~#\\\\<,>\\.?/]*");
 
       column2.setCellRenderer(new TextFieldRenderer());
       column2.setCellEditor(songFieldEditor);
@@ -1225,6 +1225,15 @@ public class SBSSongs extends JFrame
 				bufferedWriter.write("      </component>");
 				bufferedWriter.newLine();
 
+				bufferedWriter.write("      <component>"); // new
+				bufferedWriter.newLine();
+				bufferedWriter.write("        <component_type>pattern</component_type>");
+				bufferedWriter.newLine();
+				bufferedWriter.write("        <component_name>Constants</component_name>");
+				bufferedWriter.newLine();
+				bufferedWriter.write("      </component>");
+				bufferedWriter.newLine();
+
 				bufferedWriter.write("      <component>");
 				bufferedWriter.newLine();
 				bufferedWriter.write("        <component_type>string</component_type>");
@@ -1363,12 +1372,25 @@ public class SBSSongs extends JFrame
 				bufferedWriter.newLine();
 				bufferedWriter.write("        <component_position>2</component_position>");
 				bufferedWriter.newLine();
-				bufferedWriter.write("        <component_type>string</component_type>");
+				bufferedWriter.write("        <component_type>pattern</component_type>"); // changed
 				bufferedWriter.newLine();
-				bufferedWriter.write("        <component_name>constants</component_name>");
+				bufferedWriter.write("        <component_name>Constants</component_name>");
 				bufferedWriter.newLine();
 				bufferedWriter.write("      </pattern_component>");
 				bufferedWriter.newLine();
+
+			      	bufferedWriter.write("      <pattern_component>"); //new
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("        <pattern_name>Constants</pattern_name>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("        <component_position>1</component_position>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("        <component_type>string</component_type>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("        <component_name>constants</component_name>");
+			      	bufferedWriter.newLine();
+			      	bufferedWriter.write("      </pattern_component>");
+			      	bufferedWriter.newLine();
 
 				bufferedWriter.write("      <pattern_component>");
 				bufferedWriter.newLine();
@@ -1492,9 +1514,9 @@ public class SBSSongs extends JFrame
 			      	bufferedWriter.newLine();
 			      	bufferedWriter.write("        <component_position>2</component_position>");
 			      	bufferedWriter.newLine();
-			      	bufferedWriter.write("        <component_type>string</component_type>");
+			      	bufferedWriter.write("        <component_type>pattern</component_type>"); //changed
 			      	bufferedWriter.newLine();
-			      	bufferedWriter.write("        <component_name>constants</component_name>");
+			      	bufferedWriter.write("        <component_name>Constants</component_name>");
 			      	bufferedWriter.newLine();
 			      	bufferedWriter.write("      </pattern_component>");
 			      	bufferedWriter.newLine();
@@ -2373,7 +2395,7 @@ public class SBSSongs extends JFrame
             aboutFrame.setVisible(true);
 
             JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\">Audovia - Database application for making music using JFugue " +
-                          "MusicStrings&nbsp; version 3.3.1</p>" +
+                          "MusicStrings&nbsp; version 3.3.2</p>" +
 
                           "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2016&nbsp; Donald G Gray</p>" +
 

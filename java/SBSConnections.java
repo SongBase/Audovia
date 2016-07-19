@@ -240,7 +240,7 @@ public class SBSConnections extends JFrame
       column2.setCellRenderer(new TextFieldRenderer());
 
       TextFieldEditor connectionFieldEditor = new TextFieldEditor();
-      connectionFieldEditor.setFilter("[\\w !£$%^&\\*()\\-+={\\[}\\]:;@'~#\\\\<,>\\.?/]*");
+      connectionFieldEditor.setFilter("[\\w !Â£$%^&\\*()\\-+={\\[}\\]:;@'~#\\\\<,>\\.?/]*");
       column2.setCellEditor(connectionFieldEditor);
 
       tableField.getSelectionModel().setSelectionMode

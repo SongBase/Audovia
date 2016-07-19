@@ -316,13 +316,13 @@ public class SBSStrings extends JFrame
       column2.setCellRenderer(new TextFieldRenderer());
 
       TextFieldEditor stringFieldEditor = new TextFieldEditor();
-      stringFieldEditor.setFilter("[\\w !£$%^&\\*()\\-+={\\[}\\]:;@'~#\\\\<,>\\.?/]*");
+      stringFieldEditor.setFilter("[\\w !Â£$%^&\\*()\\-+={\\[}\\]:;@'~#\\\\<,>\\.?/]*");
       column2.setCellEditor(stringFieldEditor);
 
       column3.setCellRenderer(new TextAreaRenderer());
 
       TextAreaEditor valueAreaEditor = new TextAreaEditor(frame, keyField);
-      //valueAreaEditor.setFilter("[\\w !£$%^&\\*()\\-+={\\[}\\]:;@'~#\\\\<,>\\.?/]*");
+      //valueAreaEditor.setFilter("[\\w !Â£$%^&\\*()\\-+={\\[}\\]:;@'~#\\\\<,>\\.?/]*");
       column3.setCellEditor(valueAreaEditor);
 
       tableField.getSelectionModel().setSelectionMode

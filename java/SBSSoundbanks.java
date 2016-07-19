@@ -233,7 +233,7 @@ public class SBSSoundbanks extends JFrame
       tableField.removeColumn(column1);
 
       TextFieldEditor soundbankFieldEditor = new TextFieldEditor();
-      soundbankFieldEditor.setFilter("[\\w !£$%^&\\*()\\-+={\\[}\\]:;@'~#\\\\<,>\\.?/]*");
+      soundbankFieldEditor.setFilter("[\\w !Â£$%^&\\*()\\-+={\\[}\\]:;@'~#\\\\<,>\\.?/]*");
 
       column2.setCellRenderer(new TextFieldRenderer());
       column2.setCellEditor(soundbankFieldEditor);

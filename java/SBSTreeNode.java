@@ -49,19 +49,19 @@ public class SBSTreeNode
 	{
 		if (component_position == null)
 		{
-			return component_name;
+			return "<html><b>" + component_name + "</b></html>";
 		}
 		else
 		{
 	   	if (string_value == null)
 		   {
-		      return "<html>" + component_position.toString() + ":&nbsp;&nbsp;" + component_name + "</html>";
-	      }
-	      else
-	      {
-		      String content = string_value.replaceAll("\n", "&nbsp;&nbsp;");
-		      return "<html>" + component_position.toString() + ":&nbsp;&nbsp;" + component_name + ":" + "<font face=\"Liberation Mono\" style=\"font-size: 14pt;\">&nbsp;&nbsp;" + content + "</font></html>";
-	      }
+		      return "<html><b>" + component_position.toString() + ":&nbsp;&nbsp;" + component_name + "</b></html>";
+	           }
+	        else
+	           {
+		      String content = string_value.replaceAll("\n", "<br>");
+		      return "<html><b>" + component_position.toString() + ":&nbsp;&nbsp;" + component_name + ":</b><font face=\"Liberation Mono\" style=\"font-size: 14pt;\"><br>" + content + "</font></html>";
+	           }
 		}
 	}
 

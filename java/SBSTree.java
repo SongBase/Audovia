@@ -328,6 +328,9 @@ public class SBSTree extends JFrame
       tree.setRootVisible(false);
       tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 
+      JLabel myCellRenderer = (JLabel)tree.getCellRenderer();
+      myCellRenderer.setVerticalTextPosition(JLabel.TOP);
+
       tree.addTreeSelectionListener
          (new TreeSelectionListener()
          {

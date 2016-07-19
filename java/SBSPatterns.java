@@ -417,7 +417,7 @@ public class SBSPatterns extends JFrame
       column2.setCellRenderer(new TextFieldRenderer());
 
       TextFieldEditor patternFieldEditor = new TextFieldEditor();
-      patternFieldEditor.setFilter("[\\w !£$%^&\\*()\\-+={\\[}\\]:;@'~#\\\\<,>\\.?/]*");
+      patternFieldEditor.setFilter("[\\w !Â£$%^&\\*()\\-+={\\[}\\]:;@'~#\\\\<,>\\.?/]*");
       column2.setCellEditor(patternFieldEditor);
 
       tableField.getSelectionModel().setSelectionMode
