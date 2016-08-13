@@ -32,7 +32,7 @@ import javax.swing.plaf.basic.*;
 public class SBSUserMain
 {
 	/*
-	 * version 3.3.6
+	 * version 3.3.7
 	 *
 	 */
 
@@ -85,7 +85,7 @@ public class SBSUserMain
 
           //System.out.println("menu bar test");
 
-         System.out.println("Audovia version 3.3.6 for Ubuntu Snappy");
+         System.out.println("Audovia version 3.3.7 for Ubuntu Snappy");
          System.out.println("Work directory: " + System.getProperty("user.dir"));
          System.out.println("Java directory: " + System.getProperty("java.home"));
 

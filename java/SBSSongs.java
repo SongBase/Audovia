@@ -37,13 +37,13 @@ import javax.xml.parsers.*;
 import javax.swing.border.*;
 import java.net.*;
 import javax.swing.filechooser.*;
-
+import javax.swing.UIManager.*;
 import javax.swing.plaf.basic.*;
 
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.3.6
+	 * version 3.3.7
 	 *
 	 */
 
@@ -292,7 +292,16 @@ public class SBSSongs extends JFrame
          shareItem.addActionListener(shareAction);
 	   }
 
-      JMenu helpMenu = new JMenu("Help");
+      JMenu documentationMenu = new JMenu("Documentation");
+      menuBar.add(documentationMenu);
+      
+      JMenuItem documentationItem = new JMenuItem("Audovia Documentation");
+      documentationMenu.add(documentationItem);
+
+      DocumentationAction documentationAction = new DocumentationAction();
+      documentationItem.addActionListener(documentationAction);
+
+      JMenu helpMenu = new JMenu("About");
       menuBar.add(helpMenu);
 
       JMenuItem aboutItem    = new JMenuItem("About Audovia");
@@ -2363,6 +2372,47 @@ public class SBSSongs extends JFrame
       }
    }
 
+   private class DocumentationAction implements ActionListener
+   {
+      public void actionPerformed(ActionEvent a)
+      {
+         if (tableField.isEditing())
+         {
+            int editingRow = tableField.getEditingRow();
+            int editingCol = tableField.getEditingColumn();
+            TableCellEditor tableEditor = tableField.getCellEditor();
+            tableEditor.stopCellEditing();
+            tableField.setValueAt(tableEditor.getCellEditorValue(),
+               editingRow, editingCol);
+
+            tableField.requestFocusInWindow();
+         }
+         try
+         {
+            String defaultLF = UIManager.getSystemLookAndFeelClassName();
+            UIManager.setLookAndFeel(defaultLF);
+
+            ViewerComponentExample viewPDF = new ViewerComponentExample();
+            viewPDF.view("doc/AudoviaDocumentation-3-3.pdf");
+
+         for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
+         {
+            if ("Nimbus".equals(info.getName()))
+            {
+               UIManager.setLookAndFeel(info.getClassName());
+               UIManager.put("ScrollBar.minimumThumbSize", new Dimension(32,32)); // added 8 Sep 2015
+               break;
+            }
+         }
+          
+         }
+         catch (Exception e)
+         {
+            Messages.exceptionHandler(frame, title, e);
+         }
+      }
+   }
+
    private class AboutAction implements ActionListener
    {
       public void actionPerformed(ActionEvent a)
@@ -2395,7 +2445,7 @@ public class SBSSongs extends JFrame
             aboutFrame.setVisible(true);
 
             JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\">Audovia - Database application for making music using JFugue " +
-                          "MusicStrings&nbsp; version 3.3.6</p>" +
+                          "MusicStrings&nbsp; version 3.3.7</p>" +
 
                           "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2016&nbsp; Donald G Gray</p>" +
 
@@ -2413,10 +2463,18 @@ public class SBSSongs extends JFrame
                           "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.&nbsp; " +
                           "See the GNU General Public License for more details.</p>" +
 
-                          "<p>You should have received a copy of the GNU General Public License " +
-                          "along with this program.&nbsp; If not, see http://www.gnu.org/licenses/.</p></html>");
+                          "<p style=\"margin-bottom:8px;\">You should have received a copy of the GNU General Public License " +
+                          "along with this program.&nbsp; If not, see http://www.gnu.org/licenses/.</p>" +
 
-            label.setPreferredSize(new Dimension(590,360));
+                          "<p style=\"margin-bottom:8px;\">The Documentation PDF Viewer uses the ICEpdf library and is distributed " +
+                          "under the terms of the Apache License, version 2.</p> " +
+
+                          "<p style=\"margin-bottom:8px;\">You should have received a copy of the Apache License " +
+                          "along with this program.&nbsp; If not, see http://www.apache.org/licenses/.</p>" +
+
+                          "</html>");
+
+            label.setPreferredSize(new Dimension(600,400));
             label.setVerticalAlignment(JLabel.TOP);
 
             JScrollPane contentPane = new JScrollPane(label); // added
