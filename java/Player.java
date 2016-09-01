@@ -54,6 +54,7 @@ public class Player
 {
     private Sequencer sequencer;
     private MusicStringParser parser;
+    //private MusicStringPulseParser pparser; // added D G Gray 28 Aug 2016
     private MidiRenderer renderer;
     private float sequenceTiming = Sequence.PPQ;
     private int resolution = 128;
@@ -201,6 +202,12 @@ public class Player
         this.parser = parser;
         this.parser.addParserListener(this.renderer);  // added by D G Gray 07-jun-2010
     }
+
+//    public void setParser(MusicStringPulseParser parser) // added by D G Gray 28th Aug 2016
+//    {
+//        this.parser = parser;
+//        this.parser.addParserListener(this.renderer);  // added by D G Gray 07-jun-2010
+//    }
 
     /**
      * Returns the MidiRenderer that this Player will use to play MIDI events.

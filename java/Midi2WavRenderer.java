@@ -48,7 +48,7 @@ import javax.sound.sampled.AudioSystem;
 
 import org.jfugue.JFugueException;
 import org.jfugue.Pattern;
-import org.jfugue.Player;
+//import org.jfugue.Player; modified D G Gray 28th Aug 2016
 
 import com.sun.media.sound.AudioSynthesizer;
 
@@ -175,6 +175,60 @@ public class Midi2WavRenderer
         AudioSystem.write(stream, AudioFileFormat.Type.WAVE, outputFile);
 
         this.synth.close();
+    }
+
+
+    /**
+     * Creates a WAV file based on the Pattern, using a supplied soundbank - by D G Gray 28th Aug 2016.
+     *
+     * @param sequence
+     * @param outputFile
+     * @throws MidiUnavailableException
+     * @throws InvalidMidiDataException
+     * @throws IOException
+     */
+    public void createWavFile(Pattern pattern, String numeric_duration_type, Soundbank soundbank, File outputFile) throws MidiUnavailableException, InvalidMidiDataException, IOException
+    {
+        AudioSynthesizer synth = findAudioSynthesizer();
+
+        if (synth == null) {
+            throw new JFugueException("No AudioSynthesizer was found!");
+        }
+
+        //AudioFormat format = new AudioFormat(96000, 24, 2, true, false);
+        AudioFormat format = new AudioFormat(44100, 16, 2, true, false);  // modified D G Gray 3rd May 2015
+        Map<String, Object> p = new HashMap<String, Object>();
+        p.put("interpolation", "sinc");
+        p.put("max polyphony", "1024");
+        AudioInputStream stream = synth.openStream(format, p);
+
+        if (soundbank != null) synth.loadAllInstruments(soundbank);
+
+        Sequencer sequencer = Player.getSequencerConnectedToSynthesizer(synth);
+        Player player = new Player(sequencer);
+
+        if (numeric_duration_type != null && numeric_duration_type.equals("pulses"))
+        {
+           MusicStringParser parser = new MusicStringParser();
+           parser.setNumeric_duration_type("pulses");
+           player.setParser(parser);
+        }
+
+        Sequence sequence = player.getSequence(pattern);
+
+        // Play Sequence into AudioSynthesizer Receiver.
+        double total = send(sequence, synth.getReceiver());
+
+        // Calculate how long the WAVE file needs to be.
+        //long len = (long) (stream.getFormat().getFrameRate() * (total + 4));
+        long len = (long) (stream.getFormat().getFrameRate() * (total + pad));  // modified D G Gray 10th Dec 2014
+        stream = new AudioInputStream(stream, stream.getFormat(), len);
+
+        // Write WAVE file to disk.
+        AudioSystem.write(stream, AudioFileFormat.Type.WAVE, outputFile);
+
+        player.close();
+        synth.close();
     }
 
 

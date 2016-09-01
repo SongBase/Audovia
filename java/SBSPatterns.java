@@ -40,6 +40,8 @@ import javax.swing.filechooser.*;
 
 import javax.swing.plaf.basic.*;
 
+//import com.sun.media.sound.AudioSynthesizer;
+
 public class SBSPatterns extends JFrame
 {
 	/*
@@ -107,6 +109,8 @@ public class SBSPatterns extends JFrame
    private Pattern pattern;
 
    private JDialog pleaseWait;
+
+   private Soundbank soundbank;
 
    public SBSPatterns(JFrame aParentFrame,
                       Field aSiblingCountField,
@@ -1042,7 +1046,8 @@ public class SBSPatterns extends JFrame
 
                         if (numeric_duration_type != null && numeric_duration_type.equals("pulses"))
                         {
-	                	       MusicStringPulseParser parser = new MusicStringPulseParser();
+	                	       MusicStringParser parser = new MusicStringParser();
+                                       parser.setNumeric_duration_type("pulses");
 			                   player.setParser(parser);
 		                  }
 
@@ -1175,7 +1180,8 @@ public class SBSPatterns extends JFrame
 
                         if (numeric_duration_type != null && numeric_duration_type.equals("pulses"))
                         {
-	                	      MusicStringPulseParser MusicStringIn = new MusicStringPulseParser();
+	                	      MusicStringParser MusicStringIn = new MusicStringParser();
+                                      MusicStringIn.setNumeric_duration_type("pulses");
 		                     MusicStringIn.addParserListener(MusicXmlOut);
 		                     //MusicStringIn.parse(octaveLowerSong);
 		                     MusicStringIn.parse(pattern);
@@ -1225,15 +1231,16 @@ public class SBSPatterns extends JFrame
 
    private class ExportWavAction implements ActionListener
    {
-		private int pad;
+      private int pad;
 
       public ExportWavAction(int aPad)
       {
-			pad = aPad;
-		}
+	 pad = aPad;
+      }
 
       public void actionPerformed(ActionEvent a)
       {
+         soundbank = null;
          if (tableField.isEditing())
          {
             int editingRow = tableField.getEditingRow();
@@ -1289,86 +1296,67 @@ public class SBSPatterns extends JFrame
                         addStrings(pattern_id, pattern_name, ancestors);
                         conn.commit();
 
-                        //Player player = new Player();
+			if (soundbank_id != null)
+			{
+			   pleaseWait.setVisible(true);
 
-                        //if (numeric_duration_type != null && numeric_duration_type.equals("pulses"))
-                        //{
-	                	   //    MusicStringPulseParser parser = new MusicStringPulseParser();
-			               //    player.setParser(parser);
-		                  //}
-//
-			               ///player.saveMidi(pattern, file);
-			               //
+                           if (conn.getMetaData().getDatabaseProductName().equals("MySQL"))
+                           {
+ 			      cSviewStmt.setInt(1, soundbank_id.intValue());
+ 			      cSviewStmt.execute();
+ 			      rset = cSviewStmt.getResultSet();
+ 		           }
+ 		           else
+		           {
+                              viewStmt.setInt(1,soundbank_id.intValue());
+                              rset = viewStmt.executeQuery();
+		           }
+                           rset.next();
 
-			      if (soundbank_id != null)
+                           if (conn.getMetaData().getDatabaseProductName().equals("PostgreSQL") ||
+                               conn.getMetaData().getDatabaseProductName().equals("Oracle"))
+                           {
+                              inputStream = rset.getBinaryStream(1);
+		           }
+                           else
+                           {
+                              Blob soundbank_blob = rset.getBlob(1);
+
+                              if (soundbank_blob != null)
+                              {
+                                 byte[] bytes = soundbank_blob.getBytes(1L, (int)soundbank_blob.length());
+                                 inputStream = new ByteArrayInputStream(bytes);
+			      }
+			      else
 			      {
-						pleaseWait.setVisible(true);
+				 inputStream = null;
+			      }
+			   }
 
-			         synthesizer = MidiSystem.getSynthesizer();
+                           rset.close();
 
-			         synthesizer.open();
+                           if (inputStream != null)
+                           {
+			      soundbank = MidiSystem.getSoundbank(inputStream);
 
-			         Sequencer sequencer = Player.getSequencerConnectedToSynthesizer(synthesizer);
-			         player = new Player(sequencer); ////////////
+	                      inputStream.close();
+	                      conn.commit();
+		           }
+		           else
+		           {
+                              conn.commit();
+                              pleaseWait.setVisible(false);
+                              Messages.warningMessage(frame, title, "Soundbank not loaded - default soundbank will be used.");
+			   }
 
-                  if (conn.getMetaData().getDatabaseProductName().equals("MySQL"))
-                  {
- 			            cSviewStmt.setInt(1, soundbank_id.intValue());
- 			            cSviewStmt.execute();
- 			            rset = cSviewStmt.getResultSet();
- 		            }
- 		            else
-		            {
-                     viewStmt.setInt(1,soundbank_id.intValue());
-                     rset = viewStmt.executeQuery();
-					   }
-                  rset.next();
+		        }
+		        else
+		        {
+	                   String[] soundbank_options = {"Default Soundbank", "Soundbank from File"};
 
-                  if (conn.getMetaData().getDatabaseProductName().equals("PostgreSQL") ||
-                      conn.getMetaData().getDatabaseProductName().equals("Oracle"))
-                  {
-                     inputStream = rset.getBinaryStream(1);
-					   }
-                  else
-                  {
-                     Blob soundbank_blob = rset.getBlob(1);
+	                   JOptionPane optionPane = new JOptionPane();
 
-                     if (soundbank_blob != null)
-                     {
-                        byte[] bytes = soundbank_blob.getBytes(1L, (int)soundbank_blob.length());
-                        inputStream = new ByteArrayInputStream(bytes);
-						   }
-						   else
-						   {
-								inputStream = null;
-							}
-						}
-
-                  rset.close();
-
-                  if (inputStream != null)
-                  {
-			      		Soundbank soundbank = MidiSystem.getSoundbank(inputStream);
-	                  synthesizer.loadAllInstruments(soundbank);
-	                  inputStream.close();
-	                  conn.commit();
-		         	}
-		         	else
-		         	{
-                     conn.commit();
-                     pleaseWait.setVisible(false);
-                     Messages.warningMessage(frame, title, "Soundbank not loaded - default soundbank will be used.");
-			      	}
-
-                  //player = new Player(synthesizer, frame);
-		         }
-		         else
-		         {
-	               String[] soundbank_options = {"Default Soundbank", "Soundbank from File"};
-
-	               JOptionPane optionPane = new JOptionPane();
-
-	               int soundbank_choice = optionPane.showOptionDialog(frame,
+	                   int soundbank_choice = optionPane.showOptionDialog(frame,
 	                              "No soundbank attached to song.\n\n" +
 	                              "Choose the Default Soundbank or a Soundbank from File.",
 	                               title,
@@ -1378,90 +1366,58 @@ public class SBSPatterns extends JFrame
 	                               soundbank_options,
 	                               null);
 
-	               if (soundbank_choice != JOptionPane.CLOSED_OPTION)
-	               {
-	                  if (soundbank_choice == 0)
-	                  {
-								pleaseWait.setVisible(true);
-
-			               synthesizer = MidiSystem.getSynthesizer();
-
-			               synthesizer.open();
-
-								Sequencer sequencer = Player.getSequencerConnectedToSynthesizer(synthesizer);
-			               player = new Player(sequencer); ////////////
-                        //player = new Player(frame);
-						   }
-						   else
-						   {
-								FileSystemView fsv2 = new SingleRootFileSystemView(new File("."));
-                        JFileChooser chooser = new JFileChooser("SF2", fsv2);
-                        chooser.setPreferredSize(new Dimension(600,300));
-                        chooser.setDialogTitle("Get Soundbank from File");
-
-                        FileNameExtensionFilter filter = new FileNameExtensionFilter("Soundbank files *.sf2 and *.dls", "sf2", "dls");
-                        chooser.addChoosableFileFilter(filter);
-                        chooser.setFileFilter(filter);
-
-                        int result = chooser.showDialog(frame, "Get Soundbank"); ///////////////
-                        if (result == JFileChooser.APPROVE_OPTION)
-                        {
-                           File file = chooser.getSelectedFile();
-
-                           if (file.exists())
-                           {
-										pleaseWait.setVisible(true);
-
-			                     synthesizer = MidiSystem.getSynthesizer();
-
-			                     synthesizer.open();
-
-			      		         Soundbank soundbank = MidiSystem.getSoundbank(file);
-	                           synthesizer.loadAllInstruments(soundbank);
-
- 			                     Sequencer sequencer = Player.getSequencerConnectedToSynthesizer(synthesizer);
-			                     player = new Player(sequencer); ////////////
-                              //player = new Player(synthesizer, frame);
-                           }
-                           else
-                           {
-                              throw new Exception("Soundbank not found.");
-                           }
-                        }
-                        else
-                        {
-									throw new Exception("Get Soundbank Aborted.");
-								}
-							}
-						}
-						else
-						{
-							throw new Exception("Export to WAV Aborted.");
-						}
-	    	      }
-
-               if (numeric_duration_type != null && numeric_duration_type.equals("pulses"))
-               {
-		            MusicStringPulseParser parser = new MusicStringPulseParser();
-			      	player.setParser(parser);
+	                   if (soundbank_choice != JOptionPane.CLOSED_OPTION)
+	                   {
+	                      if (soundbank_choice == 0)
+	                      {
+				 pleaseWait.setVisible(true);
 			      }
+			      else
+			      {
+				 FileSystemView fsv2 = new SingleRootFileSystemView(new File("."));
+                                 JFileChooser chooser = new JFileChooser("SF2", fsv2);
+                                 chooser.setPreferredSize(new Dimension(600,300));
+                                 chooser.setDialogTitle("Get Soundbank from File");
 
-               pleaseWait.setVisible(true);
+                                 FileNameExtensionFilter filter = new FileNameExtensionFilter("Soundbank files *.sf2 and *.dls", "sf2", "dls");
+                                 chooser.addChoosableFileFilter(filter);
+                                 chooser.setFileFilter(filter);
 
-               Sequence sequence = player.getSequence(pattern);
-               Midi2WavRenderer renderer = new Midi2WavRenderer(pad);
-               renderer.createWavFile(sequence, fileOut);
+                                 int result = chooser.showDialog(frame, "Get Soundbank");
+                                 if (result == JFileChooser.APPROVE_OPTION)
+                                 {
+                                    File file = chooser.getSelectedFile();
 
+                                    if (file.exists())
+                                    {
+				       pleaseWait.setVisible(true);
 
-			      //player.play(pattern);
-               player.close();
+			      	       soundbank = MidiSystem.getSoundbank(file);
 
-               pleaseWait.setVisible(false);
+                                    }
+                                    else
+                                    {
+                                       throw new Exception("Soundbank not found.");
+                                    }
+                                 }
+                                 else
+                                 {
+				    throw new Exception("Get Soundbank Aborted.");
+				 }
+			     }
+			   }
+			   else
+			   {
+			      throw new Exception("Export to WAV Aborted.");
+			   }
+	    	        }
 
-               if (synthesizer != null) synthesizer.close();
+                        pleaseWait.setVisible(true);
 
-			               //
-                        //player.close();
+                        Midi2WavRenderer renderer = new Midi2WavRenderer(pad);
+                        renderer.createWavFile(pattern, numeric_duration_type, soundbank, fileOut);
+
+                        pleaseWait.setVisible(false);
 
                         Messages.plainMessage(frame, title, "WAV exported to: " + fileOut.getPath());
                      }

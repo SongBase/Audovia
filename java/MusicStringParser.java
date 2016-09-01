@@ -46,6 +46,7 @@ public class MusicStringParser extends Parser  // added by D G Gray 07-jun-2010
 {
     private Map<String, Object> dictionaryMap;
     private byte keySig = 0;
+    private String numeric_duration_type = null; // added by D G Gray 28th Aug 2016
 
     /**
      * Creates a new Parser object, and populates the dictionary with initial entries.
@@ -55,8 +56,13 @@ public class MusicStringParser extends Parser  // added by D G Gray 07-jun-2010
     {
         dictionaryMap = new HashMap<String, Object>();
         JFugueDefinitions.populateDictionary(dictionaryMap);
+        numeric_duration_type = null; // added by D G Gray 28th Aug 2016
     }
 
+    public void setNumeric_duration_type(String aNumeric_duration_type)
+    {
+       numeric_duration_type = aNumeric_duration_type;
+    }
 
     /**
      * Parses a <code>Pattern</code> and fires events to subscribed <code>ParserListener</code>
@@ -997,7 +1003,10 @@ public class MusicStringParser extends Parser  // added by D G Gray 07-jun-2010
         context.decimalDuration = 0.0;
         if (index < slen) {
             switch (s.charAt(index)) {
-                case '/' : index = parseNumericDuration(s, slen, index, context); break;
+                case '/' : index = parseNumericDuration(s, slen, index, context);
+                           if (numeric_duration_type != null && numeric_duration_type.equals("pulses"))
+                           context.decimalDuration = context.decimalDuration/128.0; // added by D G Gray 28th Aug 2016
+                           break;
                 case 'W' :
                 case 'H' :
                 case 'Q' :

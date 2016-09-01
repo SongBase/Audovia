@@ -142,7 +142,8 @@ public class SBSPlayerThread extends Thread
 
                   if (numeric_duration_type != null && numeric_duration_type.equals("pulses"))
                   {
-		               MusicStringPulseParser parser = new MusicStringPulseParser();
+		               MusicStringParser parser = new MusicStringParser();
+                                        parser.setNumeric_duration_type("pulses");
 			         	player.setParser(parser);
 			         }
 
@@ -283,7 +284,8 @@ public class SBSPlayerThread extends Thread
 
                if (numeric_duration_type != null && numeric_duration_type.equals("pulses"))
                {
-		            MusicStringPulseParser parser = new MusicStringPulseParser();
+		            MusicStringParser parser = new MusicStringParser();
+                            parser.setNumeric_duration_type("pulses");
 			      	player.setParser(parser);
 			      }
 

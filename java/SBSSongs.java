@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.3.7
+	 * version 3.3.8
 	 *
 	 */
 
@@ -2445,7 +2445,7 @@ public class SBSSongs extends JFrame
             aboutFrame.setVisible(true);
 
             JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\">Audovia - Database application for making music using JFugue " +
-                          "MusicStrings&nbsp; version 3.3.7</p>" +
+                          "MusicStrings&nbsp; version 3.3.8</p>" +
 
                           "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2016&nbsp; Donald G Gray</p>" +
 
