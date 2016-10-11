@@ -447,6 +447,7 @@ public class SBSPopupEditor extends JDialog
       instrument.addItem("I[tenor_sax]");
       instrument.addItem("I[baritone_sax]");
       instrument.addItem("I[oboe]");
+      instrument.addItem("I[chanter]");
       instrument.addItem("I[english_horn]");
 
       instrument.addItem("I[bassoon]");

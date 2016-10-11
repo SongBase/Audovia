@@ -133,6 +133,7 @@ public final class JFugueDefinitions
         dictionaryMap.put("TENOR_SAX"                ,"66");
         dictionaryMap.put("BARITONE_SAX"             ,"67");
         dictionaryMap.put("OBOE"                     ,"68");
+        dictionaryMap.put("CHANTER"                  ,"68"); // added D G Gray 9th Oct 2016
         dictionaryMap.put("ENGLISH_HORN"             ,"69");
 
         dictionaryMap.put("BASSOON"                  ,"70");
