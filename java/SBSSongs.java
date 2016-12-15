@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.3.9
+	 * version 3.3.12
 	 *
 	 */
 
@@ -378,7 +378,11 @@ public class SBSSongs extends JFrame
       JLabel titleField = new JLabel("Audovia");
       JLabel blankField = new JLabel("     ");
 
-      JLabel iconLabel = new JLabel(scaledIcon); ////////////////
+      JButton iconLabel     = new JButton(scaledIcon);
+      iconLabel.setBorder(new EmptyBorder(0,0,0,0));
+      iconLabel.setToolTipText("<html><p style=\"background-color:#e8ccff;padding:2px;\">Tree View</p></html>");
+
+      //JLabel iconLabel = new JLabel(scaledIcon); ////////////////
       JPanel iconPanel = new JPanel();
       iconPanel.add(iconLabel);
 
@@ -501,15 +505,15 @@ public class SBSSongs extends JFrame
       PatternsAction patternsAction = new PatternsAction();
       QuitAction quitAction         = new QuitAction();
 
-      //iconButton.addActionListener(iconAction);
+      iconLabel.addActionListener(treeViewAction);
 
-      //iconButton.addMouseListener(new java.awt.event.MouseAdapter() {
-		//    public void mouseEntered(java.awt.event.MouseEvent evt) {
-		//        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		//    }
-		//    public void mouseExited(java.awt.event.MouseEvent evt) {
-		//        setCursor(Cursor.getDefaultCursor());
-		//    }
+      //iconLabel.addMouseListener(new java.awt.event.MouseAdapter() {
+	//	    public void mouseEntered(java.awt.event.MouseEvent evt) {
+	//	        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+	//	    }
+	//	    public void mouseExited(java.awt.event.MouseEvent evt) {
+	//	        setCursor(Cursor.getDefaultCursor());
+	//	    }
       //});
 
       searchButton.addActionListener(searchAction);
@@ -2445,7 +2449,7 @@ public class SBSSongs extends JFrame
             aboutFrame.setVisible(true);
 
             JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\">Audovia - Database application for making music using JFugue " +
-                          "MusicStrings&nbsp; version 3.3.9</p>" +
+                          "MusicStrings&nbsp; version 3.3.12</p>" +
 
                           "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2016&nbsp; Donald G Gray</p>" +
 
