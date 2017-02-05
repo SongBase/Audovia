@@ -2,22 +2,22 @@
  * JFugue - API for Music Programming
  * Copyright (C) 2003-2008  David Koelle
  *
- * http://www.jfugue.org 
- * 
+ * http://www.jfugue.org
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- *  
+ *
  */
 
 package org.jfugue.extras;
@@ -26,7 +26,7 @@ import org.jfugue.*;
 
 /**
  * The IntervalPatternTransformer alters music by changing the interval, or step, for each
- * note in the given Pattern. For example, a C5 (note 60) raised 3 steps would turn into a 
+ * note in the given Pattern. For example, a C5 (note 60) raised 3 steps would turn into a
  * D#5 (note 63).  The interval is passed in as a parameter.
  *
  * <p>
@@ -40,7 +40,8 @@ import org.jfugue.*;
 public class IntervalPatternTransformer extends PatternTransformer
 {
     private int interval;
-    
+    private byte voiceValue = 0; // added D G Gray 5th Feb 2017
+
     /**
      * Instantiates a new IntervalPatternTransformer object.  The default value by which
      * to increase the duration is 1.
@@ -50,12 +51,23 @@ public class IntervalPatternTransformer extends PatternTransformer
         this.interval = interval;
     }
 
+    /** Gets the Voice value - added D G Gray 5th Feb 2017 */
+    public void voiceEvent(Voice voice)
+    {
+        voiceValue = voice.getVoice();
+
+        getReturnPattern().addElement(voice);
+    }
+
     /** Transforms the given note */
     public void noteEvent(Note note)
     {
         byte noteValue = note.getValue();
-        noteValue += this.interval;
-        note.setValue(noteValue);
+        if (voiceValue != 9) // added D G Gray 5th Feb 2017
+        {
+           noteValue += this.interval;
+           note.setValue(noteValue);
+	     }
 
         getReturnPattern().addElement(note);
     }
@@ -64,8 +76,12 @@ public class IntervalPatternTransformer extends PatternTransformer
     public void sequentialNoteEvent(Note note)
     {
         byte noteValue = note.getValue();
-        noteValue += this.interval;
-        note.setValue(noteValue);
+        if (voiceValue != 9) // added D G Gray 5th Feb 2017
+        {
+           noteValue += this.interval;
+           note.setValue(noteValue);
+	     }
+
 
         getReturnPattern().addElement(note);
     }
@@ -74,8 +90,12 @@ public class IntervalPatternTransformer extends PatternTransformer
     public void parallelNoteEvent(Note note)
     {
         byte noteValue = note.getValue();
-        noteValue += this.interval;
-        note.setValue(noteValue);
+        if (voiceValue != 9) // added D G Gray 5th Feb 2017
+        {
+           noteValue += this.interval;
+           note.setValue(noteValue);
+	     }
+
 
         getReturnPattern().addElement(note);
     }
