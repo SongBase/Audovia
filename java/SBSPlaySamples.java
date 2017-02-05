@@ -33,6 +33,7 @@ import javax.print.attribute.standard.*;
 import java.lang.reflect.*;
 import java.sql.*;
 import javax.sound.midi.*;
+import org.jfugue.*;
 
 public class SBSPlaySamples extends JDialog
 {

@@ -33,6 +33,7 @@ import javax.print.attribute.standard.*;
 import java.lang.reflect.*;
 import java.sql.*;
 import org.jfugue.*;
+import org.jfugue.extras.*;
 import nu.xom.*;
 
 import javax.sound.midi.*;
@@ -707,6 +708,20 @@ public class SBSPatterns extends JFrame
                      addStrings(pattern_id, pattern_name, ancestors);
                      conn.commit();
 
+                        SBSChangePitch changePitch = new SBSChangePitch();
+							   changePitch.setVisible(true);
+								String pitch = changePitch.getPitch();
+	    		            changePitch.dispose();
+
+                        if (Integer.parseInt(pitch) != 0)
+                        {
+	    		            IntervalPatternTransformer patternTransformer = new IntervalPatternTransformer(Integer.parseInt(pitch));
+								pattern = patternTransformer.transform(pattern);
+								String patternString = pattern.toString();
+								patternString = patternString.replaceAll("[Kk][a-zA-Z#]* "," ");
+								pattern = new Pattern(patternString);
+							   }
+
                      SBSPlayerThread pt = new SBSPlayerThread(conn, numeric_duration_type, soundbank_id, pattern, frame);
                      pt.start();
 
@@ -1042,6 +1057,20 @@ public class SBSPatterns extends JFrame
                         addStrings(pattern_id, pattern_name, ancestors);
                         conn.commit();
 
+                        SBSChangePitch changePitch = new SBSChangePitch();
+							   changePitch.setVisible(true);
+								String pitch = changePitch.getPitch();
+	    		            changePitch.dispose();
+
+                        if (Integer.parseInt(pitch) != 0)
+                        {
+	    		            IntervalPatternTransformer patternTransformer = new IntervalPatternTransformer(Integer.parseInt(pitch));
+								pattern = patternTransformer.transform(pattern);
+								String patternString = pattern.toString();
+								patternString = patternString.replaceAll("[Kk][a-zA-Z#]* "," ");
+								pattern = new Pattern(patternString);
+							   }
+
                         Player player = new Player();
 
                         if (numeric_duration_type != null && numeric_duration_type.equals("pulses"))
@@ -1145,6 +1174,20 @@ public class SBSPatterns extends JFrame
                         addStrings(pattern_id, pattern_name, ancestors);
                         conn.commit();
 
+                        SBSChangePitch changePitch = new SBSChangePitch();
+							   changePitch.setVisible(true);
+								String pitch = changePitch.getPitch();
+	    		            changePitch.dispose();
+
+                        if (Integer.parseInt(pitch) != 0)
+                        {
+	    		            IntervalPatternTransformer patternTransformer = new IntervalPatternTransformer(Integer.parseInt(pitch));
+								pattern = patternTransformer.transform(pattern);
+								String patternString = pattern.toString();
+								patternString = patternString.replaceAll("[Kk][a-zA-Z#]* "," ");
+								pattern = new Pattern(patternString);
+							   }
+
                         //PatternTransformer octaveChanger = new PatternTransformer()
                         //{
                         //   public void noteEvent(Note note)
@@ -1177,6 +1220,9 @@ public class SBSPatterns extends JFrame
 
 								//Pattern octaveLowerSong = octaveChanger.transform(pattern);
 								//  octaveChanger is loosing note tie information so do the transformation in MusicXmlRenderer instead.
+
+								//IntervalPatternTransformer patternTransformer = new IntervalPatternTransformer(2); // testing only
+								//pattern = patternTransformer.transform(pattern); // testing only
 
                         if (numeric_duration_type != null && numeric_duration_type.equals("pulses"))
                         {
@@ -1295,6 +1341,20 @@ public class SBSPatterns extends JFrame
                         ancestors.add(pattern_id);
                         addStrings(pattern_id, pattern_name, ancestors);
                         conn.commit();
+
+                        SBSChangePitch changePitch = new SBSChangePitch();
+							   changePitch.setVisible(true);
+								String pitch = changePitch.getPitch();
+	    		            changePitch.dispose();
+
+                        if (Integer.parseInt(pitch) != 0)
+                        {
+	    		            IntervalPatternTransformer patternTransformer = new IntervalPatternTransformer(Integer.parseInt(pitch));
+								pattern = patternTransformer.transform(pattern);
+								String patternString = pattern.toString();
+								patternString = patternString.replaceAll("[Kk][a-zA-Z#]* "," ");
+								pattern = new Pattern(patternString);
+							   }
 
 			if (soundbank_id != null)
 			{

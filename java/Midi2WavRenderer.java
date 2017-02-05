@@ -48,7 +48,7 @@ import javax.sound.sampled.AudioSystem;
 
 import org.jfugue.JFugueException;
 import org.jfugue.Pattern;
-//import org.jfugue.Player; modified D G Gray 28th Aug 2016
+import org.jfugue.*; //modified D G Gray 28th Aug 2016
 
 import com.sun.media.sound.AudioSynthesizer;
 

@@ -1,6 +1,6 @@
 /*
  * SBSSongs.java - List of Songs
- * Copyright (C) 2010 - 2016  Donald G Gray
+ * Copyright (C) 2010 - 2017  Donald G Gray
  *
  * http://gray10.com/
  *
@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.3.12
+	 * version 3.4.0
 	 *
 	 */
 
@@ -294,7 +294,7 @@ public class SBSSongs extends JFrame
 
       JMenu documentationMenu = new JMenu("Documentation");
       menuBar.add(documentationMenu);
-      
+
       JMenuItem documentationItem = new JMenuItem("Audovia Documentation");
       documentationMenu.add(documentationItem);
 
@@ -2408,7 +2408,7 @@ public class SBSSongs extends JFrame
                break;
             }
          }
-          
+
          }
          catch (Exception e)
          {
@@ -2449,9 +2449,9 @@ public class SBSSongs extends JFrame
             aboutFrame.setVisible(true);
 
             JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\">Audovia - Database application for making music using JFugue " +
-                          "MusicStrings&nbsp; version 3.3.12</p>" +
+                          "MusicStrings&nbsp; version 3.4.0</p>" +
 
-                          "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2016&nbsp; Donald G Gray</p>" +
+                          "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2017&nbsp; Donald G Gray</p>" +
 
                           "<p style=\"margin-bottom:4px;\">website: http://audovia.com/</p>" +
                           "<p style=\"margin-bottom:4px;\">e-mail: info@audovia.com</p>" +

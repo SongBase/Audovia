@@ -1,6 +1,6 @@
 /*
  * SBSUserMain.java - Main program for Audovia System
- * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015, 2016  Donald G Gray
+ * Copyright (C) 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017  Donald G Gray
  *
  * http://gray10.com/
  *
@@ -32,7 +32,7 @@ import javax.swing.plaf.basic.*;
 public class SBSUserMain
 {
 	/*
-	 * version 3.3.12
+	 * version 3.4.0
 	 *
 	 */
 
@@ -85,7 +85,7 @@ public class SBSUserMain
 
           //System.out.println("menu bar test");
 
-         System.out.println("Audovia version 3.3.12 for Ubuntu Snappy");
+         System.out.println("Audovia version 3.4.0 for Ubuntu Snappy");
          System.out.println("Work directory: " + System.getProperty("user.dir"));
          System.out.println("Java directory: " + System.getProperty("java.home"));
 

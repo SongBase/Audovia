@@ -39,6 +39,7 @@ import javax.sound.midi.*;
 import javax.swing.filechooser.*;
 
 import org.jfugue.*;
+import org.jfugue.extras.*;
 
 import javax.swing.plaf.basic.*;
 
@@ -704,6 +705,20 @@ public class SBSTree extends JFrame
                      addStrings(component_id, component_name, ancestors);
                      conn.commit();
 
+                        SBSChangePitch changePitch = new SBSChangePitch();
+							   changePitch.setVisible(true);
+								String pitch = changePitch.getPitch();
+	    		            changePitch.dispose();
+
+                        if (Integer.parseInt(pitch) != 0)
+                        {
+	    		            IntervalPatternTransformer patternTransformer = new IntervalPatternTransformer(Integer.parseInt(pitch));
+								pattern = patternTransformer.transform(pattern);
+								String patternString = pattern.toString();
+								patternString = patternString.replaceAll("[Kk][a-zA-Z#]* "," ");
+								pattern = new Pattern(patternString);
+							   }
+
                      SBSPlayerThread pt = new SBSPlayerThread(conn, numeric_duration_type, soundbank_id, pattern, frame);
                      pt.start();
 
@@ -909,6 +924,20 @@ public class SBSTree extends JFrame
                         addStrings(component_id, component_name, ancestors);
                         conn.commit();
 
+                        SBSChangePitch changePitch = new SBSChangePitch();
+							   changePitch.setVisible(true);
+								String pitch = changePitch.getPitch();
+	    		            changePitch.dispose();
+
+                        if (Integer.parseInt(pitch) != 0)
+                        {
+	    		            IntervalPatternTransformer patternTransformer = new IntervalPatternTransformer(Integer.parseInt(pitch));
+								pattern = patternTransformer.transform(pattern);
+								String patternString = pattern.toString();
+								patternString = patternString.replaceAll("[Kk][a-zA-Z#]* "," ");
+								pattern = new Pattern(patternString);
+							   }
+
                         Player player = new Player();
 
                         if (numeric_duration_type != null && numeric_duration_type.equals("pulses"))
@@ -989,6 +1018,20 @@ public class SBSTree extends JFrame
                         ancestors.add(component_id);
                         addStrings(component_id, component_name, ancestors);
                         conn.commit();
+
+                        SBSChangePitch changePitch = new SBSChangePitch();
+							   changePitch.setVisible(true);
+								String pitch = changePitch.getPitch();
+	    		            changePitch.dispose();
+
+                        if (Integer.parseInt(pitch) != 0)
+                        {
+	    		            IntervalPatternTransformer patternTransformer = new IntervalPatternTransformer(Integer.parseInt(pitch));
+								pattern = patternTransformer.transform(pattern);
+								String patternString = pattern.toString();
+								patternString = patternString.replaceAll("[Kk][a-zA-Z#]* "," ");
+								pattern = new Pattern(patternString);
+							   }
 
                         if (numeric_duration_type != null && numeric_duration_type.equals("pulses"))
                         {
@@ -1084,6 +1127,20 @@ public class SBSTree extends JFrame
                         ancestors.add(pattern_id);
                         addStrings(pattern_id, pattern_name, ancestors);
                         conn.commit();
+
+                        SBSChangePitch changePitch = new SBSChangePitch();
+							   changePitch.setVisible(true);
+								String pitch = changePitch.getPitch();
+	    		            changePitch.dispose();
+
+                        if (Integer.parseInt(pitch) != 0)
+                        {
+	    		            IntervalPatternTransformer patternTransformer = new IntervalPatternTransformer(Integer.parseInt(pitch));
+								pattern = patternTransformer.transform(pattern);
+								String patternString = pattern.toString();
+								patternString = patternString.replaceAll("[Kk][a-zA-Z#]* "," ");
+								pattern = new Pattern(patternString);
+							   }
 
 			if (soundbank_id != null)
 			{
