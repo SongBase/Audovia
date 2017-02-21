@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.4.2
+	 * version 3.4.3
 	 *
 	 */
 
@@ -105,7 +105,7 @@ public class SBSSongs extends JFrame
    private String  access_type;
 
    private SBSSongsTableModel tableModel;
-   private String title = "SBSSongs";
+   private String title = "Audovia - SBSSongs";
 
    private JComboBox<String> soundbankComboBox;
 
@@ -140,7 +140,7 @@ public class SBSSongs extends JFrame
 				}
 			});
 
-      setSize(700,540); // was 530
+      setSize(700,535); // was 530
       setLocation(50,50);
       setTitle(title + " (" + aConnectionName + ")");
 
@@ -245,14 +245,14 @@ public class SBSSongs extends JFrame
       JMenuItem templateItem     = new JMenuItem("Template");
       JMenuItem xmlExportItem    = new JMenuItem("XML Export");
       JMenuItem xmlImportItem    = new JMenuItem("XML Import");
-      JMenuItem treeViewItem     = new JMenuItem("Tree View");
+      JMenuItem quitItem     = new JMenuItem("Exit");
 
       fileMenu.add(templateItem);
       fileMenu.addSeparator();
       fileMenu.add(xmlExportItem);
       fileMenu.add(xmlImportItem);
       fileMenu.addSeparator();
-      fileMenu.add(treeViewItem);
+      fileMenu.add(quitItem);
 
       JMenu soundbanksMenu = new JMenu("Soundbanks");
       menuBar.add(soundbanksMenu);
@@ -325,8 +325,8 @@ public class SBSSongs extends JFrame
       XmlImportAction xmlImportAction = new XmlImportAction();
       xmlImportItem.addActionListener(xmlImportAction);
 
-      TreeViewAction treeViewAction = new TreeViewAction();
-      treeViewItem.addActionListener(treeViewAction);
+      QuitAction quitAction = new QuitAction();
+      quitItem.addActionListener(quitAction);
 
       SoundbanksAction soundbanksAction = new SoundbanksAction();
       soundbanksItem.addActionListener(soundbanksAction);
@@ -355,59 +355,72 @@ public class SBSSongs extends JFrame
       JPanel topPanel = new JPanel(); ///////
       topPanel.setLayout(new BorderLayout()); //////////
       //topPanel.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));  ///////////
-      topPanel.setBorder(BorderFactory.createEmptyBorder(15,20,15,80));
+//      topPanel.setBorder(BorderFactory.createEmptyBorder(15,20,15,80));
+
+      topPanel.setBorder(BorderFactory.createEmptyBorder(15,20,10,20));
+
+//      Font boldItalic = new Font("Liberation Sans", Font.BOLD+Font.ITALIC, 14); //////////
+//      JPanel headerPanel = new JPanel(); ////////
+//      headerPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); ////////
+//      JLabel headerField = new JLabel("Songs"); ///////////
+//      headerField.setFont(boldItalic); //////////////////
+//      headerPanel.add(headerField); ////////////
 
 
-      Font boldItalic = new Font("Liberation Sans", Font.BOLD+Font.ITALIC, 14); //////////
-      JPanel headerPanel = new JPanel(); ////////
-      headerPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); ////////
-      JLabel headerField = new JLabel("Songs"); ///////////
-      headerField.setFont(boldItalic); //////////////////
-      headerPanel.add(headerField); ////////////
+//      JPanel middlePanel = new JPanel();
+//      JLabel middleField = new JLabel("database application for making music using JFugue MusicStrings");
+//      Font middleFont = new Font("Liberation Serif", Font.PLAIN+Font.ITALIC, 12);
+//      middlePanel.add(middleField);
+//      middleField.setFont(middleFont);
+//      middleField.setForeground(new Color(85, 26, 139));
 
 
-      JPanel middlePanel = new JPanel();
-      JLabel middleField = new JLabel("database application for making music using JFugue MusicStrings");
-      Font middleFont = new Font("Liberation Serif", Font.PLAIN+Font.ITALIC, 12);
-      middlePanel.add(middleField);
-      middleField.setFont(middleFont);
-      middleField.setForeground(new Color(85, 26, 139));
+//      JPanel titlePanel = new JPanel();
+//      JLabel titleField = new JLabel("Audovia");
+//      JLabel blankField = new JLabel("     ");
 
-
-      JPanel titlePanel = new JPanel();
-      JLabel titleField = new JLabel("Audovia");
-      JLabel blankField = new JLabel("     ");
-
-      JButton iconLabel     = new JButton(scaledIcon);
-      iconLabel.setBorder(new EmptyBorder(0,0,0,0));
-      iconLabel.setToolTipText("<html><p style=\"background-color:#e8ccff;padding:2px;\">Tree View</p></html>");
+//      JButton iconLabel     = new JButton(scaledIcon);
+//      iconLabel.setBorder(new EmptyBorder(0,0,0,0));
+//      iconLabel.setToolTipText("<html><p style=\"background-color:#e8ccff;padding:2px;\">Tree View</p></html>");
 
       //JLabel iconLabel = new JLabel(scaledIcon); ////////////////
-      JPanel iconPanel = new JPanel();
-      iconPanel.add(iconLabel);
+//      JPanel iconPanel = new JPanel();
+//      iconPanel.add(iconLabel);
 
-      JPanel centrePanel = new JPanel();
-      centrePanel.setLayout(new BorderLayout());
+//      JPanel centrePanel = new JPanel();
+//      centrePanel.setLayout(new BorderLayout());
 
-      Font titleFont = new Font("Liberation Serif", Font.PLAIN, 24);
-      titleField.setFont(titleFont);
-      titleField.setForeground(new Color(85, 26, 139));
+//      Font titleFont = new Font("Liberation Serif", Font.PLAIN, 24);
+//      titleField.setFont(titleFont);
+//      titleField.setForeground(new Color(85, 26, 139));
 
       //titlePanel.add(iconLabel);
 
-      titlePanel.add(titleField);
+//      titlePanel.add(titleField);
       //titlePanel.setBorder(BorderFactory.createEmptyBorder(15,0,0,0));
 
       //topPanel.add(titlePanel, BorderLayout.NORTH); /////////
       //topPanel.add(middlePanel, BorderLayout.CENTER);
 
-      centrePanel.add(titlePanel, BorderLayout.NORTH); /////////
-      centrePanel.add(middlePanel, BorderLayout.SOUTH);
+//      centrePanel.add(titlePanel, BorderLayout.NORTH); /////////
+//      centrePanel.add(middlePanel, BorderLayout.SOUTH);
 
-      topPanel.add(iconPanel, BorderLayout.WEST);
-      topPanel.add(centrePanel, BorderLayout.CENTER);
+//      topPanel.add(iconPanel, BorderLayout.WEST);
+//      topPanel.add(centrePanel, BorderLayout.CENTER);
 
       //topPanel.add(headerPanel, BorderLayout.SOUTH); /////////
+
+      Font boldItalic = new Font("Liberation Sans", Font.BOLD+Font.ITALIC, 18);
+
+      JPanel headerPanel = new JPanel();
+      headerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+      JLabel headerField = new JLabel("Songs");
+      headerField.setFont(boldItalic);
+      headerField.setForeground(new Color(85, 26, 139));
+      //headerField.setForeground(new Color(102, 0, 153));
+      headerPanel.add(headerField);
+      topPanel.add(headerPanel, BorderLayout.SOUTH);
+
       contentPane.add(topPanel, BorderLayout.NORTH); ///////////
 
       //contentPane.add(titlePanel, BorderLayout.NORTH);
@@ -479,7 +492,7 @@ public class SBSSongs extends JFrame
       JButton saveButton     = new JButton("Save");
       JButton stringsButton  = new JButton("Strings");
       JButton patternsButton = new JButton("Patterns");
-      JButton quitButton     = new JButton("Quit");
+      JButton treeviewButton     = new JButton("Tree View");
 
       //buttonPanel.add(iconButton);
       //buttonPanel.add(blankField);
@@ -490,7 +503,7 @@ public class SBSSongs extends JFrame
       buttonPanel.add(saveButton);
       buttonPanel.add(stringsButton);
       buttonPanel.add(patternsButton);
-      buttonPanel.add(quitButton);
+      buttonPanel.add(treeviewButton);
 
       buttonPanel.setBorder(BorderFactory.createEmptyBorder(20,0,20,0));
       contentPane.add(buttonPanel, BorderLayout.SOUTH);
@@ -503,9 +516,9 @@ public class SBSSongs extends JFrame
       SaveAction saveAction         = new SaveAction();
       StringsAction stringsAction   = new StringsAction();
       PatternsAction patternsAction = new PatternsAction();
-      QuitAction quitAction         = new QuitAction();
+      TreeViewAction treeviewAction         = new TreeViewAction();
 
-      iconLabel.addActionListener(treeViewAction);
+//      iconLabel.addActionListener(treeViewAction);
 
       //iconLabel.addMouseListener(new java.awt.event.MouseAdapter() {
 	//	    public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -522,7 +535,7 @@ public class SBSSongs extends JFrame
       saveButton.addActionListener(saveAction);
       stringsButton.addActionListener(stringsAction);
       patternsButton.addActionListener(patternsAction);
-      quitButton.addActionListener(quitAction);
+      treeviewButton.addActionListener(treeviewAction);
    }
 
    private class WebAction implements ActionListener
@@ -926,6 +939,18 @@ public class SBSSongs extends JFrame
    {
       public void actionPerformed(ActionEvent a)
       {
+
+         if (tableField.isEditing())
+         {
+            int editingRow = tableField.getEditingRow();
+            int editingCol = tableField.getEditingColumn();
+            TableCellEditor tableEditor = tableField.getCellEditor();
+            tableEditor.stopCellEditing();
+            tableField.setValueAt(tableEditor.getCellEditorValue(),
+               editingRow, editingCol);
+            tableField.requestFocusInWindow();
+         }
+
          quit();
       }
    }
@@ -1987,16 +2012,16 @@ public class SBSSongs extends JFrame
    {
       public void actionPerformed(ActionEvent a)
       {
-         if (tableField.isEditing())
-         {
-            int editingRow = tableField.getEditingRow();
-            int editingCol = tableField.getEditingColumn();
-            TableCellEditor tableEditor = tableField.getCellEditor();
-            tableEditor.stopCellEditing();
-            tableField.setValueAt(tableEditor.getCellEditorValue(),
-               editingRow, editingCol);
-            tableField.requestFocusInWindow();
-         }
+//         if (tableField.isEditing())
+//         {
+//            int editingRow = tableField.getEditingRow();
+//            int editingCol = tableField.getEditingColumn();
+//            TableCellEditor tableEditor = tableField.getCellEditor();
+//            tableEditor.stopCellEditing();
+//            tableField.setValueAt(tableEditor.getCellEditorValue(),
+//               editingRow, editingCol);
+//            tableField.requestFocusInWindow();
+//         }
          selectedRow = tableField.getSelectedRow();
          selectedCol = tableField.getSelectedColumn();
          if (selectedRow >= 0)
@@ -2033,7 +2058,7 @@ public class SBSSongs extends JFrame
                      tree.setVisible(true);
                      childCount++;
 
-                     //tableField.requestFocusInWindow();
+                     tableField.requestFocusInWindow();
                   }
                   catch (Exception e)
                   {
@@ -2449,7 +2474,7 @@ public class SBSSongs extends JFrame
             aboutFrame.setVisible(true);
 
             JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\">Audovia - Database application for making music using JFugue " +
-                          "MusicStrings&nbsp; version 3.4.2</p>" +
+                          "MusicStrings&nbsp; version 3.4.3</p>" +
 
                           "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2017&nbsp; Donald G Gray</p>" +
 
