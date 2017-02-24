@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.4.3
+	 * version 3.4.4
 	 *
 	 */
 
@@ -2473,14 +2473,18 @@ public class SBSSongs extends JFrame
             aboutFrame.setLocation(100,100);
             aboutFrame.setVisible(true);
 
-            JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\">Audovia - Database application for making music using JFugue " +
-                          "MusicStrings&nbsp; version 3.4.3</p>" +
+            JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\"><b>Audovia</b> - Database application for making music using JFugue " +
+                          "MusicStrings&nbsp; version 3.4.4</p>" +
 
                           "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2017&nbsp; Donald G Gray</p>" +
 
                           "<p style=\"margin-bottom:4px;\">website: http://audovia.com/</p>" +
                           "<p style=\"margin-bottom:4px;\">e-mail: info@audovia.com</p>" +
                           "<p style=\"margin-bottom:8px;\">documentation: ~/snap/audovia/&lt;version&gt;/doc/</p>" +
+
+                          "<p style=\"margin-bottom:8px;\"><b>Quick Start:<br>" +
+                          "&nbsp;&nbsp;&nbsp;&nbsp; 1. File/XML Import, open the Demo folder, then select a song and Import XML.<br>" +
+                          "&nbsp;&nbsp;&nbsp;&nbsp; 2. Tree View, select “Song”, press Play, then Default Soundbank.</b></p>" +
 
                           "<p style=\"margin-bottom:8px;\">This program is free software: you can redistribute it and/or modify " +
                           "it under the terms of the GNU General Public License as published by " +
@@ -2503,10 +2507,14 @@ public class SBSSongs extends JFrame
 
                           "</html>");
 
-            label.setPreferredSize(new Dimension(600,400));
+            label.setPreferredSize(new Dimension(600,500));
             label.setVerticalAlignment(JLabel.TOP);
 
-            JScrollPane contentPane = new JScrollPane(label); // added
+            JPanel myPanel = new JPanel();
+            myPanel.add(label);
+
+            JScrollPane contentPane = new JScrollPane(myPanel); // added
+            contentPane.setPreferredSize(new Dimension(660,400));
 
             aboutFrame.add(contentPane); // added
             aboutFrame.pack(); // added

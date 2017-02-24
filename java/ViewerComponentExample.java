@@ -63,7 +63,7 @@ public class ViewerComponentExample {
                 JPanel viewerComponentPanel = factory.buildViewerPanel();
                 JFrame applicationFrame = new JFrame();
 
-                ImageIcon icon = new ImageIcon("SongBuilderColourIcon64.png");   //added by D G Gray 11th Aug 2016
+                ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");   //added by D G Gray 11th Aug 2016
 					 applicationFrame.setIconImage(icon.getImage());   //added by D G Gray 11th Aug 2016
 					 applicationFrame.setTitle("PDF Viewer");  //added by D G Gray 11th Aug 2016
 
@@ -71,6 +71,8 @@ public class ViewerComponentExample {
                 applicationFrame.getContentPane().add(viewerComponentPanel);
                 // Now that the GUI is all in place, we can try openning a PDF
                 controller.openDocument(filePath);
+
+                controller.setUtilityPaneVisible(true);  // added by D G Gray 22nd Feb 2017
 
                 // add the window event callback to dispose the controller and
                 // currently open document.
