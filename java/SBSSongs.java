@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.4.4
+	 * version 3.4.5
 	 *
 	 */
 
@@ -2422,7 +2422,7 @@ public class SBSSongs extends JFrame
             UIManager.setLookAndFeel(defaultLF);
 
             ViewerComponentExample viewPDF = new ViewerComponentExample();
-            viewPDF.view("doc/AudoviaDocumentation-3-3.pdf");
+            viewPDF.view("doc/AudoviaDocumentation-3-4.pdf");
 
          for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
          {
@@ -2474,7 +2474,7 @@ public class SBSSongs extends JFrame
             aboutFrame.setVisible(true);
 
             JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\"><b>Audovia</b> - Database application for making music using JFugue " +
-                          "MusicStrings&nbsp; version 3.4.4</p>" +
+                          "MusicStrings&nbsp; version 3.4.5</p>" +
 
                           "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2017&nbsp; Donald G Gray</p>" +
 
@@ -2483,8 +2483,8 @@ public class SBSSongs extends JFrame
                           "<p style=\"margin-bottom:8px;\">documentation: ~/snap/audovia/&lt;version&gt;/doc/</p>" +
 
                           "<p style=\"margin-bottom:8px;\"><b>Quick Start:<br>" +
-                          "&nbsp;&nbsp;&nbsp;&nbsp; 1. File/XML Import, open the Demo folder, then select a song and Import XML.<br>" +
-                          "&nbsp;&nbsp;&nbsp;&nbsp; 2. Tree View, select “Song”, press Play, then Default Soundbank.</b></p>" +
+                          "&nbsp;&nbsp;&nbsp;&nbsp; 1. File/XML Import, open the Demo folder, then select a song and Import XML.<br>" +
+                          "&nbsp;&nbsp;&nbsp;&nbsp; 2. Tree View, select \"Song\", press Play, then Default Soundbank.</b></p>" +
 
                           "<p style=\"margin-bottom:8px;\">This program is free software: you can redistribute it and/or modify " +
                           "it under the terms of the GNU General Public License as published by " +
