@@ -46,7 +46,7 @@ import javax.swing.plaf.basic.*;
 public class SBSPatterns extends JFrame
 {
 	/*
-	 * version 3.1.0
+	 * version 3.5.0
 	 *
 	 */
 
@@ -285,7 +285,7 @@ public class SBSPatterns extends JFrame
 
       fileMenu.add(exportMidiItem);
       fileMenu.add(exportMusicXMLItem);
-      fileMenu.add(exportWavItem);
+      //fileMenu.add(exportWavItem);
       fileMenu.addSeparator();
       fileMenu.add(cloneItem);
 

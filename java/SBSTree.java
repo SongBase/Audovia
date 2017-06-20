@@ -1,6 +1,6 @@
 /*
  * SBSTree.java - Tree View
- * Copyright (C) 2011, 2014, 2015, 2016  Donald G Gray
+ * Copyright (C) 2011, 2014, 2015, 2016, 2017  Donald G Gray
  *
  * http://gray10.com/
  *
@@ -48,7 +48,7 @@ import javax.swing.plaf.basic.*;
 public class SBSTree extends JFrame
 {
 	/*
-	 * version 3.1.6
+	 * version 3.5.0
 	 *
 	 */
 
@@ -294,7 +294,7 @@ public class SBSTree extends JFrame
 
       fileMenu.add(exportMidiItem);
       fileMenu.add(exportMusicXMLItem);
-      fileMenu.add(exportWavItem);
+      //fileMenu.add(exportWavItem);
       fileMenu.addSeparator();
       fileMenu.add(cloneItem);
 
