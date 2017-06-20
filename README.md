@@ -3,7 +3,7 @@ Database application for making music using JFugue MusicStrings
 
 **_[Website](http://audovia.com/)_**
 
-Make music on your Linux Ubuntu laptop or PC with **Audovia**.  Songs can have up to 15 instrumental voices and a percussion track with instruments chosen from a soundbank of 128 instruments.  Either the default soundbank or one of your own can be used.  Songs can be developed, tested and edited very quickly and easily by virtue of the database structure and the JFugue MusicString notation.
+Make music on your snapd enabled Linux laptop or PC with **Audovia**.  Songs can have up to 15 instrumental voices and a percussion track with instruments chosen from a soundbank of 128 instruments.  Either the default soundbank or one of your own can be used.  Songs can be developed, tested and edited very quickly and easily by virtue of the database structure and the JFugue MusicString notation.
 
 Notes are specified by their name and octave or by their MIDI value and their durations are specified either by character code, or numerically.
 
