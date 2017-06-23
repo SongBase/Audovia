@@ -1,6 +1,6 @@
 /*
  * SBSPatterns.java - Manage Patterns
- * Copyright (C) 2010, 2011, 2012, 2014, 2015  Donald G Gray
+ * Copyright (C) 2010, 2011, 2012, 2014, 2015, 2017  Donald G Gray
  *
  * http://gray10.com/
  *
@@ -46,7 +46,7 @@ import javax.swing.plaf.basic.*;
 public class SBSPatterns extends JFrame
 {
 	/*
-	 * version 3.5.0
+	 * version 3.5.1
 	 *
 	 */
 
@@ -273,6 +273,7 @@ public class SBSPatterns extends JFrame
       menuBar.add(fileMenu);
 
       JMenuItem exportMidiItem     = new JMenuItem("Export to MIDI");
+      JMenuItem exportMusicStringItem = new JMenuItem("Export to MusicString");
       JMenuItem exportMusicXMLItem = new JMenuItem("Export to MusicXML");
       JMenu     exportWavItem      = new JMenu("Export to WAV");
       JMenuItem cloneItem          = new JMenuItem("Clone");
@@ -284,6 +285,8 @@ public class SBSPatterns extends JFrame
       JMenuItem exportWavpad4Item  = new JMenuItem("Pad 4 seconds");
 
       fileMenu.add(exportMidiItem);
+      fileMenu.add(exportMusicStringItem);
+      fileMenu.add(exportMusicXMLItem);
       fileMenu.add(exportMusicXMLItem);
       //fileMenu.add(exportWavItem);
       fileMenu.addSeparator();
@@ -297,6 +300,9 @@ public class SBSPatterns extends JFrame
 
       ExportMidiAction exportMidiAction = new ExportMidiAction();
       exportMidiItem.addActionListener(exportMidiAction);
+
+      ExportMusicStringAction exportMusicStringAction = new ExportMusicStringAction();
+      exportMusicStringItem.addActionListener(exportMusicStringAction);
 
       ExportMusicXMLAction exportMusicXMLAction = new ExportMusicXMLAction();
       exportMusicXMLItem.addActionListener(exportMusicXMLAction);
@@ -1084,6 +1090,120 @@ public class SBSPatterns extends JFrame
                         player.close();
 
                         Messages.plainMessage(frame, title, "MIDI exported to: " + file.getPath());
+                     }
+                  }
+                  catch (Exception e)
+                  {
+                     try
+                     {
+                        conn.rollback();
+                     }
+                     catch (Exception e1)
+                     {
+                        Messages.exceptionHandler(frame, title, e1);
+                     }
+                     Messages.exceptionHandler(frame, title, e);
+                  }
+               }
+            }
+            else
+            {
+               Messages.plainMessage(frame, title, "Null record selected.");
+            }
+         }
+         else
+         {
+            Messages.plainMessage(frame, title, "No Selection made.");
+         }
+      }
+   }
+
+   private class ExportMusicStringAction implements ActionListener
+   {
+      public void actionPerformed(ActionEvent a)
+      {
+         if (tableField.isEditing())
+         {
+            int editingRow = tableField.getEditingRow();
+            int editingCol = tableField.getEditingColumn();
+            TableCellEditor tableEditor = tableField.getCellEditor();
+            tableEditor.stopCellEditing();
+            tableField.setValueAt(tableEditor.getCellEditorValue(),
+               editingRow, editingCol);
+            tableField.requestFocusInWindow();
+         }
+         selectedRow = tableField.getSelectedRow();
+         selectedCol = tableField.getSelectedColumn();
+         if (selectedRow >= 0)
+         {
+            tableField.changeSelection(selectedRow, selectedCol, false, false);
+            int i = selectedRow;
+            status       = (String)tableModel.getValueAt(i,0);
+            pattern_id   = (Integer)tableModel.getValueAt(i,1);
+            pattern_name = (String)tableModel.getValueAt(i,2);
+
+            if (! status.equals("new"))
+            {
+               int selection = 0;
+               if (status.equals("changed") || status.equals("inserted"))
+               {
+                  selection = Messages.plainQuestion(frame, title, "OK to Save current row?");
+               }
+               if (selection == 0)
+               {
+                  try
+                  {
+                     save();
+                     conn.commit();
+                     if (status.equals("changed") || status.equals("inserted"))
+                     {
+                        tableModel.setValueAt("unchanged", i, 0);
+                     }
+                     FileSystemView fsv = new SingleRootFileSystemView(new File("."));
+                     JFileChooser chooser = new JFileChooser(new File("MusicString"), fsv);
+                     chooser.setSelectedFile(new File(song_name + "-" + pattern_name + ".txt"));
+                     chooser.setPreferredSize(new Dimension(600,300));
+                     chooser.setDialogTitle("Export to MusicString - " + song_name + " - " + pattern_name);
+
+                     int result = chooser.showDialog(frame, "Export to MusicString");
+                     if (result == JFileChooser.APPROVE_OPTION)
+                     {
+                        File file = chooser.getSelectedFile();
+
+                        pattern = new Pattern();
+
+                        ArrayList<Integer> ancestors = new ArrayList<Integer>();
+                        ancestors.add(pattern_id);
+                        addStrings(pattern_id, pattern_name, ancestors);
+                        conn.commit();
+
+                        SBSChangePitch changePitch = new SBSChangePitch();
+							   changePitch.setVisible(true);
+								String pitch = changePitch.getPitch();
+	    		            changePitch.dispose();
+
+                        if (Integer.parseInt(pitch) != 0)
+                        {
+	    		            IntervalPatternTransformer patternTransformer = new IntervalPatternTransformer(Integer.parseInt(pitch));
+								pattern = patternTransformer.transform(pattern);
+								String patternString = pattern.toString();
+								patternString = patternString.replaceAll("[Kk][a-zA-Z#]* ","KCmaj ");
+								pattern = new Pattern(patternString);
+							   }
+
+                        FileWriter fileWriter = new FileWriter(file);
+                        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+                        String outputString = pattern.toString();
+                        outputString = outputString.replace("|","|\n");
+
+                        bufferedWriter.write(outputString);
+                        bufferedWriter.newLine();
+
+                        bufferedWriter.close();
+                        fileWriter.close();
+
+                        Messages.plainMessage(frame, title, "MusicString exported to: " + file.getPath());
                      }
                   }
                   catch (Exception e)

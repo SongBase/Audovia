@@ -48,7 +48,7 @@ import javax.swing.plaf.basic.*;
 public class SBSTree extends JFrame
 {
 	/*
-	 * version 3.5.0
+	 * version 3.5.1
 	 *
 	 */
 
@@ -282,6 +282,7 @@ public class SBSTree extends JFrame
       menuBar.add(fileMenu);
 
       JMenuItem exportMidiItem     = new JMenuItem("Export to MIDI");
+      JMenuItem exportMusicStringItem = new JMenuItem("Export to MusicString");
       JMenuItem exportMusicXMLItem = new JMenuItem("Export to MusicXML");
       JMenu     exportWavItem      = new JMenu("Export to WAV");
       JMenuItem cloneItem          = new JMenuItem("Clone");
@@ -293,6 +294,7 @@ public class SBSTree extends JFrame
       JMenuItem exportWavpad4Item  = new JMenuItem("Pad 4 seconds");
 
       fileMenu.add(exportMidiItem);
+      fileMenu.add(exportMusicStringItem);
       fileMenu.add(exportMusicXMLItem);
       //fileMenu.add(exportWavItem);
       fileMenu.addSeparator();
@@ -306,6 +308,9 @@ public class SBSTree extends JFrame
 
       ExportMidiAction exportMidiAction = new ExportMidiAction();
       exportMidiItem.addActionListener(exportMidiAction);
+
+      ExportMusicStringAction exportMusicStringAction = new ExportMusicStringAction();
+      exportMusicStringItem.addActionListener(exportMusicStringAction);
 
       ExportMusicXMLAction exportMusicXMLAction = new ExportMusicXMLAction();
       exportMusicXMLItem.addActionListener(exportMusicXMLAction);
@@ -716,6 +721,7 @@ public class SBSTree extends JFrame
 								pattern = patternTransformer.transform(pattern);
 								String patternString = pattern.toString();
 								patternString = patternString.replaceAll("[Kk][a-zA-Z#]* "," ");
+								//System.out.println(patternString); //for testing
 								pattern = new Pattern(patternString);
 							   }
 
@@ -951,6 +957,98 @@ public class SBSTree extends JFrame
                         player.close();
 
                         Messages.plainMessage(frame, title, "MIDI exported to: " + file.getPath());
+                     }
+                  }
+                  catch (Exception e)
+                  {
+                     try
+                     {
+                        conn.rollback();
+                     }
+                     catch (Exception e1)
+                     {
+                        Messages.exceptionHandler(frame, title, e1);
+                     }
+                     Messages.exceptionHandler(frame, title, e);
+                  }
+            }
+            else
+            {
+               Messages.plainMessage(frame, title, "Pattern not selected.");
+            }
+         }
+         else
+         {
+            Messages.plainMessage(frame, title, "No Selection made.");
+         }
+      }
+   }
+
+   private class ExportMusicStringAction implements ActionListener
+   {
+      public void actionPerformed(ActionEvent a)
+      {
+         TreePath path = tree.getSelectionPath();
+         if (path != null)
+         {
+			   tree.scrollPathToVisible(path);
+
+			   DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)path.getLastPathComponent();
+				if (selectedNode.getAllowsChildren() == true)
+            {
+
+					SBSTreeNode treeNode = (SBSTreeNode)selectedNode.getUserObject(); ///////////////////
+
+					Integer component_id = treeNode.getComponentId();
+					String component_name = treeNode.getComponentName();
+
+                  try
+                  {
+							FileSystemView fsv = new SingleRootFileSystemView(new File("."));
+                     JFileChooser chooser = new JFileChooser(new File("MusicString"), fsv);
+                     chooser.setSelectedFile(new File(song_name + "-" + component_name + ".txt"));
+                     chooser.setPreferredSize(new Dimension(600,300));
+                     chooser.setDialogTitle("Export to MusicString - " + song_name + " - " + component_name);
+
+                     int result = chooser.showDialog(frame, "Export to MusicString");
+                     if (result == JFileChooser.APPROVE_OPTION)
+                     {
+                        File file = chooser.getSelectedFile();
+
+                        pattern = new Pattern();
+
+                        ArrayList<Integer> ancestors = new ArrayList<Integer>();
+                        ancestors.add(component_id);
+                        addStrings(component_id, component_name, ancestors);
+                        conn.commit();
+
+                        SBSChangePitch changePitch = new SBSChangePitch();
+							   changePitch.setVisible(true);
+								String pitch = changePitch.getPitch();
+	    		            changePitch.dispose();
+
+                        if (Integer.parseInt(pitch) != 0)
+                        {
+	    		            IntervalPatternTransformer patternTransformer = new IntervalPatternTransformer(Integer.parseInt(pitch));
+								pattern = patternTransformer.transform(pattern);
+								String patternString = pattern.toString();
+								patternString = patternString.replaceAll("[Kk][a-zA-Z#]* ","KCmaj ");
+								pattern = new Pattern(patternString);
+							   }
+
+                        FileWriter fileWriter = new FileWriter(file);
+                        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+                        String outputString = pattern.toString();
+                        outputString = outputString.replace("|","|\n");
+
+                        bufferedWriter.write(outputString);
+                        bufferedWriter.newLine();
+
+                        bufferedWriter.close();
+                        fileWriter.close();
+
+                        Messages.plainMessage(frame, title, "MusicString exported to: " + file.getPath());
                      }
                   }
                   catch (Exception e)
