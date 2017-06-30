@@ -309,7 +309,7 @@ public class MusicXmlRenderer implements ParserListener
 
     public void layerEvent(Layer layer)
     {
- //    	        pattern.add(layer.getMusicString());
+//    	        pattern.add(layer.getMusicString());
     }
 
     public void timeEvent(Time time)

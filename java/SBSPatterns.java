@@ -46,7 +46,7 @@ import javax.swing.plaf.basic.*;
 public class SBSPatterns extends JFrame
 {
 	/*
-	 * version 3.5.1
+	 * version 3.5.2
 	 *
 	 */
 
@@ -991,7 +991,10 @@ public class SBSPatterns extends JFrame
 					string_value = anonymous_string;
 				}
 
-				if (component_type.equals("string")) pattern.add(string_value);
+				if (component_type.equals("string"))
+				{
+				   if (string_value != null) pattern.add(string_value);
+			    }
 				else
 				{
 					ArrayList<Integer> myAncestors = new ArrayList<Integer>(ancestors);
