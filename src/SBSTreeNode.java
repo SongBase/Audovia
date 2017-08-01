@@ -53,14 +53,14 @@ public class SBSTreeNode
 		}
 		else
 		{
-	   	if (string_value == null)
+	   	if (string_value == null || string_value.length() == 0)
 		   {
 		      return "<html><b>" + component_position.toString() + ":&nbsp;&nbsp;" + component_name + "</b></html>";
 	           }
 	        else
 	           {
-		      String content = string_value.replaceAll("\n", "<br>");
-		      return "<html><b>" + component_position.toString() + ":&nbsp;&nbsp;" + component_name + ":</b><font face=\"Liberation Mono\" style=\"font-size: 14pt;\"><br>" + content + "</font></html>";
+		      String content = string_value.replaceAll("\n", "<br><font face=\"Liberation Sans\" style=\"font-size: 14pt; color: #ffffff;\"><b>" + component_position.toString() + ":&nbsp&nbsp;</b></font>");
+		      return "<html><b>" + component_position.toString() + ":&nbsp&nbsp;" + component_name + "</b><font face=\"Liberation Mono\" style=\"font-size: 14pt;\"><br><font face=\"Liberation Sans\" style=\"font-size: 14pt; color: #ffffff;\"><b>" + component_position.toString() + ":&nbsp&nbsp;</b></font>" + content + "</font></html>";
 	           }
 		}
 	}
