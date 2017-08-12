@@ -2,22 +2,22 @@
  * JFugue - API for Music Programming
  * Copyright (C) 2003-2008  David Koelle
  *
- * http://www.jfugue.org 
- * 
+ * http://www.jfugue.org
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- *  
+ *
  */
 
 package org.jfugue;
@@ -35,7 +35,7 @@ public final class TimeFactor
 {
     public static double DEFAULT_BPM = 128.0d;
     public static int QUARTER_DURATIONS_IN_WHOLE = 4;
-    
+
     public static final double getTimeFactor(Sequence sequence, double bpm)
     {
         double divisionType = sequence.getDivisionType();
@@ -52,54 +52,57 @@ public final class TimeFactor
 //            System.out.println("DivisionType is SMPTE");
         }
         // Useful resources: http://www.borg.com/~jglatt/tech/midifile/tempo.htm and http://www.borg.com/~jglatt/tech/midifile/ppqn.htm
-        
-//        If bit 15 of division is a zero, the bits 14 thru 0 represent the number of delta-time ticks which make up a 
-//        quarter-note. For instance, if division is 96, then a time interval of an eighth-note between two events 
+
+//        If bit 15 of division is a zero, the bits 14 thru 0 represent the number of delta-time ticks which make up a
+//        quarter-note. For instance, if division is 96, then a time interval of an eighth-note between two events
 //        in the file would be 48.
 //
-//        If bit 15 of division is a one, delta-times in a file correspond to subdivisions of a second, in a way consistent 
-//        with SMPTE and MIDI time code. Bits 14 thru 8 contain one of the four values -24, -25, -29, or -30, corresponding 
+//        If bit 15 of division is a one, delta-times in a file correspond to subdivisions of a second, in a way consistent
+//        with SMPTE and MIDI time code. Bits 14 thru 8 contain one of the four values -24, -25, -29, or -30, corresponding
 //        to the four standard SMPTE and MIDI time code formats (-29 corresponds to 30 drop frame), and represents the number
-//        of frames per second. These negative numbers are stored in two's complement form. The second byte (stored positive) 
-//        is the resolution within a frame: typical values may be 4 (MIDI time code resolution), 8, 10, 80 (bit resolution), 
+//        of frames per second. These negative numbers are stored in two's complement form. The second byte (stored positive)
+//        is the resolution within a frame: typical values may be 4 (MIDI time code resolution), 8, 10, 80 (bit resolution),
 //        or 100. This system allows exact specification of time- code-based tracks, but also allows millisecond-based tracks
-//        by specifying 25 frames/sec and a resolution of 40 units per frame. If the events in a file are stored with bit 
-//        resolution of thirty-frame time code, the division word would be E250 hex.         
+//        by specifying 25 frames/sec and a resolution of 40 units per frame. If the events in a file are stored with bit
+//        resolution of thirty-frame time code, the division word would be E250 hex.
 
-        if (bpm == 0.0) 
-        { 
-            bpm = DEFAULT_BPM; 
+        if (bpm == 0.0)
+        {
+            bpm = DEFAULT_BPM;
         }
-        
+
         return 60000.0 / (resolution * bpm);
     }
-    
+
     public static final byte[] convertBPMToBytes(int tempo)
     {
-    	// This block is original code from JFugue 4.0.3 
-        double tempoInMsPerBeat = TimeFactor.convertBPMToMicrosecondsPerBeat(tempo);
-        double d1 = Math.floor(tempoInMsPerBeat / 16384.0);
-        double d2 = Math.floor((tempoInMsPerBeat % 16384.0) / 128.0);
-        double d3 = Math.floor((tempoInMsPerBeat % 16384.0) % 128.0);
-        return new byte[] { (byte)d1, (byte)d2, (byte)d3 }; 
-
-    	// This block is suggested by Apex.Mao, but makes music 4 times as fast 
+    	// This block is original code from JFugue 4.0.3
 //        double tempoInMsPerBeat = TimeFactor.convertBPMToMicrosecondsPerBeat(tempo);
-//        int i1 = (int)Math.floor(tempoInMsPerBeat / 65536);
-//        tempoInMsPerBeat %= 65536;
-//        int i2 = (int)Math.floor(tempoInMsPerBeat/256);
-//        tempoInMsPerBeat %= 256;
-//        int i3 = (int)Math.floor(tempoInMsPerBeat);
-//        return new byte[] { (byte)i1, (byte)i2, (byte)i3 };
-    }    
-    
+//        double d1 = Math.floor(tempoInMsPerBeat / 16384.0);
+//        double d2 = Math.floor((tempoInMsPerBeat % 16384.0) / 128.0);
+//        double d3 = Math.floor((tempoInMsPerBeat % 16384.0) % 128.0);
+        //System.out.println(d1 + " " + d2 + " " + d3);
+//        return new byte[] { (byte)d1, (byte)d2, (byte)d3 };
+
+    	// This block is suggested by Apex.Mao, but makes music 4 times as fast
+        double tempoInMsPerBeat = TimeFactor.convertBPMToMicrosecondsPerBeat(tempo);
+        int i1 = (int)Math.floor(tempoInMsPerBeat / 65536);
+        tempoInMsPerBeat %= 65536;
+        int i2 = (int)Math.floor(tempoInMsPerBeat/256);
+        tempoInMsPerBeat %= 256;
+        int i3 = (int)Math.floor(tempoInMsPerBeat);
+        return new byte[] { (byte)i1, (byte)i2, (byte)i3 };
+    }
+
     public static final int parseMicrosecondsPerBeat(MetaMessage message)
     {
     	byte bytes[] = message.getMessage();
-    	int microseconds = (int)bytes[3] * 65536 + (int)bytes[4]*256 + (int)bytes[5];
+    	System.out.println("modified tempo");
+    	int microseconds = (int)bytes[3] * 65536 + (int)bytes[4]*256 + (int)bytes[5]; //modified D G Gray 10th Aug 2017
+    	//int microseconds = ((int)bytes[3] * 16384 + (int)bytes[4]*128 + (int)bytes[5]) * 4;
     	return microseconds;
     }
-    
+
     /** Converts microseconds per beat to BPM -- and vice versa */
     public static final double convertMicrosecondsPerBeatToBPM(double value) {
         double microsecondsPerMinute = 60000000.0D;
@@ -108,7 +111,7 @@ public final class TimeFactor
         }
         return microsecondsPerMinute / value;
     }
-    
+
     /** Converts microseconds per beat to BPM -- and vice versa */
     public static final double convertBPMToMicrosecondsPerBeat(int bpm) {
         double microsecondsPerMinute = 60000000.0D;
@@ -117,22 +120,22 @@ public final class TimeFactor
         }
         return microsecondsPerMinute / bpm;
     }
-    
+
     /**
      * Takes all of the MIDI events in the given Sequence, sorts them according to
      * when they are to be played, and sends the events to the MidiMessageRecipient
      * when the each event is ready to be played.
-     * 
+     *
      * @param sequence The Sequence with messages to sort and deliver
      * @param recipient the handler of the delivered message
      */
-    public static final void sortAndDeliverMidiMessages(Sequence sequence, MidiMessageRecipient recipient) 
+    public static final void sortAndDeliverMidiMessages(Sequence sequence, MidiMessageRecipient recipient)
     {
     	double timeFactor = 4.0;
-    	
+
         Map<Long, List<MidiEvent>> timeMap = new HashMap<Long, List<MidiEvent>>();
         long longestTime = TimeEventManager.sortSequenceByTimestamp(sequence, timeMap);
-        
+
         long lastTime = 0;
         for (long time=0; time <= longestTime; time++)
         {
@@ -141,10 +144,10 @@ public final class TimeFactor
             {
                 for (MidiEvent event : midiEventList)
                 {
-                    MidiMessage message = event.getMessage(); 
-                    
+                    MidiMessage message = event.getMessage();
+
                     // If the message is a Tempo event (0x51), convert the tempo so we can use it in timing the messages
-                    if ((message.getMessage().length >= 2) && (message.getMessage()[1] == 0x51) && (message instanceof MetaMessage)) 
+                    if ((message.getMessage().length >= 2) && (message.getMessage()[1] == 0x51) && (message instanceof MetaMessage))
                     {
                         double bpm = TimeFactor.convertMicrosecondsPerBeatToBPM(parseMicrosecondsPerBeat((MetaMessage)message)) * 4.0;
                         timeFactor = TimeFactor.getTimeFactor(sequence, bpm);
@@ -155,7 +158,7 @@ public final class TimeFactor
                 try
                 {
                     long sleepTime = (int)(((time - lastTime) * (timeFactor * TimeFactor.QUARTER_DURATIONS_IN_WHOLE+0.20))); // TODO - Make the numbers here less magical
-                    Thread.sleep(sleepTime); 
+                    Thread.sleep(sleepTime);
                     lastTime = time;
                 } catch (Exception ex)
                 {

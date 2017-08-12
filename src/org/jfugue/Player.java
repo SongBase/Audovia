@@ -57,7 +57,7 @@ public class Player
     //private MusicStringPulseParser pparser; // added D G Gray 28 Aug 2016
     private MidiRenderer renderer;
     private float sequenceTiming = Sequence.PPQ;
-    private int resolution = 128;
+    private int resolution = 32; // modified D G Gray 12th Aug 2017
     private volatile boolean paused = false;
     private volatile boolean started = false;
     private volatile boolean finished = false;

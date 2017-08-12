@@ -343,6 +343,7 @@ public abstract class AudioFloatConverter {
                 float[] out_buff, int out_offset, int out_len) {
             int ix = in_offset;
             int ox = out_offset;
+            //System.out.println("PCM 8 bit, unsigned");
             for (int i = 0; i < out_len; i++)
                 out_buff[ox++] = ((in_buff[ix++] & 0xFF) - 127)
                         * (1.0f / 127.0f);
@@ -353,6 +354,7 @@ public abstract class AudioFloatConverter {
                 byte[] out_buff, int out_offset) {
             int ix = in_offset;
             int ox = out_offset;
+            //System.out.println("PCM 8 bit, unsigned");
             for (int i = 0; i < in_len; i++)
                 out_buff[ox++] = (byte) (127 + in_buff[ix++] * 127.0f);
             return out_buff;
@@ -482,6 +484,7 @@ public abstract class AudioFloatConverter {
                 float[] out_buff, int out_offset, int out_len) {
             int ix = in_offset;
             int ox = out_offset;
+            //System.out.println("PCM 24 bit, signed, little-endian");
             for (int i = 0; i < out_len; i++) {
                 int x = (in_buff[ix++] & 0xFF) | ((in_buff[ix++] & 0xFF) << 8)
                         | ((in_buff[ix++] & 0xFF) << 16);
@@ -496,6 +499,7 @@ public abstract class AudioFloatConverter {
                 byte[] out_buff, int out_offset) {
             int ix = in_offset;
             int ox = out_offset;
+            //System.out.println("PCM 24 bit, signed, little-endian");
             for (int i = 0; i < in_len; i++) {
                 int x = (int) (in_buff[ix++] * (float)0x7FFFFF);
                 if (x < 0)
@@ -514,6 +518,7 @@ public abstract class AudioFloatConverter {
                 float[] out_buff, int out_offset, int out_len) {
             int ix = in_offset;
             int ox = out_offset;
+            //System.out.println("PCM 24 bit, signed, big-endian");
             for (int i = 0; i < out_len; i++) {
                 int x = ((in_buff[ix++] & 0xFF) << 16)
                         | ((in_buff[ix++] & 0xFF) << 8) | (in_buff[ix++] & 0xFF);
@@ -528,6 +533,7 @@ public abstract class AudioFloatConverter {
                 byte[] out_buff, int out_offset) {
             int ix = in_offset;
             int ox = out_offset;
+            //System.out.println("PCM 24 bit, signed, big-endian");
             for (int i = 0; i < in_len; i++) {
                 int x = (int) (in_buff[ix++] * (float)0x7FFFFF);
                 if (x < 0)
@@ -546,6 +552,7 @@ public abstract class AudioFloatConverter {
                 float[] out_buff, int out_offset, int out_len) {
             int ix = in_offset;
             int ox = out_offset;
+            //System.out.println("PCM 24 bit, unsigned, little-endian");
             for (int i = 0; i < out_len; i++) {
                 int x = (in_buff[ix++] & 0xFF) | ((in_buff[ix++] & 0xFF) << 8)
                         | ((in_buff[ix++] & 0xFF) << 16);
@@ -559,6 +566,7 @@ public abstract class AudioFloatConverter {
                 byte[] out_buff, int out_offset) {
             int ix = in_offset;
             int ox = out_offset;
+            //System.out.println("PCM 24 bit, unsigned, little-endian");
             for (int i = 0; i < in_len; i++) {
                 int x = (int) (in_buff[ix++] * (float)0x7FFFFF);
                 x += 0x7FFFFF;
@@ -576,6 +584,7 @@ public abstract class AudioFloatConverter {
                 float[] out_buff, int out_offset, int out_len) {
             int ix = in_offset;
             int ox = out_offset;
+            //System.out.println("PCM 24 bit, unsigned, big-endian");
             for (int i = 0; i < out_len; i++) {
                 int x = ((in_buff[ix++] & 0xFF) << 16)
                         | ((in_buff[ix++] & 0xFF) << 8) | (in_buff[ix++] & 0xFF);
@@ -589,6 +598,7 @@ public abstract class AudioFloatConverter {
                 byte[] out_buff, int out_offset) {
             int ix = in_offset;
             int ox = out_offset;
+            //System.out.println("PCM 24 bit, unsigned, big-endian");
             for (int i = 0; i < in_len; i++) {
                 int x = (int) (in_buff[ix++] * (float)0x7FFFFF);
                 x += 0x7FFFFF;

@@ -306,7 +306,7 @@ public class Midi2WavRenderer
 			trackspos[seltrack]++;
 			long tick = selevent.getTick();
 			if (divtype == Sequence.PPQ)
-				curtime += ((tick - lasttick) * mpq * 4) / seqres; // modified D G Gray 2nd Sep 2014
+				curtime += ((tick - lasttick) * mpq) / seqres; // modified D G Gray 2nd Sep 2014
 			else
 				curtime = (long) ((tick * 1000000.0 * divtype) / seqres);
 			lasttick = tick;
@@ -315,8 +315,9 @@ public class Midi2WavRenderer
 				if (divtype == Sequence.PPQ)
 					if (((MetaMessage) msg).getType() == 0x51) {
 						byte[] data = ((MetaMessage) msg).getData();
-						mpq = ((data[0] & 0x7f) << 14)
-								| ((data[1] & 0x7f) << 7) | (data[2] & 0x7f); // modified D G Gray 2nd Sep 2014
+						//System.out.println(data[0] + " " + data[1] + " " + data[2]);
+						mpq = ((data[0] & 0xff) << 16)
+								| ((data[1] & 0xff) << 8) | (data[2] & 0xff); // modified D G Gray 2nd Sep 2014
 					}
 			} else {
 				if (recv != null)
