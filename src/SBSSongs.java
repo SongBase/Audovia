@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.5.6
+	 * version 3.6.0
 	 *
 	 */
 
@@ -140,7 +140,7 @@ public class SBSSongs extends JFrame
 				}
 			});
 
-      setSize(700,535); // was 530
+      setSize(700,540); // was 530, 535
       setLocation(50,50);
       setTitle(title + " (" + aConnectionName + ")");
 
@@ -243,8 +243,8 @@ public class SBSSongs extends JFrame
       menuBar.add(fileMenu);
 
       JMenuItem templateItem     = new JMenuItem("Template");
-      JMenuItem xmlExportItem    = new JMenuItem("XML Export");
-      JMenuItem xmlImportItem    = new JMenuItem("XML Import");
+      JMenuItem xmlExportItem    = new JMenuItem("Song Export");
+      JMenuItem xmlImportItem    = new JMenuItem("Song Import");
       JMenuItem quitItem     = new JMenuItem("Exit");
 
       fileMenu.add(templateItem);
@@ -436,7 +436,7 @@ public class SBSSongs extends JFrame
       Font headerFont = new Font("Liberation Sans", Font.BOLD, 15); ///////////// font experiment
       header.setFont(headerFont);
       Dimension dim = header.getPreferredSize();
-      dim.height = 34; // was 26
+      dim.height = 40; // was 26, 34
       header.setPreferredSize(dim);
 
       columnModel = tableField.getColumnModel();
@@ -452,6 +452,7 @@ public class SBSSongs extends JFrame
       tableField.removeColumn(column4);
 
       column2.setPreferredWidth(400);
+      column3.setPreferredWidth(50);
       column5.setPreferredWidth(100);
 
       TextFieldEditor songFieldEditor = new TextFieldEditor();
@@ -1605,7 +1606,7 @@ public class SBSSongs extends JFrame
 
             bufferedWriter.close();
             fileWriter.close();
-            Messages.plainMessage(frame, title, "XML exported to: " + templateFile.getPath());
+            Messages.plainMessage(frame, title, "Template exported to: " + templateFile.getPath());
             }
                {
                   if (templateFile.exists())
@@ -1635,11 +1636,11 @@ public class SBSSongs extends JFrame
 								}
 							}
 
-                     Messages.plainMessage(frame, title, "XML imported from: " + templateFile.getPath());
+                     Messages.plainMessage(frame, title, "Template imported from: " + templateFile.getPath());
                   }
                   else
                   {
-                     Messages.warningMessage(frame, title, "XML file: " + templateFile.getPath() + " not found.");
+                     Messages.warningMessage(frame, title, "Template file: " + templateFile.getPath() + " not found.");
                   }
                } /////////////////////////////////////////////////
 
@@ -1722,9 +1723,9 @@ public class SBSSongs extends JFrame
                      JFileChooser chooser = new JFileChooser(new File("XML"), fsv);
                      chooser.setSelectedFile(new File(song_name + ".sbxml"));
                      chooser.setPreferredSize(new Dimension(600,300));
-                     chooser.setDialogTitle("XML Export - " + song_name);
+                     chooser.setDialogTitle("Song Export - " + song_name);
 
-                     int result = chooser.showDialog(frame, "Export to XML");
+                     int result = chooser.showDialog(frame, "Export Song");
                      if (result == JFileChooser.APPROVE_OPTION)
                      {
                         File file = chooser.getSelectedFile();
@@ -1858,7 +1859,7 @@ public class SBSSongs extends JFrame
                         conn.commit();
                         bufferedWriter.close();
                         fileWriter.close();
-                        Messages.plainMessage(frame, title, "XML exported to: " + file.getPath());
+                        Messages.plainMessage(frame, title, "Song exported to: " + file.getPath());
                      }
                   }
                   catch (Exception e)
@@ -1933,13 +1934,13 @@ public class SBSSongs extends JFrame
                FileSystemView fsv = new SingleRootFileSystemView(new File("."));
                JFileChooser chooser = new JFileChooser(new File("XML"), fsv);
                chooser.setPreferredSize(new Dimension(600,300));
-               chooser.setDialogTitle("XML Import");
+               chooser.setDialogTitle("Song Import");
 
-               FileNameExtensionFilter filter = new FileNameExtensionFilter("Audovia XML files *.sbxml", "sbxml");
+               FileNameExtensionFilter filter = new FileNameExtensionFilter("Audovia Song files *.sbxml", "sbxml");
                chooser.addChoosableFileFilter(filter);
                chooser.setFileFilter(filter);
 
-               int result = chooser.showDialog(frame, "Import XML");
+               int result = chooser.showDialog(frame, "Import Song");
                if (result == JFileChooser.APPROVE_OPTION)
                {
                   File file = chooser.getSelectedFile();
@@ -1971,11 +1972,11 @@ public class SBSSongs extends JFrame
 								}
 							}
 
-                     Messages.plainMessage(frame, title, "XML file: " + file.getPath() + " imported.");
+                     Messages.plainMessage(frame, title, "Song file: " + file.getPath() + " imported.");
                   }
                   else
                   {
-                     Messages.warningMessage(frame, title, "XML file: " + file.getPath() + " not found.");
+                     Messages.warningMessage(frame, title, "Song file: " + file.getPath() + " not found.");
                   }
                }
 				}
@@ -2422,7 +2423,7 @@ public class SBSSongs extends JFrame
             UIManager.setLookAndFeel(defaultLF);
 
             ViewerComponentExample viewPDF = new ViewerComponentExample();
-            viewPDF.view("doc/AudoviaDocumentation-3-5.pdf");
+            viewPDF.view("doc/AudoviaDocumentation-3-6.pdf");
 
          for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
          {
@@ -2474,7 +2475,7 @@ public class SBSSongs extends JFrame
             aboutFrame.setVisible(true);
 
             JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\"><b>Audovia</b> - Database application for making music using JFugue " +
-                          "MusicStrings&nbsp; version 3.5.6</p>" +
+                          "MusicStrings&nbsp; version 3.6.0</p>" +
 
                           "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2017&nbsp; Donald G Gray</p>" +
 
@@ -2483,7 +2484,7 @@ public class SBSSongs extends JFrame
                           "<p style=\"margin-bottom:8px;\">documentation: ~/snap/audovia/&lt;version&gt;/doc/</p>" +
 
                           "<p style=\"margin-bottom:8px;\"><b>Quick Start:<br>" +
-                          "&nbsp;&nbsp;&nbsp;&nbsp; 1. File/XML Import, open the Demo folder, then select a song and Import XML.<br>" +
+                          "&nbsp;&nbsp;&nbsp;&nbsp; 1. File/Song Import, open the Demo folder, then select a song and Import Song.<br>" +
                           "&nbsp;&nbsp;&nbsp;&nbsp; 2. Tree View, select \"Song\", press Play, then Default Soundbank.</b></p>" +
 
                           "<p style=\"margin-bottom:8px;\">This program is free software: you can redistribute it and/or modify " +

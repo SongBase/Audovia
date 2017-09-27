@@ -40,7 +40,8 @@ public class SBSSongsTableModel extends AbstractTableModel
    private String[]  names = {"Status",
                               "Song Id",
                               "Song Name",
-                              "/durations",
+//                              "/durations",
+                              "<html><font face=\"Liberation Sans\" style=\"font-size: 12pt;\">numeric<br>durations</font></html>",
                               "Soundbank Id",
                               "Soundbank"};
    private String  access_type;
