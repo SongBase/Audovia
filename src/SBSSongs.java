@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.6.1
+	 * version 3.6.2
 	 *
 	 */
 
@@ -1779,7 +1779,7 @@ public class SBSSongs extends JFrame
 							      bufferedWriter.newLine();
 							      bufferedWriter.write("        <component_name><![CDATA[" + component_name + "]]></component_name>");
 							      bufferedWriter.newLine();
-							      if (string_value != null)
+							      if (string_value != null && string_value.length() > 0)
 							      {
 							         bufferedWriter.write("        <string_value><![CDATA[" + string_value + "]]></string_value>");
 							         bufferedWriter.newLine();
@@ -1836,7 +1836,7 @@ public class SBSSongs extends JFrame
 							      bufferedWriter.write("        <component_name><![CDATA[" + component_name + "]]></component_name>");
 							      bufferedWriter.newLine();
 								   }
-							      if (anonymous_string != null)
+							      if (anonymous_string != null && anonymous_string.length() > 0)
 							      {
 							         bufferedWriter.write("        <anonymous_string><![CDATA[" + anonymous_string + "]]></anonymous_string>");
 							         bufferedWriter.newLine();
@@ -2475,7 +2475,7 @@ public class SBSSongs extends JFrame
             aboutFrame.setVisible(true);
 
             JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\"><b>Audovia</b> - Database application for making music using JFugue " +
-                          "MusicStrings&nbsp; version 3.6.1</p>" +
+                          "MusicStrings&nbsp; version 3.6.2</p>" +
 
                           "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2017&nbsp; Donald G Gray</p>" +
 

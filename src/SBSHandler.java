@@ -208,6 +208,8 @@ public class SBSHandler extends DefaultHandler
                           int length) throws SAXException
    {
       string_buffer = new String(ch, start, length);
+      //if (string_buffer.trim().length() == 0) string_buffer = null;
+      //System.out.println(start + "   " + length + "   " + string_buffer);
 	}
 
    public void startElement(String uri,
