@@ -131,11 +131,19 @@ public class MusicXmlRenderer implements ParserListener
 
 	    		//	beats - 1 beat per measure
 
-	    		SBSTimeSignature timeSignature = new SBSTimeSignature(elCurPart.getAttribute("id").getValue());  //  added by D G Gray 19/06/2010
+	    		SBSTimeSignatureClef timeSignature = new SBSTimeSignatureClef(elCurPart.getAttribute("id").getValue());  //  added by D G Gray 19/06/2010
 	    		timeSignature.setVisible(true);  //  added by D G Gray 19/06/2010
+
 	    		String beats = timeSignature.getBeats();  //  added by D G Gray 19/06/2010
 	    		String beat_type = timeSignature.getBeatType();  //  added by D G Gray 19/06/2010
+                String sign = timeSignature.getSign();
+                String line = timeSignature.getLine();
 	    		timeSignature.dispose();  //  added by D G Gray 19/06/2010
+
+                SBSConstants.beats = beats;
+                SBSConstants.beat_type = beat_type;
+                SBSConstants.sign = sign;
+                SBSConstants.line = line;
 
 	    		Element elTime = new Element("time");
 	    		Element elBeats = new Element("beats");
@@ -147,15 +155,6 @@ public class MusicXmlRenderer implements ParserListener
 	    		elBeatType.appendChild(beat_type);  //  added by D G Gray 19/06/2010
 	    		elTime.appendChild(elBeatType);
 	    		elAttributes.appendChild(elTime);
-    		}
-    		if (bAddDefaults)
-    		{	//	Clef - assumed to be treble clef
-
-	    		SBSClef clef = new SBSClef(elCurPart.getAttribute("id").getValue());  //  added by D G Gray 19/06/2010
-	    		clef.setVisible(true);  //  added by D G Gray 19/06/2010
-	    		String sign = clef.getSign();  //  added by D G Gray 19/06/2010
-	    		String line = clef.getLine();  //  added by D G Gray 19/06/2010
-	    		clef.dispose();  //  added by D G Gray 19/06/2010
 
 	    		Element elClef = new Element("clef");
 	    		Element elSign = new Element("sign");
@@ -168,6 +167,26 @@ public class MusicXmlRenderer implements ParserListener
 	    		elClef.appendChild(elLine);
 	    		elAttributes.appendChild(elClef);
     		}
+//    		if (bAddDefaults)
+//    		{	//	Clef - assumed to be treble clef
+//
+//	    		SBSClef clef = new SBSClef(elCurPart.getAttribute("id").getValue());  //  added by D G Gray 19/06/2010
+//	    		clef.setVisible(true);  //  added by D G Gray 19/06/2010
+//	    		String sign = clef.getSign();  //  added by D G Gray 19/06/2010
+//	    		String line = clef.getLine();  //  added by D G Gray 19/06/2010
+//	    		clef.dispose();  //  added by D G Gray 19/06/2010
+//
+//	    		Element elClef = new Element("clef");
+//	    		Element elSign = new Element("sign");
+//	    		//elSign.appendChild("G");  //  modified by D G Gray 19/06/2010
+//	    		elSign.appendChild(sign);  //  added by D G Gray 19/06/2010
+//	    		Element elLine = new Element("line");
+//	    		//elLine.appendChild("2");  //  modified by D G Gray 19/06/2010
+//	    		elLine.appendChild(line);  //  added by D G Gray 19/06/2010
+//	    		elClef.appendChild(elSign);
+//	    		elClef.appendChild(elLine);
+//	    		elAttributes.appendChild(elClef);
+//    		}
     		//	add the attributes to the measure
     		if (elAttributes.getChildCount() > 0)
     			elCurMeasure.appendChild(elAttributes);
