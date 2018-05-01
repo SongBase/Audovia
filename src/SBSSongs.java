@@ -1,6 +1,6 @@
 /*
  * SBSSongs.java - List of Songs
- * Copyright (C) 2010 - 2017  Donald G Gray
+ * Copyright (C) 2010 - 2018  Donald G Gray
  *
  * http://gray10.com/
  *
@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.6.3
+	 * version 3.6.4
 	 *
 	 */
 
@@ -292,29 +292,26 @@ public class SBSSongs extends JFrame
          shareItem.addActionListener(shareAction);
 	   }
 
-      JMenu documentationMenu = new JMenu("Documentation");
-      menuBar.add(documentationMenu);
+      JMenu helpMenu = new JMenu("Help");
+      menuBar.add(helpMenu);
 
-      JMenuItem documentationItem = new JMenuItem("Audovia Documentation");
-      documentationMenu.add(documentationItem);
+      JMenuItem aboutItem = new JMenuItem("About");
+      helpMenu.add(aboutItem);
+
+      AboutAction aboutAction = new AboutAction();
+      aboutItem.addActionListener(aboutAction);
+
+      JMenuItem documentationItem = new JMenuItem("Documentation");
+      helpMenu.add(documentationItem);
 
       DocumentationAction documentationAction = new DocumentationAction();
       documentationItem.addActionListener(documentationAction);
 
-      JMenu helpMenu = new JMenu("About");
-      menuBar.add(helpMenu);
+      JMenuItem websiteItem = new JMenuItem("Website");
+      helpMenu.add(websiteItem);
 
-      JMenuItem aboutItem    = new JMenuItem("About Audovia");
-      JMenuItem tutorialItem = new JMenuItem("Documentation");
-      //JMenuItem faqItem      = new JMenuItem("FAQ");
-      //JMenuItem checkItem    = new JMenuItem("Installation");
-      JMenuItem contactItem  = new JMenuItem("Website");
-
-      helpMenu.add(aboutItem);
-      //helpMenu.add(tutorialItem);
-      //helpMenu.add(faqItem);
-      //helpMenu.add(checkItem);
-      //helpMenu.add(contactItem);
+      WebsiteAction websiteAction = new WebsiteAction();
+      websiteItem.addActionListener(websiteAction);
 
       TemplateAction templateAction = new TemplateAction();
       templateItem.addActionListener(templateAction);
@@ -333,21 +330,6 @@ public class SBSSongs extends JFrame
 
       ConnectionsAction connectionsAction = new ConnectionsAction();
       connectionsItem.addActionListener(connectionsAction);
-
-      AboutAction aboutAction = new AboutAction();
-      aboutItem.addActionListener(aboutAction);
-
-      TutorialAction tutorialAction = new TutorialAction();
-      tutorialItem.addActionListener(tutorialAction);
-
-      //FaqAction faqAction = new FaqAction();
-      //faqItem.addActionListener(faqAction);
-
-      //CheckAction checkAction = new CheckAction();
-      //checkItem.addActionListener(checkAction);
-
-      WebAction webAction = new WebAction();
-      contactItem.addActionListener(webAction);
 
       Container contentPane = getContentPane();
       contentPane.setLayout(new BorderLayout());
@@ -2475,9 +2457,9 @@ public class SBSSongs extends JFrame
             aboutFrame.setVisible(true);
 
             JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\"><b>Audovia</b> - Database application for making music using JFugue " +
-                          "MusicStrings&nbsp; version 3.6.3</p>" +
+                          "MusicStrings&nbsp; version 3.6.4</p>" +
 
-                          "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2017&nbsp; Donald G Gray</p>" +
+                          "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2018&nbsp; Donald G Gray</p>" +
 
                           "<p style=\"margin-bottom:4px;\">website: http://audovia.com/</p>" +
                           "<p style=\"margin-bottom:4px;\">e-mail: info@audovia.com</p>" +
@@ -2588,34 +2570,38 @@ public class SBSSongs extends JFrame
 //      }
 //   }
 
-//   private class CheckAction implements ActionListener
-//   {
-//      public void actionPerformed(ActionEvent a)
-//      {
-//         if (tableField.isEditing())
-//         {
-//            int editingRow = tableField.getEditingRow();
-//            int editingCol = tableField.getEditingColumn();
-//            TableCellEditor tableEditor = tableField.getCellEditor();
-//            tableEditor.stopCellEditing();
-//            tableField.setValueAt(tableEditor.getCellEditorValue(),
-//               editingRow, editingCol);
-//            tableField.requestFocusInWindow();
-//         }
-//			try
-//			{
-//			   Desktop myDesktop = Desktop.getDesktop();
-//            //myDesktop.browse(new URI("http://www.songbuilder.co.uk/installation"));
-//            myDesktop.open(new File("doc/Song Builder Installation.pdf"));
-//
-//				//tableField.requestFocusInWindow();
-//			}
-//			catch (Exception e)
-//			{
-//				Messages.exceptionHandler(frame, title, e);
-//			}
-//      }
-//   }
+   private class WebsiteAction implements ActionListener
+   {
+      public void actionPerformed(ActionEvent a)
+      {
+         if (tableField.isEditing())
+         {
+            int editingRow = tableField.getEditingRow();
+            int editingCol = tableField.getEditingColumn();
+            TableCellEditor tableEditor = tableField.getCellEditor();
+            tableEditor.stopCellEditing();
+            tableField.setValueAt(tableEditor.getCellEditorValue(),
+               editingRow, editingCol);
+            tableField.requestFocusInWindow();
+         }
+			try
+			{
+			   if (System.getProperty("os.name").startsWith("Windows"))
+			   {
+			      Desktop myDesktop = Desktop.getDesktop();
+                  myDesktop.browse(new URI("https://songbase.github.io/"));
+		       }
+		       else
+		       {
+				  Runtime.getRuntime().exec("xdg-open https://songbase.github.io/");
+			   }
+			}
+			catch (Exception e)
+			{
+				Messages.exceptionHandler(frame, title, e);
+			}
+      }
+   }
 
 //   private class ContactAction implements ActionListener
 //   {
