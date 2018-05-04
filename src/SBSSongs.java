@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.6.4
+	 * version 3.7
 	 *
 	 */
 
@@ -519,23 +519,6 @@ public class SBSSongs extends JFrame
       stringsButton.addActionListener(stringsAction);
       patternsButton.addActionListener(patternsAction);
       treeviewButton.addActionListener(treeviewAction);
-   }
-
-   private class WebAction implements ActionListener
-   {
-      public void actionPerformed(ActionEvent a)
-      {
-			try
-			{
-			   Desktop myDesktop = Desktop.getDesktop();
-            myDesktop.browse(new URI("http://gray10.com/"));
-			}
-			catch (Exception e)
-			{
-				Messages.exceptionHandler(frame, title, e);
-			}
-			tableField.requestFocusInWindow();
-      }
    }
 
    private class SearchAction implements ActionListener
@@ -2405,7 +2388,7 @@ public class SBSSongs extends JFrame
             UIManager.setLookAndFeel(defaultLF);
 
             ViewerComponentExample viewPDF = new ViewerComponentExample();
-            viewPDF.view("doc/AudoviaDocumentation-3-6.pdf");
+            viewPDF.view("doc/AudoviaDocumentation-3-7.pdf");
 
          for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
          {
@@ -2457,12 +2440,12 @@ public class SBSSongs extends JFrame
             aboutFrame.setVisible(true);
 
             JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\"><b>Audovia</b> - Database application for making music using JFugue " +
-                          "MusicStrings&nbsp; version 3.6.4</p>" +
+                          "MusicStrings&nbsp; version 3.7</p>" +
 
                           "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2018&nbsp; Donald G Gray</p>" +
 
-                          "<p style=\"margin-bottom:4px;\">website: http://audovia.com/</p>" +
-                          "<p style=\"margin-bottom:4px;\">e-mail: info@audovia.com</p>" +
+                          "<p style=\"margin-bottom:4px;\">website: https://songbase.github.io/</p>" +
+                          "<p style=\"margin-bottom:4px;\">e-mail: audovia@btinternet.com</p>" +
                           "<p style=\"margin-bottom:8px;\">documentation: ~/snap/audovia/&lt;version&gt;/doc/</p>" +
 
                           "<p style=\"margin-bottom:8px;\"><b>Quick Start:<br>" +
@@ -2511,65 +2494,6 @@ public class SBSSongs extends JFrame
       }
    }
 
-   private class TutorialAction implements ActionListener
-   {
-      public void actionPerformed(ActionEvent a)
-      {
-         if (tableField.isEditing())
-         {
-            int editingRow = tableField.getEditingRow();
-            int editingCol = tableField.getEditingColumn();
-            TableCellEditor tableEditor = tableField.getCellEditor();
-            tableEditor.stopCellEditing();
-            tableField.setValueAt(tableEditor.getCellEditorValue(),
-               editingRow, editingCol);
-            tableField.requestFocusInWindow();
-         }
-			try
-			{
-			   Desktop myDesktop = Desktop.getDesktop();
-            //myDesktop.browse(new URI("http://www.songbuilder.co.uk/tutorial"));
-            //if (System.getProperty("os.name").startsWith("Windows"))
-            myDesktop.open(new File("doc/AudoviaDocumentation.pdf"));
-            //else
-            //myDesktop.open(new File("/opt/SongBase/doc/SongBuilderDocumentation.pdf"));
-				//tableField.requestFocusInWindow();
-			}
-			catch (Exception e)
-			{
-				Messages.exceptionHandler(frame, title, e);
-			}
-      }
-   }
-
-//   private class FaqAction implements ActionListener
-//   {
-//      public void actionPerformed(ActionEvent a)
-//      {
-//         if (tableField.isEditing())
-//         {
-//            int editingRow = tableField.getEditingRow();
-//            int editingCol = tableField.getEditingColumn();
-//            TableCellEditor tableEditor = tableField.getCellEditor();
-//            tableEditor.stopCellEditing();
-//            tableField.setValueAt(tableEditor.getCellEditorValue(),
-//               editingRow, editingCol);
-//            tableField.requestFocusInWindow();
-//         }
-//			try
-//			{
-//			   Desktop myDesktop = Desktop.getDesktop();
-//            myDesktop.browse(new URI("http://www.songbuilder.co.uk/faq"));
-//
-//				//tableField.requestFocusInWindow();
-//			}
-//			catch (Exception e)
-//			{
-//				Messages.exceptionHandler(frame, title, e);
-//			}
-//      }
-//   }
-
    private class WebsiteAction implements ActionListener
    {
       public void actionPerformed(ActionEvent a)
@@ -2602,32 +2526,4 @@ public class SBSSongs extends JFrame
 			}
       }
    }
-
-//   private class ContactAction implements ActionListener
-//   {
-//      public void actionPerformed(ActionEvent a)
-//      {
-//         if (tableField.isEditing())
-//         {
-//            int editingRow = tableField.getEditingRow();
-//            int editingCol = tableField.getEditingColumn();
-//            TableCellEditor tableEditor = tableField.getCellEditor();
-//            tableEditor.stopCellEditing();
-//            tableField.setValueAt(tableEditor.getCellEditorValue(),
-//               editingRow, editingCol);
-//            tableField.requestFocusInWindow();
-//         }
-//			try
-//			{
-//			   Desktop myDesktop = Desktop.getDesktop();
-//            myDesktop.mail(new URI("mailto:gray10@gmx.com"));
-//
-//				//tableField.requestFocusInWindow();
-//			}
-//			catch (Exception e)
-//			{
-//				Messages.exceptionHandler(frame, title, e);
-//			}
-//      }
-//   }
 }
