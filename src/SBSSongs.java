@@ -2379,32 +2379,48 @@ public class SBSSongs extends JFrame
             tableEditor.stopCellEditing();
             tableField.setValueAt(tableEditor.getCellEditorValue(),
                editingRow, editingCol);
-
             tableField.requestFocusInWindow();
          }
-         try
-         {
-            String defaultLF = UIManager.getSystemLookAndFeelClassName();
-            UIManager.setLookAndFeel(defaultLF);
+//         try
+//         {
+//            String defaultLF = UIManager.getSystemLookAndFeelClassName();
+//            UIManager.setLookAndFeel(defaultLF);
+//
+//            ViewerComponentExample viewPDF = new ViewerComponentExample();
+//            viewPDF.view("doc/AudoviaDocumentation-3-7.pdf");
+//
+//         for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
+//         {
+//            if ("Nimbus".equals(info.getName()))
+//            {
+//               UIManager.setLookAndFeel(info.getClassName());
+//               UIManager.put("ScrollBar.minimumThumbSize", new Dimension(32,32)); // added 8 Sep 2015
+//               break;
+//            }
+//         }
 
-            ViewerComponentExample viewPDF = new ViewerComponentExample();
-            viewPDF.view("doc/AudoviaDocumentation-3-7.pdf");
+			try
+			{
+			   if (System.getProperty("os.name").startsWith("Windows"))
+			   {
+			      Desktop myDesktop = Desktop.getDesktop();
+                  myDesktop.browse(new URI("https://songbase.github.io/doc/AudoviaDocumentation-3-7.pdf"));
+		       }
+		       else
+		       {
+				  Runtime.getRuntime().exec("xdg-open https://songbase.github.io/doc/AudoviaDocumentation-3-7.pdf");
+			   }
+			}
+			catch (Exception e)
+			{
+				Messages.exceptionHandler(frame, title, e);
+			}
 
-         for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
-         {
-            if ("Nimbus".equals(info.getName()))
-            {
-               UIManager.setLookAndFeel(info.getClassName());
-               UIManager.put("ScrollBar.minimumThumbSize", new Dimension(32,32)); // added 8 Sep 2015
-               break;
-            }
-         }
-
-         }
-         catch (Exception e)
-         {
-            Messages.exceptionHandler(frame, title, e);
-         }
+//         }
+//         catch (Exception e)
+//         {
+//            Messages.exceptionHandler(frame, title, e);
+//         }
       }
    }
 
