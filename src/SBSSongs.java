@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.*;
 public class SBSSongs extends JFrame
 {
 	/*
-	 * version 3.7
+	 * version 3.7.1
 	 *
 	 */
 
@@ -1289,8 +1289,8 @@ public class SBSSongs extends JFrame
 					bufferedWriter.newLine();
 					numberi = Integer.toString(v);
 					voiceNumber = voiceMask.substring(0,voiceMask.length()-numberi.length()) + numberi;
-					if (v == 9) bufferedWriter.write("        <component_name>start voice " + voiceNumber + " (percussion)</component_name>");
-					else bufferedWriter.write("        <component_name>start voice " + voiceNumber + "</component_name>");
+					if (v == 9) bufferedWriter.write("        <component_name><![CDATA[<i>START VOICE " + voiceNumber + " (percussion)</i>]]></component_name>");
+					else bufferedWriter.write("        <component_name><![CDATA[<i>START VOICE " + voiceNumber + "</i>]]></component_name>");
 					bufferedWriter.newLine();
 					if (v == 9) bufferedWriter.write("        <string_value>V" + numberi + "</string_value>");
 					else bufferedWriter.write("        <string_value>V" + numberi + " KCmaj I[piano]</string_value>");
@@ -1436,8 +1436,8 @@ public class SBSSongs extends JFrame
 					bufferedWriter.newLine();
 					bufferedWriter.write("        <component_type>string</component_type>");
 					bufferedWriter.newLine();
-					if (v == 9) bufferedWriter.write("        <component_name>start voice " + voiceNumber + " (percussion)</component_name>");
-					else bufferedWriter.write("        <component_name>start voice " + voiceNumber + "</component_name>");
+					if (v == 9) bufferedWriter.write("        <component_name><![CDATA[<i>START VOICE " + voiceNumber + " (percussion)</i>]]></component_name>");
+					else bufferedWriter.write("        <component_name><![CDATA[<i>START VOICE " + voiceNumber + "</i>]]></component_name>");
 					bufferedWriter.newLine();
 					bufferedWriter.write("      </pattern_component>");
 					bufferedWriter.newLine();
@@ -1538,8 +1538,8 @@ public class SBSSongs extends JFrame
 					      bufferedWriter.newLine();
 					      bufferedWriter.write("        <component_type>string</component_type>");
  				         bufferedWriter.newLine();
-					      if (v == 9) bufferedWriter.write("        <component_name>start voice " + voiceNumber + " (percussion)</component_name>");
-					      else bufferedWriter.write("        <component_name>start voice " + voiceNumber + "</component_name>");
+					      if (v == 9) bufferedWriter.write("        <component_name><![CDATA[<i>START VOICE " + voiceNumber + " (percussion)</i>]]></component_name>");
+					      else bufferedWriter.write("        <component_name><![CDATA[<i>START VOICE " + voiceNumber + "</i>]]></component_name>");
 					      bufferedWriter.newLine();
 					      bufferedWriter.write("      </pattern_component>");
 					      bufferedWriter.newLine();
@@ -2455,8 +2455,10 @@ public class SBSSongs extends JFrame
             aboutFrame.setLocation(100,100);
             aboutFrame.setVisible(true);
 
-            JLabel label = new JLabel("<html><p style=\"margin-bottom:8px;\"><b>Audovia</b> - Database application for making music using JFugue " +
-                          "MusicStrings&nbsp; version 3.7</p>" +
+            JLabel label = new JLabel();
+
+            label.setText("<html><p style=\"margin-bottom:8px;\"><b>Audovia</b> - Database application for making music using JFugue " +
+                          "MusicStrings&nbsp; version 3.7.1</p>" +
 
                           "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2018&nbsp; Donald G Gray</p>" +
 
@@ -2481,15 +2483,9 @@ public class SBSSongs extends JFrame
                           "<p style=\"margin-bottom:8px;\">You should have received a copy of the GNU General Public License " +
                           "along with this program.&nbsp; If not, see http://www.gnu.org/licenses/.</p>" +
 
-                          "<p style=\"margin-bottom:8px;\">The Documentation PDF Viewer uses the ICEpdf library and is distributed " +
-                          "under the terms of the Apache License, version 2.</p> " +
-
-                          "<p style=\"margin-bottom:8px;\">You should have received a copy of the Apache License " +
-                          "along with this program.&nbsp; If not, see http://www.apache.org/licenses/.</p>" +
-
                           "</html>");
 
-            label.setPreferredSize(new Dimension(600,500));
+            label.setPreferredSize(new Dimension(600,380));
             label.setVerticalAlignment(JLabel.TOP);
 
             JPanel myPanel = new JPanel();
