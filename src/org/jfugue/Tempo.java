@@ -38,6 +38,7 @@ package org.jfugue;
  */
 public final class Tempo implements JFugueElement
 {
+	private static final long serialVersionUID = 1L;
     private int tempo;
 
     /**

@@ -30,6 +30,7 @@ package org.jfugue;
  */
 public final class Time implements JFugueElement
 {
+	private static final long serialVersionUID = 1L;
     private long time;
 
     /**

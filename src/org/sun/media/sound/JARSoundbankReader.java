@@ -81,14 +81,15 @@ public class JARSoundbankReader extends SoundbankReader {
             while (line != null) {
                 if (!line.startsWith("#")) {
                     try {
-                        Class c = Class.forName(line.trim(), true, ucl);
-                        Object o = c.newInstance();
+                        Class<?> c = Class.forName(line.trim(), true, ucl);
+                        Object o = c.getDeclaredConstructor().newInstance();
                         if (o instanceof Soundbank) {
                             soundbanks.add((Soundbank) o);
                         }
                     } catch (ClassNotFoundException  e) {
                     } catch (InstantiationException  e) {
                     } catch (IllegalAccessException  e) {
+                    } catch (ReflectiveOperationException  e) {
                     }
                 }
                 line = r.readLine();

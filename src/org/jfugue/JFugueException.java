@@ -2,22 +2,22 @@
  * JFugue - API for Music Programming
  * Copyright (C) 2003-2008  David Koelle
  *
- * http://www.jfugue.org 
- * 
+ * http://www.jfugue.org
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- *  
+ *
  */
 
 package org.jfugue;
@@ -33,8 +33,10 @@ public class JFugueException extends RuntimeException
     /**
      * Create a new JFugueException.
      *
-     * @param exc The string representing the exception.  
+     * @param exc The string representing the exception.
      */
+     private static final long serialVersionUID = 1L;
+
     public JFugueException(Exception exc)
     {
         super(exc);
@@ -43,7 +45,7 @@ public class JFugueException extends RuntimeException
     /**
      * Create a new JFugueException.
      *
-     * @param exc The string representing the exception.  
+     * @param exc The string representing the exception.
      */
     public JFugueException(String exc)
     {
@@ -115,7 +117,7 @@ public class JFugueException extends RuntimeException
     public static final String EXPECTED_INT    = "The JFugue Parser expected an int, but encountered the value * which is not an int.";
     /** The parser expected a double. */
     public static final String EXPECTED_DOUBLE = "The JFugue Parser expected a double, but encountered the value * which is not a double.";
-    
+
     /** The MIDI System cannot instantiate a sequencer. */
     public static final String SEQUENCER_DEVICE_NOT_SUPPORTED_WITH_EXCEPTION = "The MIDI System cannot instantiate a sequencer.  Although this error is reported by JFugue, the problem is not with JFugue itself.  Find resources for using MIDI on your specific system.  The exception message from MidiSystem.getSequencer() is: ";
     /** The MIDI System cannot instantiate a sequencer. */
@@ -129,16 +131,16 @@ public class JFugueException extends RuntimeException
 
     /** Error while sleep */
     public static final String ERROR_SLEEP = "Error while sleeping";
-    
+
     /** Error resolving MidiDevice with Intelligent Resolver */
     public static final String INTELLIGENT_RESOLVER_FAILED = "IntelligentDeviceResolver not intelligent enough.  Be explicit about the MidiDevice.";
 
     /** Verification exception */
     public static final String VERIFICATION_EXCEPTION = "The result of parsing, '*', was not expected.";
-    
+
     /** General error */
     public static final String GENERAL_ERROR = "General error: ";
-    
+
     /** Error for MusicXMLParser (TODO: Should this reside in MusicXMLParser?) */
     public static final String BEAT_UNIT_MUST_BE_QUARTER = "MusicXML tag \"beat-unit\" must be set to \"quarter\"";
 

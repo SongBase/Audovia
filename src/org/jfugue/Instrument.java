@@ -30,6 +30,7 @@ package org.jfugue;
  */
 public final class Instrument implements JFugueElement
 {
+	private static final long serialVersionUID = 1L;
     private byte instrument;
 
     /**

@@ -37,6 +37,7 @@ package org.jfugue;
  */
 public final class Note implements JFugueElement
 {
+	private static final long serialVersionUID = 1L;
     private byte value = 0;
     private long duration = 0;
     private double decimalDuration = 0.0;

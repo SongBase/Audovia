@@ -30,6 +30,7 @@ package org.jfugue;
  */
 public final class Controller implements JFugueElement
 {
+	private static final long serialVersionUID = 1L;
     byte index;
     byte value;
 

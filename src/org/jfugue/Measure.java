@@ -36,6 +36,8 @@ public final class Measure implements JFugueElement
      * Creates a new Measure object, which is simply an indicator
      * that a measure line has been parsed in a MusicString
      */
+     private static final long serialVersionUID = 1L;
+
     public Measure()
     {
     }

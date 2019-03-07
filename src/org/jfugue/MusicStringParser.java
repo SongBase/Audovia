@@ -1381,7 +1381,7 @@ public final class MusicStringParser extends Parser  // added by D G Gray 07-jun
         String definition = dictionaryLookup(bracketedString);
         Byte newbyte = null;
         try {
-            newbyte = new Byte(definition);
+            newbyte = Byte.valueOf(definition);
         } catch (NumberFormatException e) {
             throw new JFugueException(JFugueException.EXPECTED_BYTE, definition, bracketedString);
         }
@@ -1399,7 +1399,7 @@ public final class MusicStringParser extends Parser  // added by D G Gray 07-jun
         String definition = dictionaryLookup(bracketedString);
         Long newlong = null;
         try {
-            newlong = new Long(definition);
+            newlong = Long.valueOf(definition);
         } catch (NumberFormatException e) {
             throw new JFugueException(JFugueException.EXPECTED_LONG,definition,bracketedString);
         }
@@ -1417,7 +1417,7 @@ public final class MusicStringParser extends Parser  // added by D G Gray 07-jun
         String definition = dictionaryLookup(bracketedString);
         Integer newint = null;
         try {
-            newint = new Integer(definition);
+            newint = Integer.valueOf(definition);
         } catch (NumberFormatException e) {
             throw new JFugueException(JFugueException.EXPECTED_INT,definition,bracketedString);
         }
@@ -1435,7 +1435,7 @@ public final class MusicStringParser extends Parser  // added by D G Gray 07-jun
         String definition = dictionaryLookup(bracketedString);
         Double newdouble = null;
         try {
-            newdouble = new Double(definition);
+            newdouble = Double.valueOf(definition);
         } catch (NumberFormatException e) {
             throw new JFugueException(JFugueException.EXPECTED_DOUBLE,definition,bracketedString);
         }

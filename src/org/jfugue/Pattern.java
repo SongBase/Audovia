@@ -58,6 +58,7 @@ import org.jfugue.extras.ReversePatternTransformer;
  */
 public class Pattern implements Serializable
 {
+	private static final long serialVersionUID = 1L;
     private StringBuilder musicString;
     private Map<String, String> properties;  // uses lazy initialization, so access only through getProperties()
 
@@ -103,13 +104,13 @@ public class Pattern implements Serializable
     }
 
     /**
-     * 
+     *
      * @version 4.0
      * */
     public static Pattern createPattern(Map<String, Pattern> context, Pattern pattern)
     {
     	StringBuilder buddy = new StringBuilder();
-    	
+
     	String[] tokens = pattern.getTokens();
     	for (String token : tokens) {
     		if ((token.charAt(0) == '{') && (token.charAt(token.length()-1) == '}')) {
@@ -117,30 +118,30 @@ public class Pattern implements Serializable
     			Pattern p = context.get(key);
     			buddy.append(p.getMusicString());
     			buddy.append(" ");
-    		} else { 
+    		} else {
     			buddy.append(token);
     			buddy.append(" ");
     		}
     	}
-    	
+
     	return new Pattern(buddy.toString());
     }
-    
+
     /**
-     * 
+     *
      * @version 4.0
      * */
     public static Pattern createPattern(Map<String, Pattern> context, Pattern... patterns)
     {
-    	
+
     	Pattern allPatterns = new Pattern();
     	for (Pattern p : patterns) {
     		allPatterns.add(p);
     	}
-    	
+
     	return createPattern(context, allPatterns);
     }
-    
+
     /**
      * Sets the music string kept by this pattern.
      * @param s the music string
@@ -271,7 +272,7 @@ public class Pattern implements Serializable
     //
     //  PROPERTIES
     //
-    
+
     /**
      * Sets the title for this Pattern.
      * As of JFugue 4.0, the title is set as a property with the key Pattern.TITLE
@@ -390,7 +391,8 @@ public class Pattern implements Serializable
             if ((tokens[i].length() > 0) && (tokens[i].charAt(0) == '@')) {
                 String timeNumberString = tokens[i].substring(1,tokens[i].length());
                 if (timeNumberString.indexOf("[") == -1) {
-                    long timeNumber = new Long(timeNumberString).longValue();
+                    //long timeNumber = new Long(timeNumberString).longValue();
+                    long timeNumber = Long.parseLong(timeNumberString);
                     long newTime = timeNumber + offsetTime;
                     if (newTime < 0) newTime = 0;
                     buddy.append("@" + newTime);
@@ -408,7 +410,7 @@ public class Pattern implements Serializable
     //
     //  PATTERN MANIPULATION
     //
-    
+
     /**
      * Repeats the music string in this pattern
      * by the given number of times.
@@ -428,17 +430,17 @@ public class Pattern implements Serializable
      * once in a repeated pattern.
      * Example: If the pattern is "T0 A B", calling <code>repeat(4, 3)</code> will
      * make the pattern "T0 A B A B A B A B".
-     * 
-     * In Version 4.1, this is fixed to work on the index of the token in the pattern, 
+     *
+     * In Version 4.1, this is fixed to work on the index of the token in the pattern,
      * as opposed to the index of the string.
-     *   
+     *
      * @version 3.0
      **/
     public void repeat(int times, int beginIndex)
     {
         Pattern patternUpToBeingIndex = getSubPattern(0, beginIndex-1);
         Pattern repeatingPattern = getSubPattern(beginIndex);
-        
+
         repeat(patternUpToBeingIndex.toString(), repeatingPattern.toString(), times, null);
     }
 
@@ -449,10 +451,10 @@ public class Pattern implements Serializable
      * trailing information to only be specified once in a repeated pattern.
      * Example: If the pattern is "T0 A B C", calling <code>repeat(4, 3, 5)</code>
      * will make the pattern "T0 A B A B A B A B C".
-     * 
-     * In Version 4.1, this is fixed to work on the index of the token in the pattern, 
+     *
+     * In Version 4.1, this is fixed to work on the index of the token in the pattern,
      * as opposed to the index of the string.
-     *   
+     *
      * @version 3.0
      */
     public void repeat(int times, int beginIndex, int endIndex)
@@ -460,7 +462,7 @@ public class Pattern implements Serializable
         Pattern patternUpToBeingIndex = getSubPattern(0, beginIndex-1);
         Pattern repeatingPattern = getSubPattern(beginIndex, endIndex);
         Pattern patternAfterEndIndex = getSubPattern(endIndex + 1);
-        
+
         repeat(patternUpToBeingIndex.toString(), repeatingPattern.toString(), times, patternAfterEndIndex.toString());
     }
 
@@ -496,7 +498,7 @@ public class Pattern implements Serializable
     /**
      * Returns a new Pattern that is a subpattern of this pattern.
      * @return subpattern of this pattern.
-     * 
+     *
      * Version 4.1.0 improves on previous versions of this method by
      * returning tokens instead of substring of the pattern.
      * @version 4.1.0
@@ -510,7 +512,7 @@ public class Pattern implements Serializable
     /**
      * Returns a new Pattern that is a subpattern of this pattern.
      * @return subpattern of this pattern
-     * 
+     *
      * Version 4.1.0 improves on previous versions of this method by
      * returning tokens instead of substring of the pattern.
      * @version 4.1.0
@@ -521,23 +523,23 @@ public class Pattern implements Serializable
     	if (endIndex >= tokens.length) {
     		throw new ArrayIndexOutOfBoundsException("endIndex is greater than the number of tokens in this Pattern");
     	}
-    	
+
     	StringBuilder buddy = new StringBuilder();
     	for (int i = beginIndex; i < endIndex; i++) {
     		buddy.append(tokens[i]);
-    		if (i < endIndex-1) { 
+    		if (i < endIndex-1) {
     			buddy.append(" ");
     		}
     	}
-    	
+
         return new Pattern(buddy.toString());
     }
 
     /**
      * Returns a Pattern that replaces the token at the provided index with the new token.
-     * 
+     *
      * Use this if, for example, you have two musical phrases that are very similar except for a few notes.
-     * 
+     *
      * @param index The index of the token to replace
      * @param newToken The new token to place at the specified index
      * @return The new Pattern
@@ -556,13 +558,13 @@ public class Pattern implements Serializable
     			buddy.append(" ");
     		}
     	}
-    	
+
     	return new Pattern(buddy.toString());
     }
 
     /**
      * Returns a Pattern that replaces a series of tokens with the new tokens.
-     * 
+     *
      * @param index The index of the first token to replace
      * @param newTokens An array of tokens that will be placed into the pattern
      * @return The new Pattern
@@ -573,7 +575,7 @@ public class Pattern implements Serializable
     	if (startingIndex + newTokens.length > tokens.length) {
     		throw new ArrayIndexOutOfBoundsException("startingIndex plus the number of newTokens is greater than the number of tokens in this Pattern");
     	}
-    	
+
     	StringBuilder buddy = new StringBuilder();
     	int counter = 0;
     	for (int i = 0; i < tokens.length; i++) {
@@ -587,7 +589,7 @@ public class Pattern implements Serializable
     			buddy.append(" ");
     		}
     	}
-    	
+
     	return new Pattern(buddy.toString());
     }
 
@@ -595,13 +597,13 @@ public class Pattern implements Serializable
      * Loads a pattern from a text file.  Each line of the file should be either a
      * collection of MusicString tokens, or a line that begins with a # character, indicating
      * that the line is a comment.
-     * 
+     *
      * Commented lines may contain properties in the form of key:value.  For example,
      * <pre>
      * # Title: Inventio 13
      * </pre>
      * would create a property called 'Title' that would contain the value 'Inventio 13'.
-     * 
+     *
      * @param file
      * @return
      * @throws IOException
@@ -641,7 +643,7 @@ public class Pattern implements Serializable
     /**
      * Saves the pattern as a text file.  The file passed in should ideally be named
      * with a .jfugue extension.
-     * 
+     *
      * @param filename the filename to save under
      */
     public void savePattern(File file) throws IOException
@@ -728,7 +730,7 @@ public class Pattern implements Serializable
     //
     //  TRANSFORMERS AND TOOLS
     //
-    
+
     /**
      * @version 4.1
      */
@@ -737,15 +739,15 @@ public class Pattern implements Serializable
         GetInstrumentsUsedTool ifinder = new GetInstrumentsUsedTool();
         return ifinder.getInstrumentsUsedInPattern(this);
     }
-    
+
     /**
      * @version 4.1
      */
-    public Class getReversePatternTransformerClass() 
+    public Class<?> getReversePatternTransformerClass()
     {
         return ReversePatternTransformer.class;
     }
-    
+
     /**
      * @version 4.1
      */
@@ -753,16 +755,18 @@ public class Pattern implements Serializable
     {
         Pattern reverse = null;
         try {
-            PatternTransformer rpt = (PatternTransformer)getReversePatternTransformerClass().newInstance();
+            PatternTransformer rpt = (PatternTransformer)getReversePatternTransformerClass().getDeclaredConstructor().newInstance();
             reverse = rpt.transform(this);
         } catch (IllegalAccessException e) {
             throw new JFugueException(e);
         } catch (InstantiationException e) {
             throw new JFugueException(e);
+        } catch (ReflectiveOperationException e) {
+            throw new JFugueException(e);
         }
         return reverse;
     }
-    
+
     //
     //  LISTENERS
     //
@@ -805,7 +809,7 @@ public class Pattern implements Serializable
         }
         return listenerList;
     }
-    
+
     /** Tells all PatternListener interfaces that a fragment has been added. */
     private void fireFragmentAdded(Pattern fragment)
     {

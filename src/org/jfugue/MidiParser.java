@@ -2,22 +2,22 @@
  * JFugue - API for Music Programming
  * Copyright (C) 2003-2008  David Koelle
  *
- * http://www.jfugue.org 
- * 
+ * http://www.jfugue.org
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- *  
+ *
  */
 
 package org.jfugue;
@@ -32,7 +32,7 @@ import javax.sound.midi.Track;
 
 /**
  * Parses MIDI data, whether from a file, a connected device, or some other stream.
- * 
+ *
  * @version 4.0.3 - A Note event with 0 duration is now sent when a note is first encountered
  */
 public final class MidiParser extends Parser
@@ -48,7 +48,7 @@ public final class MidiParser extends Parser
         this.tempo = DEFAULT_TEMPO;
 
         // Create a two dimensional array of bytes [ track, note ] - when a NoteOn event is found,
-        // populate the proper spot in the array with the note's start time.  When a NoteOff event 
+        // populate the proper spot in the array with the note's start time.  When a NoteOff event
         // is found, new Time and Note objects are constructed and added to the composition
         for (int m=0; m < 16; m++) {
             for (int n=0; n < 255; n++) {
@@ -67,7 +67,7 @@ public final class MidiParser extends Parser
      * @param sequence the <code>Sequence</code> to parse
      * @throws Exception if there is an error parsing the pattern
      */
-    public void parse(Sequence sequence) 
+    public void parse(Sequence sequence)
     {
     	this.tempo = DEFAULT_TEMPO;
 
@@ -77,11 +77,11 @@ public final class MidiParser extends Parser
         this.resolution = sequence.getResolution();
         System.out.println("divisionType == PPQ? "+ (divisionType == Sequence.PPQ));
         System.out.println("resolution = "+sequence.getResolution());
-        
+
 //        if (divisionType == Sequence.PPQ) {
 //        	resolution = sequence.getResolution();
 //        } else {
-//        	frames = sequence.get 
+//        	frames = sequence.get
 //        }
 
         // Compute the size of this adventure for the ParserProgressListener
@@ -91,31 +91,31 @@ public final class MidiParser extends Parser
         {
             totalCount += tracks[i].size();
         }
-        
+
         // And now to parse the MIDI!
         for (int t = 0; t < tracks.length; t++)
         {
             int trackSize = tracks[t].size();
             if (trackSize > 0)
             {
-                fireVoiceEvent(new Voice((byte)t)); 
+                fireVoiceEvent(new Voice((byte)t));
 
                 for (int ev = 0; ev < trackSize; ev++)
                 {
                     counter++;
                     fireProgressReported("Parsing MIDI...", counter, totalCount);
-                    
+
                     MidiEvent event = tracks[t].get(ev);
                     MidiMessage message = event.getMessage();
 
                     trace("Message received: ",message);
-                    parse(message, event.getTick());  
+                    parse(message, event.getTick());
                 }
             }
         }
     }
 
-    /** 
+    /**
      * Delegator method that calls specific parsers depending on the
      * type of MidiMessage passed in.
      * @param message the message to parse
@@ -136,16 +136,16 @@ public final class MidiParser extends Parser
             parseMetaMessage((MetaMessage)message, timestamp);
         }
     }
-    
+
     /**
-     * Parses instances of ShortMessage. 
+     * Parses instances of ShortMessage.
      * @param message The message to parse
      * @param timestamp the time at which the message was encountered in this track
      */
     private void parseShortMessage(ShortMessage message, long timestamp)
     {
         int track = message.getChannel();
-        
+
         switch (message.getCommand())
         {
             case ShortMessage.PROGRAM_CHANGE :                  // 0xC0, 192
@@ -155,9 +155,9 @@ public final class MidiParser extends Parser
                 fireVoiceEvent(new Voice((byte)track));
                 fireInstrumentEvent(instrument);
                 break;
-                
+
             case ShortMessage.CONTROL_CHANGE :                  // 0xB0, 176
-                trace("Controller change to ",message.getData1(),", value = ",message.getData2());                                    
+                trace("Controller change to ",message.getData1(),", value = ",message.getData2());
                 Controller controller = new Controller((byte)message.getData1(), (byte)message.getData2());
                 fireTimeEvent(new Time(timestamp));
                 fireVoiceEvent(new Voice((byte)track));
@@ -175,27 +175,27 @@ public final class MidiParser extends Parser
                 noteOffEvent(timestamp, track, message.getData1(), message.getData2());
                 break;
             case ShortMessage.CHANNEL_PRESSURE :                // 0xD0, 208
-                trace("Channel pressure, pressure = ",message.getData1());                                    
+                trace("Channel pressure, pressure = ",message.getData1());
                 ChannelPressure pressure = new ChannelPressure((byte)message.getData1());
                 fireTimeEvent(new Time(timestamp));
                 fireVoiceEvent(new Voice((byte)track));
                 fireChannelPressureEvent(pressure);
                 break;
             case ShortMessage.POLY_PRESSURE :                   // 0xA0, 160
-                trace("Poly pressure on key ",message.getData1(),", pressure = ",message.getData2());                                    
+                trace("Poly pressure on key ",message.getData1(),", pressure = ",message.getData2());
                 PolyphonicPressure poly = new PolyphonicPressure((byte)message.getData1(), (byte)message.getData2());
                 fireTimeEvent(new Time(timestamp));
                 fireVoiceEvent(new Voice((byte)track));
                 firePolyphonicPressureEvent(poly);
                 break;
             case ShortMessage.PITCH_BEND :                      // 0xE0, 224
-                trace("Pitch Bend, data1= ",message.getData1(),", data2= ",message.getData2());                                    
+                trace("Pitch Bend, data1= ",message.getData1(),", data2= ",message.getData2());
                 PitchBend bend = new PitchBend((byte)message.getData1(), (byte)message.getData2());
                 fireTimeEvent(new Time(timestamp));
                 fireVoiceEvent(new Voice((byte)track));
                 firePitchBendEvent(bend);
                 break;
-            default : 
+            default :
                 trace("Unparsed message: ",message.getCommand());
                 break;
         }
@@ -207,13 +207,13 @@ public final class MidiParser extends Parser
         tempNoteRegistry[track][data1] = timestamp;
         tempNoteAttackRegistry[track][data1] = (byte)data2;
 
-        // Added 9/27/2008 - fire a Note with duration 0 to signify a that a Note was pressed 
+        // Added 9/27/2008 - fire a Note with duration 0 to signify a that a Note was pressed
         Note note = new Note((byte)data1, 0);
         note.setDecimalDuration(0);
         note.setAttackVelocity((byte)data2);
         fireNoteEvent(note);
     }
-    
+
     private void noteOffEvent(long timestamp, int track, int data1, int data2)
     {
         long time = tempNoteRegistry[track][data1];
@@ -221,7 +221,7 @@ public final class MidiParser extends Parser
 
         fireTimeEvent(new Time(time));
         fireVoiceEvent(new Voice((byte)track));
-        Note note = new Note((byte)data1, (long)(timestamp - time));
+        Note note = new Note((byte)data1, (timestamp - time));
         // Can you believe it?  Need to multiply an int by 1.0 to turn it into a double
 //        double decimalDuration = (timestamp - time)*1.0 / (resolution * 4.0); // TODO: This will work for PPQ, but what about SMPTE division type?
         double decimalDuration = (timestamp - time)*1.0 / (resolution); // TODO: This will work for PPQ, but what about SMPTE division type?
@@ -231,9 +231,9 @@ public final class MidiParser extends Parser
         fireNoteEvent(note);
         tempNoteRegistry[track][data1] = 0L;
     }
-        
+
     /**
-     * Parses instances of SysexMessage. 
+     * Parses instances of SysexMessage.
      * @param message The message to parse
      * @param timestamp the time at which the message was encountered in this track
      */
@@ -244,7 +244,7 @@ public final class MidiParser extends Parser
     }
 
     /**
-     * Parses instances of MetaMessage. 
+     * Parses instances of MetaMessage.
      * @param message The message to parse
      * @param timestamp the time at which the message was encountered in this track
      */
@@ -256,12 +256,12 @@ public final class MidiParser extends Parser
           case 0x59 : /*nop*/  // Even though we care about Key Signatures, we don't want to read one in from a MIDI file,
                                // because the notes that we'll receive will already be adjusted for the key signature.
                                // MIDI's Key Signature is more about notating sheet music that influencing the played notes.
-          default : 
+          default :
               trace("MetaMessage "+message.getType()+" (0x"+Integer.toHexString(message.getType())+") received but not parsed by JFugue (doesn't use them)");
               break;
         }
     }
-    
+
     private void parseTempo(MetaMessage message, long timestamp)
     {
         int beatsPerMinute = (int)TimeFactor.convertMicrosecondsPerBeatToBPM(TimeFactor.parseMicrosecondsPerBeat(message)) * 4;

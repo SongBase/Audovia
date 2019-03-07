@@ -32,6 +32,7 @@ package org.jfugue;
  */
 public final class PolyphonicPressure implements JFugueElement
 {
+	private static final long serialVersionUID = 1L;
     private byte key;
     private byte pressure;
 

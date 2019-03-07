@@ -47,6 +47,7 @@ import java.util.Map;
  */
 public class Rhythm implements Serializable
 {
+	private static final long serialVersionUID = 1L;
     private Map<Character, String> charToNote;
     private String[] layers;
     private String[] voices;
@@ -58,7 +59,7 @@ public class Rhythm implements Serializable
     private int voiceOffset = 0;
     private String offsetString = null;
 
-    
+
     public Rhythm()
     {
         charToNote = new HashMap<Character, String>();
@@ -116,7 +117,7 @@ public class Rhythm implements Serializable
         setVoice(voice, rhythmString);
         setVoiceDetails(voice, detailsString);
     }
-    
+
     public String getVoice(int voice)
     {
         return this.voices[voice];
@@ -183,7 +184,7 @@ public class Rhythm implements Serializable
                 }
             }
         }
-    
+
         for (int i=0; i < voiceOffset; i++) {
             for (int v=0; v < MAX_VOICES; v++) {
                 buffy.append("V");
@@ -200,7 +201,7 @@ public class Rhythm implements Serializable
                 }
             }
         }
-        
+
         // Add the voices
         for (int i=0; i < MAX_VOICES; i++)
         {
@@ -239,9 +240,9 @@ public class Rhythm implements Serializable
 
     public String getMusicString()
     {
-        return generateMusicString(); 
+        return generateMusicString();
     }
-    
+
     public Pattern getPattern()
     {
         return new Pattern(generateMusicString());

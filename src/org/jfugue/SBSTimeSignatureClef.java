@@ -32,6 +32,8 @@ public class SBSTimeSignatureClef extends JDialog
 	 *
 	 */
 
+   private static final long serialVersionUID = 1L;
+
    private JComboBox<String>      beatsBox;
    private JComboBox<String>      beat_typeBox;
    private JComboBox<String>      signBox;

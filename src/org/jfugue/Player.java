@@ -62,7 +62,7 @@ public class Player
     private volatile boolean started = false;
     private volatile boolean finished = false;
 
-    private Map rememberedPatterns;
+    //private Map rememberedPatterns; // doesn't seem to be required D G Gray Oct 2018
 
     private JFrame frame = null; // added by D G Gray 22-nov-2013
     private JDialog dialog = null; // added by D G Gray 22-nov-2013
@@ -319,10 +319,10 @@ public class Player
 //        }  //  commented out by D G Gray 14-jul-2011
 
       Object[] options = {"Quit"};
-      JOptionPane optionPane = new JOptionPane();
+      //JOptionPane optionPane = new JOptionPane();
       if(dialog != null)
       {
-         optionPane.showOptionDialog
+         JOptionPane.showOptionDialog
             (dialog,
              "Playing pattern.",
              "Player",
@@ -334,7 +334,7 @@ public class Player
 		 }
       else
       {
-         optionPane.showOptionDialog
+         JOptionPane.showOptionDialog
             (frame,
              "Playing pattern.",
              "Player",

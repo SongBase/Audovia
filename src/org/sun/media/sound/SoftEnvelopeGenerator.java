@@ -170,6 +170,7 @@ public class SoftEnvelopeGenerator implements SoftProcess {
                         this.delay[i][0] / 1200.0) / control_time);
                 if (stage_ix[i] < 0)
                     stage_ix[i] = 0;
+                // Fall through - added D G Gray Oct 2018. The missing break; is intentional.
             case EG_DELAY:
                 if (stage_ix[i] == 0) {
                     double attack = this.attack[i][0];
