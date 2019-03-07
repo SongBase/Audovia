@@ -11,10 +11,7 @@ You can use notes from C0 to G10, corresponding to MIDI values 0 to 127.  Middle
 
 Notes can be entered manually or by picking from graphic Treble, Alto, Tenor and Bass staves within the MusicString editor.
 
-Within the application, use *File/Template* to create a song, then *Tree View* and expand the nodes.  Select each bar in turn and enter the notes.  Select "Song" and press *Play* to play back your music.  From the *File* menu, you can export to MIDI, MusicXML and WAV.  The MIDI files can be opened in LMMS for music processing.  The WAV files can be opened in Audacity, then exported to MP3.  The MusicXML files can be opened in MuseScore for music publishing.
+Within the application, use *File/Template* to create a song, then *Tree View* and expand the nodes.  Select each bar in turn and enter the notes.  Select "Song" and press *Play* to play back your music.  From the *File* menu, you can export to MIDI and WAV.  The MIDI files can be opened in LMMS for music processing.  The WAV files can be opened in Audacity, then exported to MP3.  The MIDI files can also be opened in MuseScore for music publishing.
 
-You can collaborate with your colleagues on a song by using a MySQL shared database.  You can also export and import songs in XML format.  Use *File/XML Import* to import the demonstration songs.
+You can share songs by exporting and importing songs in XML format.  Use *File/XML Import* to import the demonstration songs.
 
-If you are setting up a shared database, use the *Database/Database Connections* form to enter the connection parameters obtained from your Database as a Service provider.  Then use *File/Create Tables* to create the database tables on the remote host.
-
-We recommend that you create a user in your MySQL database called 'guest' with *EXECUTE* as the only privilege.  Connecting as 'guest' enables read access to all songs and also the ability to create and log in to individual user accounts for the creation of songs.  Full access to these songs can optionally be shared with selected other user accounts.
