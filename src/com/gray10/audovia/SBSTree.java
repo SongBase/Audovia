@@ -301,7 +301,7 @@ public class SBSTree extends JFrame
 
       fileMenu.add(exportMidiItem);
       fileMenu.add(exportMusicStringItem);
-      fileMenu.add(exportMusicXMLItem);
+      //fileMenu.add(exportMusicXMLItem);
       fileMenu.add(exportWavItem);
       fileMenu.addSeparator();
       fileMenu.add(cloneItem);
