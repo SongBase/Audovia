@@ -11,7 +11,7 @@ You can use notes from C0 to G10, corresponding to MIDI values 0 to 127.  Middle
 
 Notes can be entered manually or by picking from graphic Treble, Alto, Tenor and Bass staves within the MusicString editor.
 
-Within the application, use *File/Template* to create a song, then *Tree View* and expand the nodes.  Select each bar in turn and enter the notes.  Select "Song" and press *Play* to play back your music.  From the *File* menu, you can export to MIDI and WAV.  The MIDI files can be opened in LMMS for music processing or MuseScore for music publishing.  The WAV files can be opened in Audacity, then exported to MP3.
+Within the application, use *File/Template* to create a song, then *Tree View* and expand the nodes.  Select each bar in turn and enter the notes.  Select "Song" and press *Play* to play back your music.  From the *File* menu, you can export to MIDI and WAV.  The MIDI files can be opened in LMMS for music processing or in MuseScore for music publishing.  The WAV files can be opened in Audacity, then exported to MP3.
 
 You can share songs by exporting and importing songs in XML format.  Use *File/XML Import* to import the demonstration songs.
 
