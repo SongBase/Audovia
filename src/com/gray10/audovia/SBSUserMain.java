@@ -55,7 +55,7 @@ public class SBSUserMain
    {
       try
       {
-         for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
+         for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
          {
             if ("Nimbus".equals(info.getName()))
             {
@@ -67,24 +67,11 @@ public class SBSUserMain
 
          UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Liberation Sans", Font.PLAIN, 14));
 
-  //       BasicMenuBarUI MyMenuBarUI = new BasicMenuBarUI ()
-	//		    {
-	//		        public void paint ( Graphics g, JComponent c )
-	//		        {
-	//		            g.setColor ( Color.RED );
-	//		            g.fillRect ( 0, 0, c.getWidth (), c.getHeight () );
-	//		        }
-  //           } ;
-
-  //           UIManager.put ( "MenuBarUI", MyMenuBarUI.getClass().getCanonicalName() );
-
          System.setProperty("image.dir", args[1]);
 
          ExecutionMonitor console = new ExecutionMonitor
-                                        ("SBS - Execution Monitor");
+                                      ("SBS - Execution Monitor");
          console.init();
-
-          //System.out.println("menu bar test");
 
          System.out.println("Audovia version 4.0 for Ubuntu Snappy");
          System.out.println("Work directory: " + System.getProperty("user.dir"));
@@ -140,8 +127,6 @@ public class SBSUserMain
 		   {
 				// check if database exists
 
-				//File database_directory = new File(database);
-				//derby_directory = new File(new File(new File(System.getProperty("user.home"),"Documents"),"Audovia"),database);
             derby_directory = new File(database);
 				if (! derby_directory.exists()) createDatabase();
 
@@ -178,8 +163,6 @@ public class SBSUserMain
 	{
 //						Properties p = System.getProperties();
 //						p.setProperty("derby.stream.error.field", "com.gray10.audovia.DerbyUtil.DEV_NULL");
-
-						//derby_directory = new File(new File(new File(System.getProperty("user.home"),"Documents"),"Audovia"),database);
 
 		            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
 		            Connection conn = DriverManager.getConnection(
@@ -267,15 +250,6 @@ public class SBSUserMain
 		            System.out.println("Audovia database objects created.");
 
 		            conn.close();
-
-		            //try
-		            //{
-		            //   DriverManager.getConnection("jdbc:derby:;shutdown=true");
-					   //}
-					   //catch (Exception e1)
-					   //{
-						//	System.out.println(e1.getMessage());
-						//}
 
 		            System.out.println("Audovia installation complete.");
    }
