@@ -2467,7 +2467,7 @@ public class SBSSongs extends JFrame
 
                           "<p style=\"margin-bottom:4px;\">website: https://songbase.github.io/</p>" +
                           "<p style=\"margin-bottom:4px;\">e-mail: audovia@btinternet.com</p>" +
-                          "<p style=\"margin-bottom:8px;\">documentation: ~/snap/audovia/&lt;version&gt;/doc/</p>" +
+                          "<p style=\"margin-bottom:8px;\">documentation: ~/Documents/Audovia/doc/</p>" +
 
                           "<p style=\"margin-bottom:8px;\"><b>Quick Start:<br>" +
                           "&nbsp;&nbsp;&nbsp;&nbsp; 1. File/Song Import, open the Demo folder, then select a song and Import Song.<br>" +
