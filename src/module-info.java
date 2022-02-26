@@ -6,5 +6,4 @@ module audovia
 	requires org.apache.derby.engine;
 	requires org.apache.derby.commons;
 	requires org.apache.derby.tools;
-
 }

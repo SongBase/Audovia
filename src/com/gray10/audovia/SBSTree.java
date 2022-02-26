@@ -1393,6 +1393,8 @@ public class SBSTree extends JFrame
                         pleaseWait.setVisible(false);
 
                         Messages.plainMessage(frame, title, "WAV exported to: " + fileOut.getPath());
+                        
+                        //Runtime.getRuntime().exec("./audacity.AppImage " + fileOut.getPath().replace(" ", "\\ "));
                      }
                   }
                   catch (Exception e)

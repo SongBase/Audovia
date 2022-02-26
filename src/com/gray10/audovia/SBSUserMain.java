@@ -73,7 +73,7 @@ public class SBSUserMain
                                       ("SBS - Execution Monitor");
          console.init();
 
-         System.out.println("Audovia version 4.0 for Ubuntu Snappy");
+         System.out.println("Audovia version 4.05 for Ubuntu Snappy");
          System.out.println("Work directory: " + System.getProperty("user.dir"));
          System.out.println("Java directory: " + System.getProperty("java.home"));
 

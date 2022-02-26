@@ -264,6 +264,13 @@ public class SBSSongs extends JFrame
 
       soundbanksMenu.add(soundbanksItem);
 
+      JMenu audacityMenu = new JMenu("Audacity(R)");
+      menuBar.add(audacityMenu);
+
+      JMenuItem audacityItem = new JMenuItem("About Audacity(R)");
+
+      audacityMenu.add(audacityItem);
+
       JMenu databaseMenu = new JMenu("Database");
       //menuBar.add(databaseMenu);
 
@@ -330,6 +337,9 @@ public class SBSSongs extends JFrame
 
       SoundbanksAction soundbanksAction = new SoundbanksAction();
       soundbanksItem.addActionListener(soundbanksAction);
+
+      AudacityAction audacityAction = new AudacityAction();
+      audacityItem.addActionListener(audacityAction);
 
       ConnectionsAction connectionsAction = new ConnectionsAction();
       connectionsItem.addActionListener(connectionsAction);
@@ -2461,9 +2471,9 @@ public class SBSSongs extends JFrame
             JLabel label = new JLabel();
 
             label.setText("<html><p style=\"margin-bottom:8px;\"><b>Audovia</b> - Database application for making music using JFugue " +
-                          "MusicStrings&nbsp; version 4.0</p>" +
+                          "MusicStrings&nbsp; version 4.05</p>" +
 
-                          "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2019&nbsp; Donald G Gray</p>" +
+                          "<p style=\"margin-bottom:4px;\">Copyright (C) 2010 - 2022&nbsp; Donald G Gray</p>" +
 
                           "<p style=\"margin-bottom:4px;\">website: https://songbase.github.io/</p>" +
                           "<p style=\"margin-bottom:4px;\">e-mail: audovia@btinternet.com</p>" +
@@ -2541,4 +2551,62 @@ public class SBSSongs extends JFrame
 			}
       }
    }
+   
+   private class AudacityAction implements ActionListener
+   {
+      public void actionPerformed(ActionEvent a)
+      {
+         if (tableField.isEditing())
+         {
+            int editingRow = tableField.getEditingRow();
+            int editingCol = tableField.getEditingColumn();
+            TableCellEditor tableEditor = tableField.getCellEditor();
+            tableEditor.stopCellEditing();
+            tableField.setValueAt(tableEditor.getCellEditorValue(),
+               editingRow, editingCol);
+            tableField.requestFocusInWindow();
+         }
+         try
+         {
+            JFrame aboutFrame = new JFrame();
+            aboutFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            aboutFrame.setTitle("About Audacity(R)");
+
+      ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
+      aboutFrame.setIconImage(icon.getImage());
+
+            aboutFrame.setLocation(100,100);
+            aboutFrame.setVisible(true);
+
+            JLabel label = new JLabel();
+
+            label.setText("<html><p style=\"margin-bottom:8px;\">For your convenience, a copy of <b>Audacity(R)</b> " +
+                          "from https://www.audacityteam.org has been included in this distribution.</p>" +
+
+                          "<p style=\"margin-bottom:8px;\">To install the desktop shortcut for Audacity(R) " +
+                          "copy /snap/audovia-lite/current/Audacity.desktop to your Desktop and allow launching.</p>" +
+
+                          "<p style=\"margin-bottom:4px;\">You can import your WAV files from Audovia into Audacity(R) and then export to MP3.</p>" +
+
+                          "</html>");
+
+            label.setPreferredSize(new Dimension(600,180));
+            label.setVerticalAlignment(JLabel.TOP);
+
+            JPanel myPanel = new JPanel();
+            myPanel.add(label);
+
+            JScrollPane contentPane = new JScrollPane(myPanel); // added
+            contentPane.setPreferredSize(new Dimension(660,200));
+
+            aboutFrame.add(contentPane); // added
+            aboutFrame.pack(); // added
+
+         }
+         catch (Exception e)
+	 {
+	    Messages.exceptionHandler(frame, title, e);
+         }
+      }
+   }     
 }
