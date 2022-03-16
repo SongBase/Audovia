@@ -1096,6 +1096,19 @@ public class SBSPatterns extends JFrame
                         player.close();
 
                         Messages.plainMessage(frame, title, "MIDI exported to: " + file.getPath());
+                        
+                        if (System.getProperty("level").equals("pro"))
+                        {
+                           selection = 0;
+                           selection = Messages.plainQuestion(frame, title, "Open in MuseScore?");
+                           if (selection == JOptionPane.OK_OPTION)
+                           {                  
+                              String MuseScore = System.getProperty("user.dir") + "/AppImage/MuseScore.AppImage";            
+                              String[] cmdarray = {MuseScore, file.getPath()};
+                              Runtime.getRuntime().exec(cmdarray);
+                           }
+                        }           
+                        
                      }
                   }
                   catch (Exception e)
@@ -1630,6 +1643,18 @@ public class SBSPatterns extends JFrame
                         pleaseWait.setVisible(false);
 
                         Messages.plainMessage(frame, title, "WAV exported to: " + fileOut.getPath());
+                        
+                        if (System.getProperty("level").equals("pro"))
+                        {
+                           selection = 0;
+                           selection = Messages.plainQuestion(frame, title, "Open in Audacity(R)?");
+                           if (selection == JOptionPane.OK_OPTION)
+                           {                  
+                              String[] cmdarray = {"/snap/audovia-lite/current/opt/Audovia/audacity.AppImage", fileOut.getPath()};
+                              Runtime.getRuntime().exec(cmdarray);
+                           }
+                        }
+                        
                      }
                   }
                   catch (Exception e)

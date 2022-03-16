@@ -68,6 +68,7 @@ public class SBSUserMain
          UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Liberation Sans", Font.PLAIN, 14));
 
          System.setProperty("image.dir", args[1]);
+         System.setProperty("level", args[2]);
 
          ExecutionMonitor console = new ExecutionMonitor
                                       ("SBS - Execution Monitor");

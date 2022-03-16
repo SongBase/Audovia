@@ -270,6 +270,13 @@ public class SBSSongs extends JFrame
       JMenuItem audacityItem = new JMenuItem("About Audacity(R)");
 
       audacityMenu.add(audacityItem);
+      
+      JMenu musescoreMenu = new JMenu("MuseScore");
+      menuBar.add(musescoreMenu);
+
+      JMenuItem musescoreItem = new JMenuItem("About MuseScore");
+
+      musescoreMenu.add(musescoreItem);
 
       JMenu databaseMenu = new JMenu("Database");
       //menuBar.add(databaseMenu);
@@ -322,6 +329,12 @@ public class SBSSongs extends JFrame
 
       WebsiteAction websiteAction = new WebsiteAction();
       websiteItem.addActionListener(websiteAction);
+      
+      JMenuItem sharedItem = new JMenuItem("Shared Songs");
+      helpMenu.add(sharedItem);
+
+      SharedAction sharedAction = new SharedAction();
+      sharedItem.addActionListener(sharedAction);
 
       TemplateAction templateAction = new TemplateAction();
       templateItem.addActionListener(templateAction);
@@ -340,6 +353,9 @@ public class SBSSongs extends JFrame
 
       AudacityAction audacityAction = new AudacityAction();
       audacityItem.addActionListener(audacityAction);
+      
+      MuseScoreAction musescoreAction = new MuseScoreAction();
+      musescoreItem.addActionListener(musescoreAction);
 
       ConnectionsAction connectionsAction = new ConnectionsAction();
       connectionsItem.addActionListener(connectionsAction);
@@ -2551,6 +2567,39 @@ public class SBSSongs extends JFrame
 			}
       }
    }
+
+   private class SharedAction implements ActionListener
+   {
+      public void actionPerformed(ActionEvent a)
+      {
+         if (tableField.isEditing())
+         {
+            int editingRow = tableField.getEditingRow();
+            int editingCol = tableField.getEditingColumn();
+            TableCellEditor tableEditor = tableField.getCellEditor();
+            tableEditor.stopCellEditing();
+            tableField.setValueAt(tableEditor.getCellEditorValue(),
+               editingRow, editingCol);
+            tableField.requestFocusInWindow();
+         }
+			try
+			{
+			   if (System.getProperty("os.name").startsWith("Windows"))
+			   {
+			      Desktop myDesktop = Desktop.getDesktop();
+                  myDesktop.browse(new URI("https://github.com/SongBase/Audovia/discussions/2"));
+		       }
+		       else
+		       {
+				  Runtime.getRuntime().exec("xdg-open https://github.com/SongBase/Audovia/discussions/2");
+			   }
+			}
+			catch (Exception e)
+			{
+				Messages.exceptionHandler(frame, title, e);
+			}
+      }
+   }
    
    private class AudacityAction implements ActionListener
    {
@@ -2586,7 +2635,10 @@ public class SBSSongs extends JFrame
                           "<p style=\"margin-bottom:8px;\">To install the desktop shortcut for Audacity(R) " +
                           "copy /snap/audovia-lite/current/Audacity.desktop to your Desktop and allow launching.</p>" +
 
-                          "<p style=\"margin-bottom:4px;\">You can import your WAV files from Audovia into Audacity(R) and then export to MP3.</p>" +
+                          "<p style=\"margin-bottom:8px;\">You can <em>Open</em> your WAV files from Audovia in Audacity(R) and then export to MP3.</p>" +
+                          
+                          "<p style=\"margin-bottom:4px;\">If you would like to open your WAV files directly in Audacity(R) " +
+                          "you can use <b>Audovia Pro</b> by copying /snap/audovia-lite/current/Audovia Pro.desktop to your Desktop and allow launching.</p>" +
 
                           "</html>");
 
@@ -2608,5 +2660,66 @@ public class SBSSongs extends JFrame
 	    Messages.exceptionHandler(frame, title, e);
          }
       }
+   } 
+   
+   private class MuseScoreAction implements ActionListener
+   {
+      public void actionPerformed(ActionEvent a)
+      {
+         if (tableField.isEditing())
+         {
+            int editingRow = tableField.getEditingRow();
+            int editingCol = tableField.getEditingColumn();
+            TableCellEditor tableEditor = tableField.getCellEditor();
+            tableEditor.stopCellEditing();
+            tableField.setValueAt(tableEditor.getCellEditorValue(),
+               editingRow, editingCol);
+            tableField.requestFocusInWindow();
+         }
+         try
+         {
+            JFrame aboutFrame = new JFrame();
+            aboutFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            aboutFrame.setTitle("About MuseScore");
+
+      ImageIcon icon = new ImageIcon(System.getProperty("image.dir") + "/" + "SongBuilderColourIcon64.png");
+      aboutFrame.setIconImage(icon.getImage());
+
+            aboutFrame.setLocation(100,100);
+            aboutFrame.setVisible(true);
+
+            JLabel label = new JLabel();
+
+            label.setText("<html><p style=\"margin-bottom:8px;\">An AppImage of <b>MuseScore</b> " +
+                          "can be obtained from https://musescore.org.</p>" +
+
+                          "<p style=\"margin-bottom:8px;\">You can <em>Open</em> your MIDI files from Audovia in MuseScore and then export to PDF.</p>" +
+                          
+                          "<p style=\"margin-bottom:8px;\">If you would like to open your MIDI files directly in MuseScore " +
+                          "you can use <b>Audovia Pro</b> by copying /snap/audovia-lite/current/Audovia Pro.desktop to your Desktop and allow launching.</p>" +
+                          
+                           "<p style=\"margin-bottom:4px;\">You will also need to create a link to your MuseScore download in ~/Documents/Audovia/AppImage/ and \"Allow executing file as program\" and rename it to MuseScore.AppImage.</p>" +                          
+                                                        
+                          "</html>");
+
+            label.setPreferredSize(new Dimension(600,180));
+            label.setVerticalAlignment(JLabel.TOP);
+
+            JPanel myPanel = new JPanel();
+            myPanel.add(label);
+
+            JScrollPane contentPane = new JScrollPane(myPanel); // added
+            contentPane.setPreferredSize(new Dimension(660,200));
+
+            aboutFrame.add(contentPane); // added
+            aboutFrame.pack(); // added
+
+         }
+         catch (Exception e)
+	 {
+	    Messages.exceptionHandler(frame, title, e);
+         }
+      }
    }     
+       
 }
