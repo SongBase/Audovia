@@ -278,6 +278,16 @@ public class SBSSongs extends JFrame
 
       musescoreMenu.add(musescoreItem);
 
+      JMenu socialMenu = new JMenu("Social");
+      menuBar.add(socialMenu);
+
+      JMenuItem facebookItem = new JMenuItem("Facebook");
+      socialMenu.add(facebookItem);
+      JMenuItem youtubeItem = new JMenuItem("YouTube");
+      socialMenu.add(youtubeItem);
+      JMenuItem twitterItem = new JMenuItem("Twitter");
+      socialMenu.add(twitterItem);
+      
       JMenu databaseMenu = new JMenu("Database");
       //menuBar.add(databaseMenu);
 
@@ -356,6 +366,15 @@ public class SBSSongs extends JFrame
       
       MuseScoreAction musescoreAction = new MuseScoreAction();
       musescoreItem.addActionListener(musescoreAction);
+
+      FacebookAction facebookAction = new FacebookAction();
+      facebookItem.addActionListener(facebookAction);
+
+      YouTubeAction youtubeAction = new YouTubeAction();
+      youtubeItem.addActionListener(youtubeAction);
+
+      TwitterAction twitterAction = new TwitterAction();
+      twitterItem.addActionListener(twitterAction);
 
       ConnectionsAction connectionsAction = new ConnectionsAction();
       connectionsItem.addActionListener(connectionsAction);
@@ -2720,6 +2739,105 @@ public class SBSSongs extends JFrame
 	    Messages.exceptionHandler(frame, title, e);
          }
       }
-   }     
-       
+   }   
+   
+   private class FacebookAction implements ActionListener
+   {
+      public void actionPerformed(ActionEvent a)
+      {
+         if (tableField.isEditing())
+         {
+            int editingRow = tableField.getEditingRow();
+            int editingCol = tableField.getEditingColumn();
+            TableCellEditor tableEditor = tableField.getCellEditor();
+            tableEditor.stopCellEditing();
+            tableField.setValueAt(tableEditor.getCellEditorValue(),
+               editingRow, editingCol);
+            tableField.requestFocusInWindow();
+         }
+			try
+			{
+			   if (System.getProperty("os.name").startsWith("Windows"))
+			   {
+			      Desktop myDesktop = Desktop.getDesktop();
+                  myDesktop.browse(new URI("https://www.facebook.com/audovia"));
+		       }
+		       else
+		       {
+				  Runtime.getRuntime().exec("xdg-open https://www.facebook.com/audovia");
+			   }
+			}
+			catch (Exception e)
+			{
+				Messages.exceptionHandler(frame, title, e);
+			}
+      }
+   }
+  
+   private class YouTubeAction implements ActionListener
+   {
+      public void actionPerformed(ActionEvent a)
+      {
+         if (tableField.isEditing())
+         {
+            int editingRow = tableField.getEditingRow();
+            int editingCol = tableField.getEditingColumn();
+            TableCellEditor tableEditor = tableField.getCellEditor();
+            tableEditor.stopCellEditing();
+            tableField.setValueAt(tableEditor.getCellEditorValue(),
+               editingRow, editingCol);
+            tableField.requestFocusInWindow();
+         }
+			try
+			{
+			   if (System.getProperty("os.name").startsWith("Windows"))
+			   {
+			      Desktop myDesktop = Desktop.getDesktop();
+                  myDesktop.browse(new URI("https://www.youtube.com/channel/UCzEo99Tp8H87jUdYh9acs5Q"));
+		       }
+		       else
+		       {
+				  Runtime.getRuntime().exec("xdg-open https://www.youtube.com/channel/UCzEo99Tp8H87jUdYh9acs5Q");
+			   }
+			}
+			catch (Exception e)
+			{
+				Messages.exceptionHandler(frame, title, e);
+			}
+      }
+   }
+   
+   private class TwitterAction implements ActionListener
+   {
+      public void actionPerformed(ActionEvent a)
+      {
+         if (tableField.isEditing())
+         {
+            int editingRow = tableField.getEditingRow();
+            int editingCol = tableField.getEditingColumn();
+            TableCellEditor tableEditor = tableField.getCellEditor();
+            tableEditor.stopCellEditing();
+            tableField.setValueAt(tableEditor.getCellEditorValue(),
+               editingRow, editingCol);
+            tableField.requestFocusInWindow();
+         }
+			try
+			{
+			   if (System.getProperty("os.name").startsWith("Windows"))
+			   {
+			      Desktop myDesktop = Desktop.getDesktop();
+                  myDesktop.browse(new URI("https://twitter.com/AudoviaMusic"));
+		       }
+		       else
+		       {
+				  Runtime.getRuntime().exec("xdg-open https://twitter.com/AudoviaMusic");
+			   }
+			}
+			catch (Exception e)
+			{
+				Messages.exceptionHandler(frame, title, e);
+			}
+      }
+   }
+         
 }
