@@ -139,7 +139,7 @@ public class SBSPlaySamples extends JDialog
       contentPane.add(titlePanel, BorderLayout.NORTH);
 
       tableField = new JTable(tableModel);
-      tableField.setShowGrid(true);
+      tableField.setShowGrid(false);
       tableField.setGridColor(Color.gray);
       tableField.setSurrendersFocusOnKeystroke(true);
       tableField.setRowHeight(30);

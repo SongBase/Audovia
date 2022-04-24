@@ -82,7 +82,7 @@ public class TextAreaEditor extends DefaultCellEditor
       textarea.setLineWrap(true);
       textarea.setWrapStyleWord(true);
       textarea.setBackground(Color.yellow);
-      textarea.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
+      textarea.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));  // why?
 
       scrollpane.getViewport().add(textarea);
 

@@ -51,7 +51,8 @@ public class IntegerFieldRenderer implements TableCellRenderer
       {
          textfield.setForeground(table.getSelectionForeground());
          textfield.setBackground(table.getSelectionBackground());
-         textfield.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+//         textfield.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+         textfield.setBorder(BorderFactory.createLineBorder(table.getSelectionBackground(),2));
       }
       else
       {
@@ -59,13 +60,15 @@ public class IntegerFieldRenderer implements TableCellRenderer
          if (row % 2 == 0)
          {
             textfield.setBackground(new Color(238,238,238));
+            textfield.setBorder(BorderFactory.createLineBorder(new Color(238,238,238),2));
          }
          else
          {
             //textfield.setBackground(table.getBackground());
             textfield.setBackground(new Color(255,255,255));
+            textfield.setBorder(BorderFactory.createLineBorder(new Color(255,255,255),2));
          }
-         textfield.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+//         textfield.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
          if (hasFocus)
          {
             textfield.setBorder(BorderFactory.createLineBorder(table.getSelectionBackground(),2));

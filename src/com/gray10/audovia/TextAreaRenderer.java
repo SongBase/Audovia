@@ -43,7 +43,7 @@ public class TextAreaRenderer implements TableCellRenderer
       textarea = new JTextArea();
       textarea.setLineWrap(true);
       textarea.setWrapStyleWord(true);
-      textarea.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));
+      textarea.setBorder(BorderFactory.createEmptyBorder(1,1,1,1));  // why?
       scrollpane = new JScrollPane();
       scrollpane.getViewport().add(textarea);
    }
@@ -61,7 +61,8 @@ public class TextAreaRenderer implements TableCellRenderer
          scrollpane.setBackground(table.getSelectionBackground());
          textarea.setForeground(table.getSelectionForeground());
          textarea.setBackground(table.getSelectionBackground());
-         scrollpane.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+//         scrollpane.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+         scrollpane.setBorder(BorderFactory.createLineBorder(table.getSelectionBackground(),2));
       }
       else
       {
@@ -71,13 +72,15 @@ public class TextAreaRenderer implements TableCellRenderer
          if (row % 2 == 0)
          {
             textarea.setBackground(new Color(238,238,238));
+            scrollpane.setBorder(BorderFactory.createLineBorder(new Color(238,238,238),2));
          }
          else
          {
-				textarea.setBackground(new Color(255,255,255));
+	     textarea.setBackground(new Color(255,255,255));
+	     scrollpane.setBorder(BorderFactory.createLineBorder(new Color(255,255,255),2));
             //textarea.setBackground(table.getBackground());
          }
-         scrollpane.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
+//         scrollpane.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
          if (hasFocus)
          {
             scrollpane.setBorder(BorderFactory.createLineBorder(table.getSelectionBackground(),2));

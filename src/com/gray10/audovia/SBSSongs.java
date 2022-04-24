@@ -279,7 +279,7 @@ public class SBSSongs extends JFrame
       musescoreMenu.add(musescoreItem);
 
       JMenu socialMenu = new JMenu("Social");
-      menuBar.add(socialMenu);
+      // menuBar.add(socialMenu);
 
       JMenuItem facebookItem = new JMenuItem("Facebook");
       socialMenu.add(facebookItem);
@@ -319,11 +319,11 @@ public class SBSSongs extends JFrame
          shareItem.addActionListener(shareAction);
 	   }
 
-      JMenu helpMenu = new JMenu("Help");
+      JMenu helpMenu = new JMenu("Documentation");
       menuBar.add(helpMenu);
 
       JMenuItem aboutItem = new JMenuItem("About");
-      helpMenu.add(aboutItem);
+      // helpMenu.add(aboutItem);
 
       AboutAction aboutAction = new AboutAction();
       aboutItem.addActionListener(aboutAction);
@@ -335,13 +335,13 @@ public class SBSSongs extends JFrame
       documentationItem.addActionListener(documentationAction);
 
       JMenuItem websiteItem = new JMenuItem("Website");
-      helpMenu.add(websiteItem);
+      // helpMenu.add(websiteItem);
 
       WebsiteAction websiteAction = new WebsiteAction();
       websiteItem.addActionListener(websiteAction);
       
       JMenuItem sharedItem = new JMenuItem("Shared Songs");
-      helpMenu.add(sharedItem);
+      // helpMenu.add(sharedItem);
 
       SharedAction sharedAction = new SharedAction();
       sharedItem.addActionListener(sharedAction);
@@ -456,7 +456,7 @@ public class SBSSongs extends JFrame
       //contentPane.add(titlePanel, BorderLayout.NORTH);
 
       tableField = new JTable(tableModel);
-      tableField.setShowGrid(true);
+      tableField.setShowGrid(false);
       tableField.setGridColor(Color.gray);
       tableField.setSurrendersFocusOnKeystroke(true);
       tableField.setRowHeight(30);

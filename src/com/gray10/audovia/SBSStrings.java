@@ -291,7 +291,7 @@ public class SBSStrings extends JFrame
       contentPane.add(topPanel, BorderLayout.NORTH);
 
       tableField = new JTable(tableModel);
-      tableField.setShowGrid(true);
+      tableField.setShowGrid(false);
       tableField.setGridColor(Color.gray);
       tableField.setSurrendersFocusOnKeystroke(true);
       tableField.setRowHeight(40);
