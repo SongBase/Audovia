@@ -212,6 +212,7 @@ public class SBSPopupEditor extends JDialog
       Collections.sort(numconstantsList);
 
       numericconstants = new JComboBox<String>();
+      //numericconstants.setRenderer(new MyComboBoxRenderer());
 
       if (numconstantsList.size() > 0)
       {
@@ -287,6 +288,7 @@ public class SBSPopupEditor extends JDialog
       Collections.sort(constantsList);
 
       constants = new JComboBox<String>();
+      //constants.setRenderer(new MyComboBoxRenderer());
 
       if (constantsList.size() > 0)
       {
@@ -327,6 +329,7 @@ public class SBSPopupEditor extends JDialog
       // end of string constants
 
       tempo           = new JComboBox<String>();
+      //tempo.setRenderer(new MyComboBoxRenderer());
       tempo.addItem("T[grave]");
       tempo.addItem("T[largo]");
       tempo.addItem("T[larghetto]");
@@ -369,6 +372,7 @@ public class SBSPopupEditor extends JDialog
 			});
 
       instrument      = new JComboBox<String>();
+      //instrument.setRenderer(new MyComboBoxRenderer());
       instrument.addItem("I[piano]");
       instrument.addItem("I[acoustic_grand]");
       instrument.addItem("I[bright_acoustic]");
@@ -565,6 +569,7 @@ public class SBSPopupEditor extends JDialog
 			});
 
       percussion      = new JComboBox<String>();
+      //percussion.setRenderer(new MyComboBoxRenderer());
       percussion.addItem("[acoustic_bass_drum]");
       percussion.addItem("[bass_drum]");
       percussion.addItem("[side_stick]");
@@ -644,6 +649,7 @@ public class SBSPopupEditor extends JDialog
 			});
 
       controller = new JComboBox<String>();
+      //controller.setRenderer(new MyComboBoxRenderer());
       controller.addItem("X[bank_select_coarse]=");
       controller.addItem("X[mod_wheel_coarse]=");
       controller.addItem("X[breath_coarse]=");

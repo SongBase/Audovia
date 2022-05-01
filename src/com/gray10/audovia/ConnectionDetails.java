@@ -62,6 +62,7 @@ public class ConnectionDetails extends JDialog
       String[] db_types = {"Postgres", "Oracle", "MySQL"};
       //String[] db_types = {"Postgres"};
       db_typeBox = new JComboBox<String>(db_types);
+      //db_typeBox.setRenderer(new MyComboBoxRenderer());
       db_typeBox.setSelectedItem(db_type);
       db_typeBox.setBounds(100,20,165,30);
       contentPane.add(db_typeBox);

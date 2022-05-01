@@ -107,6 +107,7 @@ public class SBSShareTableModel extends AbstractTableModel
       shared_with_id_cache.clear();
       shared_with_name_cache.clear();
       shared_withComboBox = new JComboBox<String>();
+      //shared_withComboBox.setRenderer(new MyComboBoxRenderer());
 
       //shared_with_id_cache.add(nullInt);
       //shared_with_name_cache.add(nullStr);

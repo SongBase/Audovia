@@ -340,8 +340,12 @@ public class SBSTree extends JFrame
       cloneItem.addActionListener(cloneAction);
 
       tree = new JTree(treeModel);
+      //tree.setCellRenderer(new MyTreeCellRenderer());
       tree.setRootVisible(false);
       tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+      
+      //DefaultTreeCellRenderer renderer = (DefaultTreeCellRenderer) tree.getCellRenderer();
+      //renderer.setBackgroundSelectionColor(new Color(128,0,255));
 
       JLabel myCellRenderer = (JLabel)tree.getCellRenderer();
       myCellRenderer.setVerticalTextPosition(JLabel.TOP);

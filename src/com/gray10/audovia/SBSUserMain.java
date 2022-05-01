@@ -55,6 +55,11 @@ public class SBSUserMain
    {
       try
       {
+         
+         UIManager.put("nimbusBase", new Color(128,0,255));
+         //UIManager.put("Tree.selectionBackground", new Color(128,0,255)); //not working
+         UIManager.put("nimbusSelectionBackground", new Color(128,0,255));
+         
          for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels())
          {
             if ("Nimbus".equals(info.getName()))
@@ -66,7 +71,19 @@ public class SBSUserMain
          }
 
          UIManager.getLookAndFeelDefaults().put("defaultFont", new Font("Liberation Sans", Font.PLAIN, 14));
-
+         
+         UIManager.getLookAndFeelDefaults().put("ComboBox.selectionBackground", new Color(128,0,255));
+         UIManager.getLookAndFeelDefaults().put("EditorPane.selectionBackground", new Color(128,0,255));
+         UIManager.getLookAndFeelDefaults().put("Menu.selectionBackground", new Color(128,0,255));
+         UIManager.getLookAndFeelDefaults().put("MenuItem.selectionBackground", new Color(128,0,255));
+         UIManager.getLookAndFeelDefaults().put("Table.selectionBackground", new Color(128,0,255));
+         UIManager.getLookAndFeelDefaults().put("TextArea.selectionBackground", new Color(128,0,255));
+         UIManager.getLookAndFeelDefaults().put("TextField.selectionBackground", new Color(128,0,255));
+         //UIManager.getLookAndFeelDefaults().put("Tree.selectionBackground", new Color(128,0,255));
+         UIManager.getLookAndFeelDefaults().put("List.selectionBackground", new Color(128,0,255));
+         UIManager.getLookAndFeelDefaults().put("Menu.selectionBackground", new Color(128,0,255));
+         UIManager.getLookAndFeelDefaults().put("MenuItem.selectionBackground", new Color(128,0,255));
+         
          System.setProperty("image.dir", args[1]);
          System.setProperty("level", args[2]);
 

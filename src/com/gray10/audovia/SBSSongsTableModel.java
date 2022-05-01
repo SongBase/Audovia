@@ -121,6 +121,8 @@ public class SBSSongsTableModel extends AbstractTableModel
       soundbank_id_cache.clear();
       soundbank_cache.clear();
       soundbankComboBox = new JComboBox<String>();
+      
+      //soundbankComboBox.setRenderer(new MyComboBoxRenderer());
 
       soundbank_id_cache.add(nullInt);
       soundbank_cache.add(nullStr);

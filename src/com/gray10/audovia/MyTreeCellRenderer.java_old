@@ -1,0 +1,28 @@
+package com.gray10.audovia;
+
+import javax.swing.*;
+import javax.swing.tree.*;
+import java.util.*;
+import java.awt.*;
+
+public class MyTreeCellRenderer extends DefaultTreeCellRenderer
+{
+
+          @Override
+          public Component getTreeCellRendererComponent(JTree tree, Object value,
+                                                        boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) 
+          {
+              super.getTreeCellRendererComponent(tree, value, sel, expanded, leaf, row, hasFocus);
+ 
+              if (hasFocus)
+              {
+   //               setBackgroundSelectionColor(new Color(128,0,255));
+  //                setBackgroundNonSelectionColor(Color.WHITE);
+   //               setBackground(new Color(128,0,255));
+     //             setOpaque(true);
+              }
+              return this;
+          }
+
+ }
+ 

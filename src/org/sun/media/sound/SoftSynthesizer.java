@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
-import java.security.AccessController;
+//import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -993,9 +993,9 @@ public final class SoftSynthesizer implements AudioSynthesizer,
     }
 
     private Properties getStoredProperties() {
-        return AccessController
-                .doPrivileged(new PrivilegedAction<Properties>() {
-                    public Properties run() {
+//        return AccessController
+//                .doPrivileged(new PrivilegedAction<Properties>() {
+//                    public Properties run() {
                         Properties p = new Properties();
                         String notePath = "/com/sun/media/sound/softsynthesizer";
                         try {
@@ -1009,12 +1009,16 @@ public final class SoftSynthesizer implements AudioSynthesizer,
                                         p.setProperty(prefs_key, val);
                                 }
                             }
-                        } catch (BackingStoreException e) {
-                        } catch (SecurityException e) {
-                        }
+                        } 
+                        catch (BackingStoreException e) 
+                        {
+                        } 
+//                        catch (SecurityException e) 
+//                        {
+//                        }
                         return p;
-                    }
-                });
+//                    }
+//                });
     }
 
     public AudioSynthesizerPropertyInfo[] getPropertyInfo(Map<String, Object> info) {

@@ -118,6 +118,7 @@ public class SBSPlaySamples extends JDialog
       titlePanel.add(labelField);
 
       titleField = new JComboBox<String>();
+      //titleField.setRenderer(new MyComboBoxRenderer());
       titleField.setEditable(true);
       titleField.setFont(stringFont);
 

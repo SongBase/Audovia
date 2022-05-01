@@ -128,6 +128,7 @@ public class SBSPatternComponentsTableModel extends AbstractTableModel
       component_id_cache.clear();
       component_cache.clear();
       componentComboBox = new JComboBox<String>();
+      //componentComboBox.setRenderer(new MyComboBoxRenderer());
 
       component_id_cache.add(nullInt);
       component_cache.add(nullStr);

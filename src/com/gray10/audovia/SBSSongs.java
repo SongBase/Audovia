@@ -497,6 +497,8 @@ public class SBSSongs extends JFrame
 		typeComboBox.addItem(null);
 		typeComboBox.addItem("decimal");
 		typeComboBox.addItem("pulses");
+		
+		//typeComboBox.setRenderer(new MyComboBoxRenderer()); ////////////////////////
 
       column3.setCellEditor(new DefaultCellEditor(typeComboBox));
 
@@ -2456,7 +2458,10 @@ public class SBSSongs extends JFrame
 		       }
 		       else
 		       {
-				  Runtime.getRuntime().exec("xdg-open https://songbase.github.io/doc/AudoviaDocumentation-4-0.pdf");
+				  //Runtime.getRuntime().exec("xdg-open https://songbase.github.io/doc/AudoviaDocumentation-4-0.pdf");
+				  
+				  String[] cmdarray = {"xdg-open", "https://songbase.github.io/doc/AudoviaDocumentation-4-0.pdf"};
+                              Runtime.getRuntime().exec(cmdarray);
 			   }
 			}
 			catch (Exception e)
@@ -2577,7 +2582,7 @@ public class SBSSongs extends JFrame
 		       }
 		       else
 		       {
-				  Runtime.getRuntime().exec("xdg-open https://songbase.github.io/");
+				  //Runtime.getRuntime().exec("xdg-open https://songbase.github.io/");
 			   }
 			}
 			catch (Exception e)
@@ -2610,7 +2615,7 @@ public class SBSSongs extends JFrame
 		       }
 		       else
 		       {
-				  Runtime.getRuntime().exec("xdg-open https://github.com/SongBase/Audovia/discussions/2");
+				  //Runtime.getRuntime().exec("xdg-open https://github.com/SongBase/Audovia/discussions/2");
 			   }
 			}
 			catch (Exception e)
@@ -2764,7 +2769,7 @@ public class SBSSongs extends JFrame
 		       }
 		       else
 		       {
-				  Runtime.getRuntime().exec("xdg-open https://www.facebook.com/audovia");
+				  //Runtime.getRuntime().exec("xdg-open https://www.facebook.com/audovia");
 			   }
 			}
 			catch (Exception e)
@@ -2797,7 +2802,7 @@ public class SBSSongs extends JFrame
 		       }
 		       else
 		       {
-				  Runtime.getRuntime().exec("xdg-open https://www.youtube.com/channel/UCzEo99Tp8H87jUdYh9acs5Q");
+				  //Runtime.getRuntime().exec("xdg-open https://www.youtube.com/channel/UCzEo99Tp8H87jUdYh9acs5Q");
 			   }
 			}
 			catch (Exception e)
@@ -2830,7 +2835,7 @@ public class SBSSongs extends JFrame
 		       }
 		       else
 		       {
-				  Runtime.getRuntime().exec("xdg-open https://twitter.com/AudoviaMusic");
+				  //Runtime.getRuntime().exec("xdg-open https://twitter.com/AudoviaMusic");
 			   }
 			}
 			catch (Exception e)

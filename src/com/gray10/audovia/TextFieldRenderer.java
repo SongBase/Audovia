@@ -50,9 +50,11 @@ public class TextFieldRenderer implements TableCellRenderer
       if (isSelected && ! hasFocus)
       {
          textfield.setForeground(table.getSelectionForeground());
-         textfield.setBackground(table.getSelectionBackground());
+ //        textfield.setBackground(table.getSelectionBackground());
+         textfield.setBackground(new Color(128,0,255));
  //        textfield.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-         textfield.setBorder(BorderFactory.createLineBorder(table.getSelectionBackground(),2));
+ //        textfield.setBorder(BorderFactory.createLineBorder(table.getSelectionBackground(),2));
+         textfield.setBorder(BorderFactory.createLineBorder(new Color(128,0,255), 2));
       }
       else
       {
@@ -71,7 +73,8 @@ public class TextFieldRenderer implements TableCellRenderer
  //        textfield.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
          if (hasFocus)
          {
-            textfield.setBorder(BorderFactory.createLineBorder(table.getSelectionBackground(),2));
+ //           textfield.setBorder(BorderFactory.createLineBorder(table.getSelectionBackground(),2));
+            textfield.setBorder(BorderFactory.createLineBorder(new Color(128,0,255), 2));
          }
       }
       textfield.setFont(table.getFont());

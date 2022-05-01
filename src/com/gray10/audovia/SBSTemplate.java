@@ -84,6 +84,7 @@ public class SBSTemplate extends JDialog
 
       String[] voices = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"};
       voicesBox = new JComboBox<String>(voices);
+      //voicesBox.setRenderer(new MyComboBoxRenderer());
       voicesBox.setSelectedIndex(0);
       voicesBox.setBounds(210,20,65,30);
       contentPane.add(voicesBox);
@@ -94,6 +95,7 @@ public class SBSTemplate extends JDialog
 
       String[] parts = {"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"};
       partsBox = new JComboBox<String>(parts);
+      //partsBox.setRenderer(new MyComboBoxRenderer());
       partsBox.setSelectedIndex(0);
       partsBox.setBounds(210,50,65,30);
       contentPane.add(partsBox);
@@ -104,6 +106,7 @@ public class SBSTemplate extends JDialog
 
       String[] bars = {"8","12","16","24","32","48","64","96","128","192","256"};
       barsBox = new JComboBox<String>(bars);
+      //barsBox.setRenderer(new MyComboBoxRenderer());
       barsBox.setSelectedIndex(0);
       barsBox.setBounds(210,80,65,30);
       contentPane.add(barsBox);
@@ -114,6 +117,7 @@ public class SBSTemplate extends JDialog
 
       String[] types = {"string","pattern"};
       typeBox = new JComboBox<String>(types);
+      //typeBox.setRenderer(new MyComboBoxRenderer());
       typeBox.setSelectedIndex(0);
       typeBox.setBounds(210,110,85,30); // was 75
       contentPane.add(typeBox);

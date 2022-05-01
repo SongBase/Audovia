@@ -60,9 +60,11 @@ public class TextAreaRenderer implements TableCellRenderer
          scrollpane.setForeground(table.getSelectionForeground());
          scrollpane.setBackground(table.getSelectionBackground());
          textarea.setForeground(table.getSelectionForeground());
-         textarea.setBackground(table.getSelectionBackground());
+         textarea.setBackground(new Color(128,0,255));
+//         textarea.setBackground(table.getSelectionBackground());
 //         scrollpane.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
-         scrollpane.setBorder(BorderFactory.createLineBorder(table.getSelectionBackground(),2));
+//         scrollpane.setBorder(BorderFactory.createLineBorder(table.getSelectionBackground(),2));
+         scrollpane.setBorder(BorderFactory.createLineBorder(new Color(128,0,255), 2));
       }
       else
       {
@@ -83,7 +85,8 @@ public class TextAreaRenderer implements TableCellRenderer
 //         scrollpane.setBorder(BorderFactory.createEmptyBorder(2,2,2,2));
          if (hasFocus)
          {
-            scrollpane.setBorder(BorderFactory.createLineBorder(table.getSelectionBackground(),2));
+//            scrollpane.setBorder(BorderFactory.createLineBorder(table.getSelectionBackground(),2));
+            scrollpane.setBorder(BorderFactory.createLineBorder(new Color(128,0,255), 2));
          }
       }
 
