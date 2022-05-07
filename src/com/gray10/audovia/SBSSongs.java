@@ -2653,7 +2653,7 @@ public class SBSSongs extends JFrame
 
             JLabel label = new JLabel();
 
-            label.setText("<html><p style=\"margin-bottom:8px;\">For your convenience, a copy of <b>Audacity(R)</b> " +
+/*            label.setText("<html><p style=\"margin-bottom:8px;\">For your convenience, a copy of <b>Audacity(R)</b> " +
                           "from https://www.audacityteam.org has been included in this distribution.</p>" +
 
                           "<p style=\"margin-bottom:8px;\">To install the desktop shortcut for Audacity(R) " +
@@ -2664,7 +2664,21 @@ public class SBSSongs extends JFrame
                           "<p style=\"margin-bottom:4px;\">If you would like to open your WAV files directly in Audacity(R) " +
                           "you can use <b>Audovia Pro</b> by copying /snap/audovia-lite/current/Audovia Pro.desktop to your Desktop and allow launching.</p>" +
 
+                          "</html>");*/
+
+            label.setText("<html>" +
+
+                          "<p style=\"margin-bottom:8px;\">You can <em>Open</em> your WAV files from Audovia in <b>Audacity(R)</b> and then export to MP3.</p>" +
+
+                          "<p style=\"margin-bottom:8px;\">You can install Audacity(R) using the command line</p>" +
+
+                          "<p style=\"margin-bottom:8px; margin-left:10px;\">$ sudo snap install audacity</p>" +
+                          
+                          "<p style=\"margin-bottom:8px;\">If you would like to open your WAV files directly in Audacity(R) " +
+                          "you can use <b>Audovia Pro</b> by copying /snap/audovia-lite/current/Audovia Pro.desktop to your Desktop and allow launching.</p>" +
+
                           "</html>");
+
 
             label.setPreferredSize(new Dimension(600,180));
             label.setVerticalAlignment(JLabel.TOP);
@@ -2714,7 +2728,7 @@ public class SBSSongs extends JFrame
 
             JLabel label = new JLabel();
 
-            label.setText("<html><p style=\"margin-bottom:8px;\">An AppImage of <b>MuseScore</b> " +
+/*            label.setText("<html><p style=\"margin-bottom:8px;\">An AppImage of <b>MuseScore</b> " +
                           "can be obtained from https://musescore.org.</p>" +
 
                           "<p style=\"margin-bottom:8px;\">You can <em>Open</em> your MIDI files from Audovia in MuseScore and then export to PDF.</p>" +
@@ -2724,7 +2738,22 @@ public class SBSSongs extends JFrame
                           
                            "<p style=\"margin-bottom:4px;\">You will also need to create a link to your MuseScore download in ~/Documents/Audovia/AppImage/ and \"Allow executing file as program\" and rename it to MuseScore.AppImage.</p>" +                          
                                                         
+                          "</html>");*/
+
+            label.setText("<html>" +
+
+                          "<p style=\"margin-bottom:8px;\">You can <em>Open</em> your MIDI files from Audovia in <b>MuseScore</b> and then export to PDF.</p>" +
+                          
+                          "<p style=\"margin-bottom:8px;\">You can install MuseScore using the command line</p>" + 
+ 
+                          "<p style=\"margin-bottom:8px; margin-left:10px;\">$ sudo snap install musescore</p>" +
+ 
+                           "<p style=\"margin-bottom:8px;\">If you would like to open your MIDI files directly in MuseScore " +
+                          "you can use <b>Audovia Pro</b> by copying /snap/audovia-lite/current/Audovia Pro.desktop to your Desktop and allow launching.</p>" +    
+                                                        
                           "</html>");
+
+
 
             label.setPreferredSize(new Dimension(600,180));
             label.setVerticalAlignment(JLabel.TOP);

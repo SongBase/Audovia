@@ -977,7 +977,8 @@ public class SBSTree extends JFrame
                            selection = Messages.plainQuestion(frame, title, "Open in MuseScore?");
                            if (selection == JOptionPane.OK_OPTION)
                            {     
-                              String MuseScore = System.getProperty("user.dir") + "/AppImage/MuseScore.AppImage";            
+//                              String MuseScore = System.getProperty("user.dir") + "/AppImage/MuseScore.AppImage";            
+                              String MuseScore = "musescore.mscore";
                               String[] cmdarray = {MuseScore, file.getPath()};
                               Runtime.getRuntime().exec(cmdarray);
                            }
@@ -1417,7 +1418,8 @@ public class SBSTree extends JFrame
                            selection = Messages.plainQuestion(frame, title, "Open in Audacity(R)?");
                            if (selection == JOptionPane.OK_OPTION)
                            {                  
-                              String[] cmdarray = {"/snap/audovia-lite/current/opt/Audovia/audacity.AppImage", fileOut.getPath()};
+//                              String[] cmdarray = {"/snap/audovia-lite/current/opt/Audovia/audacity.AppImage", fileOut.getPath()};
+                              String[] cmdarray = {"audacity", fileOut.getPath()};
                               Runtime.getRuntime().exec(cmdarray);
                            }
                         }
